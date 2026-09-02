@@ -3,8 +3,10 @@ import { MapPin, Phone, Mail, Send, Clock, CheckCircle } from 'lucide-react';
 import { AnimateOnScroll } from '../components/AnimateOnScroll';
 import { EditableElement } from '../components/EditableElement';
 import { SectionContainer } from '../components/SectionContainer';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export function Contact() {
+  const { language, t } = useLanguage();
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', subject: '', message: '', _hp: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -13,6 +15,25 @@ export function Contact() {
     e.preventDefault();
     setStatus('sending');
     setErrorMessage('');
+
+    if (import.meta.env.VITE_FORM_MODE === 'mock') {
+      console.log('[MOCK] Contact Form successfully intercepted locally.');
+      console.log({
+        type: 'contact',
+        nome: form.name,
+        empresa: form.company,
+        email: form.email,
+        telefone: form.phone,
+        assunto: form.subject,
+        mensagem: form.message,
+        _hp: form._hp
+      });
+      setTimeout(() => {
+        setStatus('success');
+        setForm({ name: '', company: '', email: '', phone: '', subject: '', message: '', _hp: '' });
+      }, 500);
+      return;
+    }
 
     try {
       const res = await fetch('/api/send-mail.php', {
@@ -170,9 +191,9 @@ export function Contact() {
                 {status === 'success' ? (
                   <div className="h-full flex flex-col items-center justify-center text-center py-10 animate-fade-in-up">
                     <CheckCircle size={64} className="text-green-500 mb-6" />
-                    <h3 className="text-2xl font-bold text-secondary mb-3">Mensagem Enviada!</h3>
-                    <p className="text-gray-500 mb-6">Nossa equipe entrará em contato em breve.</p>
-                    <button onClick={() => setStatus('idle')} className="text-primary font-bold hover:underline">Enviar nova mensagem</button>
+                    <h3 className="text-2xl font-bold text-secondary mb-3">{t('msg_sent_title', 'Mensagem Enviada!')}</h3>
+                    <p className="text-gray-500 mb-6">{t('msg_sent_desc', 'Nossa equipe entrará em contato em breve.')}</p>
+                    <button onClick={() => setStatus('idle')} className="text-primary font-bold hover:underline">{t('btn_send_new', 'Enviar nova mensagem')}</button>
                   </div>
                 ) : (
                   <>
@@ -183,39 +204,39 @@ export function Contact() {
                       <input type="text" name="_hp" style={{ display: 'none' }} value={form._hp} onChange={(e) => setForm(f => ({ ...f, _hp: e.target.value }))} tabIndex={-1} autoComplete="off" />
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Nome *</label>
-                          <input className={inputCls} required placeholder="Seu nome completo" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
+                          <label className="block text-xs font-bold uppercase text-gray-500 mb-1">{t('lbl_name', 'Nome *')}</label>
+                          <input className={inputCls} required placeholder={t('placeholder_name', 'Seu nome completo')} value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
                         </div>
                         <div>
-                          <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Empresa</label>
-                          <input className={inputCls} placeholder="Nome da empresa" value={form.company} onChange={(e) => setForm((f) => ({ ...f, company: e.target.value }))} />
+                          <label className="block text-xs font-bold uppercase text-gray-500 mb-1">{t('lbl_company', 'Empresa')}</label>
+                          <input className={inputCls} placeholder={t('placeholder_company', 'Nome da empresa')} value={form.company} onChange={(e) => setForm((f) => ({ ...f, company: e.target.value }))} />
                         </div>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-xs font-bold uppercase text-gray-500 mb-1">E-mail *</label>
-                          <input type="email" className={inputCls} required placeholder="seu@email.com" value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} />
+                          <label className="block text-xs font-bold uppercase text-gray-500 mb-1">{t('lbl_email', 'E-mail *')}</label>
+                          <input type="email" className={inputCls} required placeholder={t('placeholder_email', 'seu@email.com')} value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} />
                         </div>
                         <div>
-                          <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Telefone</label>
-                          <input className={inputCls} placeholder="(11) 9 0000-0000" value={form.phone} onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))} />
+                          <label className="block text-xs font-bold uppercase text-gray-500 mb-1">{t('lbl_phone', 'Telefone')}</label>
+                          <input className={inputCls} placeholder={t('placeholder_phone', '(11) 9 0000-0000')} value={form.phone} onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))} />
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Assunto *</label>
-                        <input className={inputCls} required placeholder="Descreva brevemente sua necessidade" value={form.subject} onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))} />
+                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1">{t('lbl_subject', 'Assunto *')}</label>
+                        <input className={inputCls} required placeholder={t('placeholder_subject', 'Descreva brevemente sua necessidade')} value={form.subject} onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))} />
                       </div>
                       <div>
-                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Mensagem *</label>
-                        <textarea className={`${inputCls} resize-none`} rows={5} required placeholder="Detalhe sua aplicação, projeto ou dúvida técnica..." value={form.message} onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))} />
+                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1">{t('lbl_message', 'Mensagem *')}</label>
+                        <textarea className={`${inputCls} resize-none`} rows={5} required placeholder={t('placeholder_message', 'Detalhe sua aplicação, projeto ou dúvida técnica...')} value={form.message} onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))} />
                       </div>
                       {status === 'error' && (
                         <div className="bg-red-50 text-red-600 p-3 rounded-sm text-sm font-medium">
-                          {errorMessage}
+                          {errorMessage || t('msg_error', 'Não foi possível enviar a mensagem.')}
                         </div>
                       )}
                       <button type="submit" disabled={status === 'sending'} className="w-full bg-primary hover:bg-primary-hover text-white font-bold py-4 rounded-sm transition-all flex items-center justify-center gap-2 hover:-translate-y-0.5 shadow-lg disabled:opacity-60">
-                        <Send size={18} /> {status === 'sending' ? 'ENVIANDO...' : 'ENVIAR MENSAGEM'}
+                        <Send size={18} /> {status === 'sending' ? t('btn_sending', 'ENVIANDO...') : t('btn_send', 'ENVIAR MENSAGEM')}
                       </button>
                     </form>
                   </>

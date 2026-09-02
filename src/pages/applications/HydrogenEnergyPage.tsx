@@ -1,8 +1,17 @@
 import { useEffect } from 'react';
 import { ShieldCheck, Zap, Factory, CheckCircle, ArrowRight, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { getEquivalentRoute } from '../../data/routeMappings';
 
 const HydrogenEnergyPage = () => {
+  const { language, t } = useLanguage();
+  useEffect(() => {
+    document.title = t('meta_hydrogen_title', 'Energias Renováveis & Hidrogênio | Prime Products');
+    const descMeta = document.querySelector('meta[name="description"]');
+    if (descMeta) descMeta.setAttribute('content', t('meta_hydrogen_desc', 'Soluções Jumbo Tubes Tipo 4, Tube Trailers e infraestrutura de alta pressão para H2 verde.'));
+  }, [language]);
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -39,22 +48,22 @@ const HydrogenEnergyPage = () => {
       <section className="bg-surface py-16">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="mb-8">
-            <Link to="/aplicacoes" className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline">
-              <ArrowLeft size={16} /> Voltar para Aplicações
+            <Link to={getEquivalentRoute('/aplicacoes', language)} className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline">
+              <ArrowLeft size={16} /> {t('hydro_back_btn', 'Voltar para Aplicações')}
             </Link>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
             <div className="lg:col-span-2 space-y-8">
               <div className="bg-white p-8 shadow-md">
-                <h2 className="text-xl font-bold text-secondary mb-4">Sobre esta Aplicação</h2>
+                <h2 className="text-xl font-bold text-secondary mb-4">{t('hydro_about_title', 'Sobre esta Aplicação')}</h2>
                 <p className="text-gray-600 leading-relaxed">
                   O futuro da energia passa pelo Hidrogênio e soluções de altíssima pressão. A Prime Products fornece as melhores tecnologias do mercado (Best of Breed) em Jumbo Tubes de alta pressão e infraestrutura para H₂.
                 </p>
               </div>
 
               <div className="bg-white p-8 shadow-md">
-                <h2 className="text-xl font-bold text-secondary mb-6">Principais Desafios</h2>
+                <h2 className="text-xl font-bold text-secondary mb-6">{t('hydro_challenges_title', 'Principais Desafios')}</h2>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
                     <CheckCircle size={18} className="text-primary mt-0.5 shrink-0" />
@@ -78,7 +87,7 @@ const HydrogenEnergyPage = () => {
             
             <div className="space-y-6">
               <div className="bg-white p-8 shadow-md">
-                <h2 className="text-xl font-bold text-secondary mb-6">Soluções Prime Products</h2>
+                <h2 className="text-xl font-bold text-secondary mb-6">{t('hydro_solutions_title', 'Soluções Prime Products')}</h2>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
                     <ArrowRight size={16} className="text-primary mt-0.5 shrink-0" />
@@ -191,15 +200,15 @@ const HydrogenEnergyPage = () => {
               </p>
               
               <div className="mt-8 pt-8 border-t border-gray-200">
-                <h4 className="font-bold text-gray-800 mb-4 text-sm uppercase tracking-wide">Produtos Relacionados:</h4>
+                <h4 className="font-bold text-gray-800 mb-4 text-sm uppercase tracking-wide">{t('related_products', 'Produtos Relacionados:')}</h4>
                 <div className="flex flex-wrap gap-4">
-                  <Link to="/produto/reguladores-especiais" className="bg-primary/10 text-primary font-semibold px-4 py-2 rounded-full hover:bg-primary hover:text-white transition-colors">
+                  <Link to={getEquivalentRoute('/produto/reguladores-especiais', language)} className="bg-primary/10 text-primary font-semibold px-4 py-2 rounded-full hover:bg-primary hover:text-white transition-colors">
                     Reguladores de Alta Pressão
                   </Link>
-                  <Link to="/produto/transmissores-pressao" className="bg-primary/10 text-primary font-semibold px-4 py-2 rounded-full hover:bg-primary hover:text-white transition-colors">
+                  <Link to={getEquivalentRoute('/produto/transmissores-pressao', language)} className="bg-primary/10 text-primary font-semibold px-4 py-2 rounded-full hover:bg-primary hover:text-white transition-colors">
                     Transmissores de Pressão
                   </Link>
-                  <Link to="/produto/valvulas-industriais" className="bg-primary/10 text-primary font-semibold px-4 py-2 rounded-full hover:bg-primary hover:text-white transition-colors">
+                  <Link to={getEquivalentRoute('/produto/valvulas-industriais', language)} className="bg-primary/10 text-primary font-semibold px-4 py-2 rounded-full hover:bg-primary hover:text-white transition-colors">
                     Válvulas UHP
                   </Link>
                 </div>

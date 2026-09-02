@@ -3,6 +3,8 @@ import { Gauge, FlaskConical, Flame, Settings, ShieldCheck, ArrowRight, CheckCir
 import { AnimateOnScroll } from '../../components/AnimateOnScroll';
 import { EditableElement } from '../../components/EditableElement';
 import { SectionContainer } from '../../components/SectionContainer';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { getEquivalentRoute } from '../../data/routeMappings';
 
 const SOLUTIONS_TESTIMONIALS = [
   {
@@ -119,6 +121,8 @@ const TECHNICAL_AREAS = [
 const SHOW_TESTIMONIALS = false;
 
 export function SolutionsMain() {
+  const { language, t } = useLanguage();
+
   return (
     <>
       <EditableElement
@@ -155,7 +159,9 @@ export function SolutionsMain() {
         <SectionContainer className="py-0">
           <AnimateOnScroll>
             <div className="text-center mb-14">
-              <h4 className="text-primary font-bold uppercase tracking-widest text-sm mb-3">O que a Prime faz</h4>
+              <h4 className="text-primary font-bold uppercase tracking-widest text-sm mb-3">
+                {t('what_prime_does', 'O que a Prime faz')}
+              </h4>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 <EditableElement id="sol_srv_title" defaultContent="Serviços de Engenharia e Atuação Integrada" />
               </h2>
@@ -183,8 +189,11 @@ export function SolutionsMain() {
             ))}
           </div>
           <div className="mt-10 text-center">
-            <Link to="/contato" className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 py-3 font-bold uppercase rounded-sm transition-all">
-              Solicitar Proposta de Serviço <ArrowRight size={16} />
+            <Link 
+              to={getEquivalentRoute('/contato', language)} 
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 py-3 font-bold uppercase rounded-sm transition-all"
+            >
+              {t('btn_request_proposal', 'Solicitar Proposta de Serviço')} <ArrowRight size={16} />
             </Link>
           </div>
         </SectionContainer>
@@ -192,7 +201,6 @@ export function SolutionsMain() {
 
       {/* Depoimentos Soluções */}
       {SHOW_TESTIMONIALS && (
-
       <section className="py-20 relative z-10 border-t border-white/10">
         <SectionContainer className="py-0">
           <AnimateOnScroll>
@@ -249,7 +257,9 @@ export function SolutionsMain() {
         <SectionContainer className="py-0">
           <AnimateOnScroll>
             <div className="text-center mb-14">
-              <h4 className="text-primary font-bold uppercase tracking-widest text-sm mb-3">Especialidades Técnicas</h4>
+              <h4 className="text-primary font-bold uppercase tracking-widest text-sm mb-3">
+                {t('technical_specialties', 'Especialidades Técnicas')}
+              </h4>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 <EditableElement id="sol_area_title" defaultContent="Áreas de Atuação" />
               </h2>
@@ -270,20 +280,23 @@ export function SolutionsMain() {
                       <div className="w-10 h-10 bg-primary rounded-sm flex items-center justify-center">
                         <Icon size={20} className="text-white" />
                       </div>
-                      <h3 className="text-white font-bold text-lg">{title}</h3>
+                      <h3 className="text-white font-bold text-lg">{t(`sol_area_${i}_title`, title)}</h3>
                     </div>
                   </div>
                   <div className="p-8">
-                    <p className="text-gray-600 mb-6 leading-relaxed text-sm">{desc}</p>
+                    <p className="text-gray-600 mb-6 leading-relaxed text-sm">{t(`sol_area_${i}_desc`, desc)}</p>
                     <ul className="space-y-2 mb-6">
                       {items.map((item, j) => (
                         <li key={j} className="flex items-center gap-2 text-sm text-gray-700">
-                          <CheckCircle size={14} className="text-primary shrink-0" /> {item}
+                          <CheckCircle size={14} className="text-primary shrink-0" /> {t(`sol_area_${i}_item_${j}`, item)}
                         </li>
                       ))}
                     </ul>
-                    <Link to={path} className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:gap-4 transition-all group-hover:text-primary-hover">
-                      Ver detalhes <ArrowRight size={16} />
+                    <Link 
+                      to={getEquivalentRoute(path, language)} 
+                      className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:gap-4 transition-all group-hover:text-primary-hover"
+                    >
+                      {t('btn_view_details', 'Ver detalhes')} <ArrowRight size={16} />
                     </Link>
                   </div>
                 </div>
@@ -293,10 +306,17 @@ export function SolutionsMain() {
 
           <div className="mt-16 bg-secondary rounded-sm p-10 text-center">
             <ShieldCheck size={48} className="text-primary mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-white mb-3">Engenharia Aplicada ao Seu Processo</h2>
-            <p className="text-gray-400 mb-6 max-w-2xl mx-auto">Nossa equipe técnica atua desde a especificação até a entrega, comissionamento e treinamento, garantindo a solução ideal para cada aplicação.</p>
-            <Link to="/contato" className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 py-3 font-bold uppercase rounded-sm transition-all">
-              Solicitar Consultoria <ArrowRight size={16} />
+            <h2 className="text-2xl font-bold text-white mb-3">
+              {t('applied_engineering_title', 'Engenharia Aplicada ao Seu Processo')}
+            </h2>
+            <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
+              {t('applied_engineering_desc', 'Nossa equipe técnica atua desde a especificação até a entrega, comissionamento e treinamento, garantindo a solução ideal para cada aplicação.')}
+            </p>
+            <Link 
+              to={getEquivalentRoute('/contato', language)} 
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 py-3 font-bold uppercase rounded-sm transition-all"
+            >
+              {t('btn_request_consulting', 'Solicitar Consultoria')} <ArrowRight size={16} />
             </Link>
           </div>
         </SectionContainer>

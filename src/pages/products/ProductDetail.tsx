@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, CheckCircle, Phone, Mail, FileText, Send } from 'lucide-react';
 import { AnimateOnScroll } from '../../components/AnimateOnScroll';
 import { EditableElement } from '../../components/EditableElement';
 import { SectionContainer } from '../../components/SectionContainer';
 import { defaultArticles } from '../../data/defaultArticles';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { getCanonicalSlug, getEquivalentRoute } from '../../data/routeMappings';
 import { TRANSMITTER_CATALOG, CALIBRATION_CATALOG, HYDRAULIC_CATALOG, VALVES_CATALOG, SPECIAL_REGULATORS_CATALOG, TEKNO_VALVES_CATALOG, TKF_CATALOG, GASTRON_CATALOG, TYPE4_CATALOG, TYPE4_EXTRA_BLOCKS, ALUMINUM_CYLINDERS_CATALOG, ALUMINUM_CYLINDERS_EXTRA_BLOCKS, OXYGEN_GENERATION_CATALOG, OXYGEN_GENERATION_EXTRA_BLOCKS, CUTTING_WELDING_CATALOG, CUTTING_WELDING_EXTRA_BLOCKS, FIRE_SUPPRESSION_CATALOG, FIRE_SUPPRESSION_EXTRA_BLOCKS, CRYOGENIC_DEWARS_CATALOG, CRYOGENIC_DEWARS_EXTRA_BLOCKS } from '../../data/catalogs';
 
 
@@ -92,16 +94,45 @@ const PRODUCT_DATA: Record<string, { name: string; cat: string; img: string; her
 };
 
 export function ProductDetail() {
-  const { id } = useParams<{ id: string }>();
+  const { id: urlId } = useParams<{ id: string }>();
+  const { language, t } = useLanguage();
+  let canonicalId = urlId ? getCanonicalSlug(urlId, 'product') : undefined;
+  if (canonicalId && !PRODUCT_DATA[canonicalId]) {
+    canonicalId = urlId ? getCanonicalSlug(urlId, 'article') : undefined;
+  }
   const articles = defaultArticles;
   const [quoteForm, setQuoteForm] = useState({ name: '', company: '', email: '', phone: '', qty: '', details: '', _hp: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
+  const product = canonicalId ? PRODUCT_DATA[canonicalId] : null;
+  const article = canonicalId ? articles.find((a) => a.id === canonicalId) : null;
+
   const handleQuote = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('sending');
     setErrorMessage('');
+
+    if (import.meta.env.VITE_FORM_MODE === 'mock') {
+      console.log(t('form_mode_mock_notice', '[MOCK] Formulário interceptado com sucesso localmente.'));
+      console.log({
+        type: 'quote',
+        nome: quoteForm.name,
+        empresa: quoteForm.company,
+        email: quoteForm.email,
+        telefone: quoteForm.phone,
+        quantidade: quoteForm.qty,
+        detalhes: quoteForm.details,
+        produtoNome: product ? product.name : 'Produto Desconhecido',
+        url: window.location.href,
+        _hp: quoteForm._hp
+      });
+      setTimeout(() => {
+        setStatus('success');
+        setQuoteForm({ name: '', company: '', email: '', phone: '', qty: '', details: '', _hp: '' });
+      }, 500);
+      return;
+    }
 
     try {
       const res = await fetch('/api/send-mail.php', {
@@ -136,34 +167,81 @@ export function ProductDetail() {
 
   const inputCls = 'w-full border border-gray-200 rounded-sm px-3 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none bg-white text-secondary placeholder-gray-400';
 
-  const product = id ? PRODUCT_DATA[id] : null;
-  const article = articles.find((a) => a.id === id);
-
   if (!product && !article) {
     return (
       <SectionContainer className="text-center py-32">
-        <h1 className="text-2xl font-bold text-secondary mb-4">Produto não encontrado</h1>
-        <Link to="/produtos" className="text-primary font-bold hover:underline inline-flex items-center gap-2">
-          <ArrowLeft size={16} /> Voltar para Produtos
+        <h1 className="text-2xl font-bold text-secondary mb-4">
+          {t('product_not_found', 'Produto não encontrado')}
+        </h1>
+        <Link 
+          to={getEquivalentRoute('/produtos', language)} 
+          className="text-primary font-bold hover:underline inline-flex items-center gap-2"
+        >
+          <ArrowLeft size={16} /> {t('back_to_products', 'Voltar para Produtos')}
         </Link>
       </SectionContainer>
     );
   }
 
-  const name = product?.name ?? article?.title ?? '';
-  const cat = product?.cat ?? article?.category ?? '';
-  const img = product?.img ?? article?.image ?? '';
-  const heroImg = product?.heroImg ?? img;
-  const images = product?.images ?? (img ? [img] : []);
-  const desc = product?.desc ?? article?.summary ?? '';
-  const features = product?.features ?? [];
-  const apps = product?.apps ?? [];
+  // Localiza dados do produto ou artigo
+  const localizedProduct = product ? {
+    ...product,
+    name: t(`product_${canonicalId}_name`, product.name),
+    cat: t(`product_${canonicalId}_cat`, product.cat),
+    desc: t(`product_${canonicalId}_desc`, product.desc),
+    features: product.features.map((f, idx) => t(`product_${canonicalId}_features_${idx}`, f)),
+    apps: product.apps.map((a, idx) => t(`product_${canonicalId}_apps_${idx}`, a)),
+    catalogTables: product.catalogTables ? product.catalogTables.map((table, tIdx) => ({
+      ...table,
+      title: t(`product_${canonicalId}_table_${tIdx}_title`, table.title),
+      columns: table.columns.map((col, cIdx) => t(`product_${canonicalId}_table_${tIdx}_col_${cIdx}`, col)),
+      rows: table.rows.map((row, rIdx) => 
+        row.map((cell, cellIdx) => t(`product_${canonicalId}_table_${tIdx}_row_${rIdx}_cell_${cellIdx}`, cell))
+      )
+    })) : undefined,
+    extraBlocks: product.extraBlocks ? product.extraBlocks.map((block: any, bIdx) => ({
+      ...block,
+      title: t(`product_${canonicalId}_extra_${bIdx}_title`, block.title),
+      desc: block.desc ? t(`product_${canonicalId}_extra_${bIdx}_desc`, block.desc) : undefined,
+      warning: block.warning ? t(`product_${canonicalId}_extra_${bIdx}_warning`, block.warning) : undefined,
+      list: block.list ? block.list.map((item: string, lIdx: number) => t(`product_${canonicalId}_extra_${bIdx}_list_${lIdx}`, item)) : undefined
+    })) : undefined
+  } : null;
+
+  const localizedArticle = article ? {
+    ...article,
+    title: t(`article_${canonicalId}_title`, article.title),
+    category: t(`category_${article.category.toLowerCase()}`, article.category),
+    summary: t(`article_${canonicalId}_summary`, article.summary)
+  } : null;
+
+  const name = localizedProduct?.name ?? localizedArticle?.title ?? '';
+  const cat = localizedProduct?.cat ?? localizedArticle?.category ?? '';
+  const img = localizedProduct?.img ?? localizedArticle?.image ?? '';
+  const heroImg = localizedProduct?.heroImg ?? img;
+  const images = localizedProduct?.images ?? (img ? [img] : []);
+  const desc = localizedProduct?.desc ?? localizedArticle?.summary ?? '';
+  const features = localizedProduct?.features ?? [];
+  const apps = localizedProduct?.apps ?? [];
   const video = product?.video ?? null;
+
+  useEffect(() => {
+    if (name) {
+      document.title = `${name} | Prime Products`;
+      let descMeta = document.querySelector('meta[name="description"]');
+      if (!descMeta) {
+        descMeta = document.createElement('meta');
+        descMeta.setAttribute('name', 'description');
+        document.head.appendChild(descMeta);
+      }
+      descMeta.setAttribute('content', desc || '');
+    }
+  }, [name, desc]);
 
   return (
     <>
       <EditableElement
-        id={`prod_${id}_hero_bg`}
+        id={`prod_${canonicalId}_hero_bg`}
         type="container"
         as="section"
         className="prime-bg-standard relative min-h-[65vh] flex items-end bg-secondary overflow-hidden pb-16 pt-40"
@@ -183,7 +261,7 @@ export function ProductDetail() {
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <span className="inline-block bg-primary text-white text-xs font-bold uppercase tracking-wider px-3 py-1 mb-4">{cat}</span>
           <h1 className="text-3xl md:text-5xl font-black text-white leading-tight">
-            <EditableElement id={`prod_${id}_title`} defaultContent={name} />
+            <EditableElement id={`prod_${canonicalId}_title`} defaultContent={name} />
           </h1>
         </div>
       </EditableElement>
@@ -191,16 +269,19 @@ export function ProductDetail() {
       <section className="bg-surface py-16">
         <SectionContainer className="py-0">
           <div className="mb-8">
-            <Link to="/produtos" className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline">
-              <ArrowLeft size={16} /> Voltar para Produtos
+            <Link 
+              to={getEquivalentRoute('/produtos', language)} 
+              className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline"
+            >
+              <ArrowLeft size={16} /> {t('back_to_products', 'Voltar para Produtos')}
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-            <div className={`bg-white p-8 rounded-sm shadow-sm border border-gray-100 flex justify-center items-center h-full min-h-[300px] ${id === 'cilindros-tipo-4' ? 'overflow-hidden' : ''}`}>
+            <div className={`bg-white p-8 rounded-sm shadow-sm border border-gray-100 flex justify-center items-center h-full min-h-[300px] ${canonicalId === 'cilindros-tipo-4' ? 'overflow-hidden' : ''}`}>
               <img 
                 src={img} 
                 alt={name} 
-                className={`max-w-full max-h-96 object-contain mix-blend-multiply ${id === 'cilindros-tipo-4' ? 'scale-[1.30] origin-top-left' : ''}`} 
+                className={`max-w-full max-h-96 object-contain mix-blend-multiply ${canonicalId === 'cilindros-tipo-4' ? 'scale-[1.30] origin-top-left' : ''}`} 
               />
             </div>
             <div className="space-y-6">
@@ -220,18 +301,18 @@ export function ProductDetail() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2 space-y-8">
               <div className="bg-white p-8 shadow-md">
-                <h2 className="text-xl font-bold text-secondary mb-4">Descrição</h2>
-                {article?.content ? (
-                  <div className="prose prose-sm max-w-none text-gray-600" dangerouslySetInnerHTML={{ __html: article.content }} />
+                <h2 className="text-xl font-bold text-secondary mb-4">{t('product_desc_title', 'Descrição')}</h2>
+                {localizedArticle?.content ? (
+                  <div className="prose prose-sm max-w-none text-gray-600" dangerouslySetInnerHTML={{ __html: localizedArticle.content }} />
                 ) : (
                   <p className="text-gray-600 leading-relaxed">
-                    <EditableElement id={`prod_${id}_desc`} defaultContent={desc} />
+                    <EditableElement id={`prod_${canonicalId}_desc`} defaultContent={desc} />
                   </p>
                 )}
               </div>
               {features.length > 0 && (
                 <div className="bg-white p-8 shadow-md">
-                  <h2 className="text-xl font-bold text-secondary mb-6">Características Técnicas</h2>
+                  <h2 className="text-xl font-bold text-secondary mb-6">{t('product_features_title', 'Características Principais')}</h2>
                   <ul className="space-y-3">
                     {features.map((f, i) => (
                       <li key={i} className="flex items-start gap-3">
@@ -244,7 +325,7 @@ export function ProductDetail() {
               )}
               {apps.length > 0 && (
                 <div className="bg-white p-8 shadow-md">
-                  <h2 className="text-xl font-bold text-secondary mb-6">Aplicações</h2>
+                  <h2 className="text-xl font-bold text-secondary mb-6">{t('product_apps_title', 'Aplicações Recomendadas')}</h2>
                   <div className="grid grid-cols-2 gap-3">
                     {apps.map((a, i) => (
                       <div key={i} className="flex items-center gap-2 text-sm text-gray-700">
@@ -257,16 +338,16 @@ export function ProductDetail() {
             </div>
 
             <div className="space-y-6">
-              {!product?.catalogTables && (
+              {!localizedProduct?.catalogTables && (
                 <AnimateOnScroll>
                   <img src={img} alt={name === 'Geração de Oxigênio e Anestesia' ? 'Sistema de geração de gases on-site com tecnologia PSA/TCA em instalação técnica.' : name} className="w-full rounded-sm shadow-lg mix-blend-multiply" referrerPolicy="no-referrer" />
                   {images.length > 1 && (
                     <div className={`grid ${images.length === 2 ? 'grid-cols-1' : 'grid-cols-2'} gap-2 mt-2`}>
                       {images.slice(1).map((src, i) => {
                           const isFullWidth = src.includes('regulador-gases-10-cropped.png');
-                          const isDetector = id === 'detectores-vazamento';
-                          const isCalibracao = id === 'reguladores-calibracao';
-                          const isEspeciais = id === 'reguladores-especiais';
+                          const isDetector = canonicalId === 'detectores-vazamento';
+                          const isCalibracao = canonicalId === 'reguladores-calibracao';
+                          const isEspeciais = canonicalId === 'reguladores-especiais';
                           return (
                             <img
                               key={i}
@@ -282,22 +363,29 @@ export function ProductDetail() {
                 </AnimateOnScroll>
               )}
               <div className="bg-secondary text-white p-8 rounded-sm shadow-lg">
-                <h3 className="font-bold text-lg mb-4">Solicitar Informações</h3>
-                <p className="text-gray-400 text-sm mb-6">Nossa equipe técnica está pronta para atender sua demanda.</p>
+                <h3 className="font-bold text-lg mb-4">{t('solicitar_informacoes', 'Solicitar Informações')}</h3>
+                <p className="text-gray-400 text-sm mb-6">{t('equipe_pronta', 'Nossa equipe técnica está pronta para atender sua demanda.')}</p>
                 <div className="space-y-3 text-sm mb-6">
                   <div className="flex items-center gap-3"><Phone size={16} className="text-primary" /><span>(31) 9 8670-8742</span></div>
                   <div className="flex items-center gap-3"><Mail size={16} className="text-primary" /><span>info@primeproducts.ind.br</span></div>
                 </div>
-                <Link to="/contato" className="block w-full bg-primary hover:bg-primary-hover text-white text-center py-3 font-bold uppercase tracking-wider rounded-sm transition-all">
-                  Solicitar Cotação
+                <Link 
+                  to={getEquivalentRoute('/contato', language)} 
+                  className="block w-full bg-primary hover:bg-primary-hover text-white text-center py-3 font-bold uppercase tracking-wider rounded-sm transition-all"
+                >
+                  {t('btn_quote', 'Solicitar Orçamento / Suporte')}
                 </Link>
               </div>
               <div className="bg-white p-6 shadow-md rounded-sm">
-                <h3 className="font-bold text-secondary mb-4 text-sm uppercase tracking-wide">Outros Produtos</h3>
+                <h3 className="font-bold text-secondary mb-4 text-sm uppercase tracking-wide">{t('other_products', 'Outros Produtos')}</h3>
                 <div className="space-y-2">
-                  {Object.entries(PRODUCT_DATA).filter(([k]) => k !== id).slice(0, 4).map(([key, p]) => (
-                    <Link key={key} to={`/produto/${key}`} className="block text-sm text-gray-600 hover:text-primary transition-colors py-1 border-b border-gray-100 last:border-0 flex items-center gap-2">
-                      <ArrowRight size={12} className="text-primary shrink-0" /> {p.name}
+                  {Object.entries(PRODUCT_DATA).filter(([k]) => k !== canonicalId).slice(0, 4).map(([key, p]) => (
+                    <Link 
+                      key={key} 
+                      to={getEquivalentRoute(`/produto/${key}`, language)} 
+                      className="block text-sm text-gray-600 hover:text-primary transition-colors py-1 border-b border-gray-100 last:border-0 flex items-center gap-2"
+                    >
+                      <ArrowRight size={12} className="text-primary shrink-0" /> {t(`product_${key}_name`, p.name)}
                     </Link>
                   ))}
                 </div>
@@ -307,9 +395,9 @@ export function ProductDetail() {
 
           <div className="space-y-8 mt-12">
             {/* Extra Blocks */}
-            {product?.extraBlocks && (
+            {localizedProduct?.extraBlocks && (
               <div className="space-y-8 mb-12">
-                {product.extraBlocks.map((block: any, i: number) => (
+                {localizedProduct.extraBlocks.map((block: any, i: number) => (
                   <div key={i} className={`bg-white p-8 shadow-md rounded-sm grid grid-cols-1 ${block.image ? 'md:grid-cols-2' : ''} gap-8 items-center`}>
                     <div className={i % 2 !== 0 && block.image ? 'md:order-last' : ''}>
                       <h2 className="text-2xl font-bold text-secondary mb-4 border-l-4 border-primary pl-4">{block.title}</h2>
@@ -341,11 +429,11 @@ export function ProductDetail() {
             )}
 
             {/* Catalog Tables */}
-              {product?.catalogTables && (
+              {localizedProduct?.catalogTables && (
                 <div className="bg-white p-8 shadow-md">
-                  <h2 className="text-xl font-bold text-secondary mb-6">Modelos e Especificações Técnicas</h2>
+                  <h2 className="text-xl font-bold text-secondary mb-6">{t('models_specs_title', 'Modelos e Especificações Técnicas')}</h2>
                   <div className="space-y-4">
-                    {product.catalogTables.map((table: any, i: number) => (
+                    {localizedProduct.catalogTables.map((table: any, i: number) => (
                       <details key={i} className="group border border-gray-200 rounded-sm">
                         <summary className="flex justify-between items-center font-medium cursor-pointer list-none p-4 bg-gray-50 hover:bg-gray-100 transition-colors">
                           <span className="text-secondary font-bold text-sm uppercase tracking-wide">{table.title}</span>
@@ -395,23 +483,23 @@ export function ProductDetail() {
               {/* Datasheet */}
               <div className="bg-white p-8 shadow-md">
                 <h2 className="text-xl font-bold text-secondary mb-4 flex items-center gap-2">
-                  <FileText size={20} className="text-primary" /> Datasheet e Documentação
+                  <FileText size={20} className="text-primary" /> {t('datasheet_doc_title', 'Datasheet e Documentação')}
                 </h2>
                 <p className="text-gray-500 text-sm mb-5 leading-relaxed">
-                  Solicite o datasheet técnico completo, ficha de especificações ou documentação de certificação deste produto diretamente com nossa equipe.
+                  {t('datasheet_doc_desc', 'Solicite o datasheet técnico completo, ficha de especificações ou documentação de certificação deste produto diretamente com nossa equipe.')}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link
-                    to="/contato"
+                    to={getEquivalentRoute('/contato', language)}
                     className="inline-flex items-center justify-center gap-2 bg-secondary hover:bg-secondary/80 text-white px-6 py-3 font-bold text-sm uppercase tracking-wider rounded-sm transition-all"
                   >
-                    <FileText size={16} /> Solicitar Datasheet
+                    <FileText size={16} /> {t('btn_request_datasheet', 'Solicitar Datasheet')}
                   </Link>
                   <Link
-                    to="/contato"
+                    to={getEquivalentRoute('/contato', language)}
                     className="inline-flex items-center justify-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 font-bold text-sm uppercase tracking-wider rounded-sm transition-all"
                   >
-                    Solicitar Certificados
+                    {t('btn_request_certificates', 'Solicitar Certificados')}
                   </Link>
                 </div>
               </div>
@@ -419,15 +507,15 @@ export function ProductDetail() {
               {/* Formulário de cotação técnica */}
               <div className="bg-surface p-8 shadow-sm rounded-sm">
                 <h3 className="text-xl font-bold text-secondary mb-6 flex items-center gap-2">
-                  <Mail size={24} className="text-primary" /> Solicitar Cotação Técnica
+                  <Mail size={24} className="text-primary" /> {t('quote_form_title', 'Solicitar Cotação ou Suporte Técnico')}
                 </h3>
                 {status === 'success' ? (
                   <div className="text-center py-8 animate-fade-in-up">
                     <CheckCircle size={48} className="text-green-500 mx-auto mb-4" />
-                    <h3 className="text-lg font-bold text-secondary mb-2">Solicitação enviada!</h3>
-                    <p className="text-gray-500 text-sm mb-4">Nossa equipe técnica entrará em contato em breve.</p>
+                    <h3 className="text-lg font-bold text-secondary mb-2">{t('quote_sent_success', 'Solicitação enviada!')}</h3>
+                    <p className="text-gray-500 text-sm mb-4">{t('msg_success_sub', 'Nossa equipe técnica entrará em contato em breve.')}</p>
                     <button onClick={() => setStatus('idle')} className="text-primary font-bold text-sm hover:underline">
-                      Enviar nova solicitação
+                      {t('btn_send_new_request', 'Enviar nova solicitação')}
                     </button>
                   </div>
                 ) : (
@@ -435,31 +523,31 @@ export function ProductDetail() {
                     <input type="text" name="_hp" style={{ display: 'none' }} value={quoteForm._hp} onChange={(e) => setQuoteForm(f => ({ ...f, _hp: e.target.value }))} tabIndex={-1} autoComplete="off" />
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Nome *</label>
-                        <input className={inputCls} required placeholder="Seu nome" value={quoteForm.name} onChange={(e) => setQuoteForm((f) => ({ ...f, name: e.target.value }))} />
+                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1">{t('lbl_name', 'Nome *')}</label>
+                        <input className={inputCls} required placeholder={t('placeholder_name', 'Seu nome completo')} value={quoteForm.name} onChange={(e) => setQuoteForm((f) => ({ ...f, name: e.target.value }))} />
                       </div>
                       <div>
-                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Empresa *</label>
-                        <input className={inputCls} required placeholder="Empresa" value={quoteForm.company} onChange={(e) => setQuoteForm((f) => ({ ...f, company: e.target.value }))} />
+                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1">{t('lbl_company', 'Empresa')} *</label>
+                        <input className={inputCls} required placeholder={t('placeholder_company', 'Nome da empresa')} value={quoteForm.company} onChange={(e) => setQuoteForm((f) => ({ ...f, company: e.target.value }))} />
                       </div>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1">E-mail *</label>
-                        <input type="email" className={inputCls} required placeholder="seu@email.com" value={quoteForm.email} onChange={(e) => setQuoteForm((f) => ({ ...f, email: e.target.value }))} />
+                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1">{t('lbl_email', 'E-mail *')}</label>
+                        <input type="email" className={inputCls} required placeholder={t('placeholder_email', 'seu@email.com')} value={quoteForm.email} onChange={(e) => setQuoteForm((f) => ({ ...f, email: e.target.value }))} />
                       </div>
                       <div>
-                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Telefone</label>
-                        <input className={inputCls} placeholder="(11) 9 0000-0000" value={quoteForm.phone} onChange={(e) => setQuoteForm((f) => ({ ...f, phone: e.target.value }))} />
+                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1">{t('lbl_phone', 'Telefone')}</label>
+                        <input className={inputCls} placeholder={t('placeholder_phone', '(11) 9 0000-0000')} value={quoteForm.phone} onChange={(e) => setQuoteForm((f) => ({ ...f, phone: e.target.value }))} />
                       </div>
                     </div>
                     <div>
-                      <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Quantidade / Volume</label>
-                      <input className={inputCls} placeholder="Ex: 5 unidades, 200 L/min, etc." value={quoteForm.qty} onChange={(e) => setQuoteForm((f) => ({ ...f, qty: e.target.value }))} />
+                      <label className="block text-xs font-bold uppercase text-gray-500 mb-1">{t('lbl_qty', 'Quantidade Estimada')}</label>
+                      <input className={inputCls} placeholder={t('placeholder_qty', 'Ex: 2 unidades')} value={quoteForm.qty} onChange={(e) => setQuoteForm((f) => ({ ...f, qty: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Detalhes técnicos da aplicação *</label>
-                      <textarea className={`${inputCls} resize-none`} rows={4} required placeholder="Descreva sua aplicação, condições de processo, pressão, temperatura, fluido, etc." value={quoteForm.details} onChange={(e) => setQuoteForm((f) => ({ ...f, details: e.target.value }))} />
+                      <label className="block text-xs font-bold uppercase text-gray-500 mb-1">{t('lbl_details', 'Detalhes da Aplicação / Especificação')} *</label>
+                      <textarea className={`${inputCls} resize-none`} rows={4} required placeholder={t('placeholder_details', 'Descreva a pressão, vazão, tipo de gás ou requisitos do seu processo...')} value={quoteForm.details} onChange={(e) => setQuoteForm((f) => ({ ...f, details: e.target.value }))} />
                     </div>
                     {status === 'error' && (
                       <div className="bg-red-50 text-red-600 p-3 rounded-sm text-sm font-medium">
@@ -467,7 +555,7 @@ export function ProductDetail() {
                       </div>
                     )}
                     <button type="submit" disabled={status === 'sending'} className="w-full bg-primary hover:bg-primary-hover text-white font-bold py-3 rounded-sm transition-all flex items-center justify-center gap-2 disabled:opacity-60">
-                      <Send size={16} /> {status === 'sending' ? 'ENVIANDO...' : 'SOLICITAR COTAÇÃO TÉCNICA'}
+                      <Send size={16} /> {status === 'sending' ? t('btn_sending', 'ENVIANDO...') : t('btn_quote_send', 'Enviar Solicitação')}
                     </button>
                   </form>
                 )}

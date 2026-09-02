@@ -1,0 +1,11 @@
+{
+  "branch": "main",
+  "remote": "origin\thttps://github.com/Ingrid-Prime/Prime-Products-novo.git (fetch)\norigin\thttps://github.com/Ingrid-Prime/Prime-Products-novo.git (push)",
+  "log": "7deaef5 refactor: organiza assets e corrige referências de catálogo",
+  "ahead": 1,
+  "behind": null,
+  "pushOk": true,
+  "finalAhead": 0,
+  "finalBehind": null,
+  "statusPost": " M src/data/defaultArticles.ts\n M src/pages/About.tsx\n M src/pages/Home.tsx\n M src/pages/content/ArticleDetail.tsx\n M src/pages/content/ContentMain.tsx\n M src/pages/solutions/SolutionsMain.tsx\n M src/pages/tools/ToolsMain.tsx\n?? docs/\n?? image_analysis.json\n?? public/images/conteudos/hero-conteudo.jpg\n?? public/images/home/imagem-para-home-site.png\n"
+}

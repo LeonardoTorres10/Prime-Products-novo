@@ -3,6 +3,8 @@ import { ArrowRight } from 'lucide-react';
 import { AnimateOnScroll } from '../../components/AnimateOnScroll';
 import { EditableElement } from '../../components/EditableElement';
 import { SectionContainer } from '../../components/SectionContainer';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { getEquivalentRoute } from '../../data/routeMappings';
 
 interface AppItem {
   id: string;
@@ -63,6 +65,7 @@ const APPLICATION_GROUPS: AppGroup[] = [
 ];
 
 export function ApplicationsMain() {
+  const { language } = useLanguage();
   return (
     <>
       <EditableElement
@@ -106,7 +109,7 @@ export function ApplicationsMain() {
                 <div className={`grid grid-cols-1 ${items.length === 1 ? 'md:grid-cols-1 max-w-xl' : items.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3'} gap-6`}>
                   {items.map(({ id, name, desc, img }, i) => (
                     <AnimateOnScroll key={id} delay={(gi * 50) + (i * 80)}>
-                      <Link to={`/aplicacao/${id}`} className="group bg-white shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 block overflow-hidden h-full flex flex-col">
+                      <Link to={getEquivalentRoute(`/aplicacao/${id}`, language)} className="group bg-white shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 block overflow-hidden h-full flex flex-col">
                         <div className="h-44 overflow-hidden">
                           <img src={img} alt={name === 'Alimentos e Bebidas' ? 'Ambiente industrial de alimentos e bebidas com processo em inox e aplicação técnica de gases.' : name === 'Criogenia' ? 'Instalação criogênica com tanque estacionário e infraestrutura técnica.' : name === 'Energias Renováveis' ? 'Aplicação de energias renováveis com infraestrutura técnica de gases, instrumentação e engenharia industrial.' : name === 'Mineração' ? 'Aplicação em mineração com monitoramento, segurança operacional, gases e infraestrutura técnica industrial.' : name} className="prime-image-standard w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
                         </div>

@@ -3,6 +3,8 @@ import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { AnimateOnScroll } from '../../components/AnimateOnScroll';
 import { EditableElement } from '../../components/EditableElement';
 import { SectionContainer } from '../../components/SectionContainer';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { getEquivalentRoute } from '../../data/routeMappings';
 
 const GALLERY = [
   { img: '/images/solucoes-integradas/sol-seg-novo-1.jpg', label: 'Segurança Industrial' },
@@ -23,6 +25,8 @@ const PRODUCTS = [
 ];
 
 export function GasesSeguranca() {
+  const { language, t } = useLanguage();
+
   return (
     <>
       <EditableElement
@@ -53,7 +57,9 @@ export function GasesSeguranca() {
       <section className="bg-secondary py-14">
         <SectionContainer className="py-0">
           <AnimateOnScroll>
-            <p className="text-primary font-bold uppercase tracking-widest text-xs mb-6 text-center">Segurança e Automação em Campo</p>
+            <p className="text-primary font-bold uppercase tracking-widest text-xs mb-6 text-center">
+              {t('safety_automation_field', 'Segurança e Automação em Campo')}
+            </p>
           </AnimateOnScroll>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
             {GALLERY.map(({ img, label }, i) => (
@@ -72,31 +78,49 @@ export function GasesSeguranca() {
       <section className="bg-surface py-20">
         <SectionContainer className="py-0">
           <div className="mb-8">
-            <Link to="/solucoes" className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline">
-              <ArrowLeft size={16} /> Voltar para Soluções
+            <Link 
+              to={getEquivalentRoute('/solucoes', language)} 
+              className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline"
+            >
+              <ArrowLeft size={16} /> {t('back_to_solutions', 'Voltar para Soluções')}
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {PRODUCTS.map(({ path, img, name, desc }, i) => (
-              <AnimateOnScroll key={i} delay={i * 100}>
-                <Link to={path} className="group bg-white shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 block overflow-hidden h-full flex flex-col">
-                  <div className="h-40 overflow-hidden">
-                    <img src={img} alt={name} className="prime-image-standard w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="p-5 flex flex-col flex-1 border-b-4 border-transparent group-hover:border-primary transition-colors">
-                    <h3 className="font-bold text-secondary text-sm mb-2 group-hover:text-primary transition-colors">{name}</h3>
-                    <p className="text-gray-500 text-xs leading-relaxed flex-1 mb-3">{desc}</p>
-                    <span className="flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-3 transition-all">Ver produto <ArrowRight size={13} /></span>
-                  </div>
-                </Link>
-              </AnimateOnScroll>
-            ))}
+            {PRODUCTS.map(({ path, img, name, desc }, i) => {
+              const prodSlug = path.split('/').pop() || '';
+              return (
+                <AnimateOnScroll key={i} delay={i * 100}>
+                  <Link 
+                    to={getEquivalentRoute(path, language)} 
+                    className="group bg-white shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 block overflow-hidden h-full flex flex-col"
+                  >
+                    <div className="h-40 overflow-hidden">
+                      <img src={img} alt={name} className="prime-image-standard w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <div className="p-5 flex flex-col flex-1 border-b-4 border-transparent group-hover:border-primary transition-colors">
+                      <h3 className="font-bold text-secondary text-sm mb-2 group-hover:text-primary transition-colors">
+                        {t(`product_${prodSlug}_name`, name)}
+                      </h3>
+                      <p className="text-gray-500 text-xs leading-relaxed flex-1 mb-3">
+                        {t(`product_${prodSlug}_desc`, desc)}
+                      </p>
+                      <span className="flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-3 transition-all">
+                        {t('btn_view_product', 'Ver produto')} <ArrowRight size={13} />
+                      </span>
+                    </div>
+                  </Link>
+                </AnimateOnScroll>
+              );
+            })}
           </div>
           <div className="mt-16 text-center">
-            <h2 className="text-2xl font-bold text-secondary mb-4">Precisa de uma solução personalizada?</h2>
-            <p className="text-gray-500 mb-6">Entre em contato com nossa equipe técnica para um projeto sob medida.</p>
-            <Link to="/contato" className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 py-3 font-bold uppercase rounded-sm transition-all">
-              Solicitar Cotação <ArrowRight size={16} />
+            <h2 className="text-2xl font-bold text-secondary mb-4">{t('personal_solution_title', 'Precisa de uma solução personalizada?')}</h2>
+            <p className="text-gray-500 mb-6">{t('personal_solution_desc', 'Entre em contato com nossa equipe técnica para um projeto sob medida.')}</p>
+            <Link 
+              to={getEquivalentRoute('/contato', language)} 
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 py-3 font-bold uppercase rounded-sm transition-all"
+            >
+              {t('btn_quote', 'Solicitar Cotação')} <ArrowRight size={16} />
             </Link>
           </div>
         </SectionContainer>

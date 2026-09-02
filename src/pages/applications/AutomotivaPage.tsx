@@ -1,8 +1,17 @@
 import { useEffect } from 'react';
 import { ArrowLeft, CheckCircle, ArrowRight, ShieldCheck, Database, Gauge, Wind } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { getEquivalentRoute } from '../../data/routeMappings';
 
 const AutomotivaPage = () => {
+  const { language, t } = useLanguage();
+  useEffect(() => {
+    document.title = t('meta_automotiva_title', 'Controle de Emissões Veiculares | Prime Products');
+    const descMeta = document.querySelector('meta[name="description"]');
+    if (descMeta) descMeta.setAttribute('content', t('meta_automotiva_desc', 'Laboratórios de emissões veiculares com amostragem, calibração e análise de precisão.'));
+  }, [language]);
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -25,10 +34,10 @@ const AutomotivaPage = () => {
         <div className="container mx-auto px-4 relative z-20">
           <div className="max-w-3xl">
             <span className="inline-block px-4 py-1 bg-primary text-white text-sm font-bold tracking-wider mb-6 uppercase">
-              INDÚSTRIA E CONTROLE
+              {t('auto_hero_tag', 'INDÚSTRIA E CONTROLE')}
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              Laboratórios de Controle de Emissões Veiculares
+              {t('auto_hero_title', 'Laboratórios de Controle de Emissões Veiculares')}
             </h1>
           </div>
         </div>
@@ -37,8 +46,8 @@ const AutomotivaPage = () => {
       <section className="bg-surface py-12">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="mb-8">
-            <Link to="/aplicacoes" className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline">
-              <ArrowLeft size={16} /> Voltar para Aplicações
+            <Link to={getEquivalentRoute('/aplicacoes', language)} className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline">
+              <ArrowLeft size={16} /> {t('auto_back_btn', 'Voltar para Aplicações')}
             </Link>
           </div>
           
@@ -46,7 +55,7 @@ const AutomotivaPage = () => {
             <div className="lg:col-span-2 space-y-12">
               
               <div className="bg-white p-8 shadow-sm border-t-4 border-primary">
-                <h2 className="text-2xl font-bold text-secondary mb-4">Visão Executiva</h2>
+                <h2 className="text-2xl font-bold text-secondary mb-4">{t('auto_exec_title', 'Visão Executiva')}</h2>
                 <p className="text-gray-600 leading-relaxed font-medium mb-4">
                   Engenharia de gases, instrumentação analítica, dinamômetros e sistemas de calibração automotiva.
                 </p>

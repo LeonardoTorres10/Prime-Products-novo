@@ -1,0 +1,42 @@
+[
+  {
+    "original_path": "/public/images/solucoes-integradas/prod-geracao-oxigenio.png",
+    "quarantine_path": "quarentena-piloto-fase5\\prod-geracao-oxigenio.png",
+    "backup_path": "/ARQUIVO/prod-geracao-3.png",
+    "sha256": "cb216a00f593de9a8ad80af2c62b0781f77f06eb784794730bbeba750f330ec4",
+    "size": 2024899,
+    "reason": "Piloto Fase 5"
+  },
+  {
+    "original_path": "/public/images/produtos/regulador-gases-08.png",
+    "quarantine_path": "quarentena-piloto-fase5\\regulador-gases-08.png",
+    "backup_path": "/ARQUIVO/produtos/reguladores-especiais/uhp-placeholder.png",
+    "sha256": "aec8ca8f4fab6a0aea469f8203991b339b23064d2c5ac6938727a67588bace30",
+    "size": 642507,
+    "reason": "Piloto Fase 5"
+  },
+  {
+    "original_path": "/public/images/produtos/produtos-bg-nostar.png",
+    "quarantine_path": "quarentena-piloto-fase5\\produtos-bg-nostar.png",
+    "backup_path": "/ARQUIVO/produtos/produtos-bg-nostar.png",
+    "sha256": "377d498a2512fd9ac8955650cf69f270f2a2ecfb0246a9f2a037acc437daf72b",
+    "size": 564975,
+    "reason": "Piloto Fase 5"
+  },
+  {
+    "original_path": "/public/images/solucoes-integradas/seguranca-e-automacao/seguranca-em-aumotacao-04.png",
+    "quarantine_path": "quarentena-piloto-fase5\\seguranca-em-aumotacao-04.png",
+    "backup_path": "/ARQUIVO/app-seguranca-04.png",
+    "sha256": "08f4aa8956392d5229dadc6b0d8af7c68c95a2520100b1222ba15e9d3c79ffcd",
+    "size": 2343605,
+    "reason": "Piloto Fase 5"
+  },
+  {
+    "original_path": "/public/images/solucoes-integradas/seguranca-e-automacao/seguranca-e-automacao-04.png",
+    "quarantine_path": "quarentena-piloto-fase5\\seguranca-e-automacao-04.png",
+    "backup_path": "/ARQUIVO/app-seguranca-2.png",
+    "sha256": "b90a65296624c7bc0a0c4f5f0cf6f78902950a515fbbc8cd4f12602d43a97d52",
+    "size": 2367797,
+    "reason": "Piloto Fase 5"
+  }
+]

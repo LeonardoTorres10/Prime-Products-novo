@@ -3,6 +3,8 @@ import { ArrowRight } from 'lucide-react';
 import { AnimateOnScroll } from '../../components/AnimateOnScroll';
 import { EditableElement } from '../../components/EditableElement';
 import { SectionContainer } from '../../components/SectionContainer';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { getEquivalentRoute } from '../../data/routeMappings';
 
 const PRODUCTS = [
   { id: 'cilindros-aluminio', name: 'Cilindros de Alumínio', cat: 'Gases', img: '/images/produtos/cilindros-aluminio/prod-cilindros-aluminio-new.jpg', desc: 'Cilindros leves e resistentes para transporte de gases comprimidos.' },
@@ -21,6 +23,7 @@ const PRODUCTS = [
 ];
 
 export function ProductsMain() {
+  const { language } = useLanguage();
   return (
     <>
       <EditableElement
@@ -55,7 +58,7 @@ export function ProductsMain() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {PRODUCTS.map(({ id, name, cat, img, desc }, i) => (
               <AnimateOnScroll key={id} delay={(i % 4) * 80} className="h-full">
-                <Link to={`/produto/${id}`} className="group h-full flex flex-col bg-white shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden">
+                <Link to={getEquivalentRoute(`/produto/${id}`, language)} className="group h-full flex flex-col bg-white shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden">
                   <div className="h-44 shrink-0 overflow-hidden">
                     <img src={img} alt={name === 'Geração de Oxigênio' ? 'Sistema de geração de gases on-site com tecnologia PSA/TCA em instalação técnica.' : name} className="prime-image-standard w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
                   </div>

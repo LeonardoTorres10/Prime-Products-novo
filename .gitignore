@@ -3,16 +3,15 @@ node_modules/
 .env.local
 *.local
 dist/
-public/images/AplicaÃ§Ãµes/
-
-public/images/SoluÃ§Ãµes/
+public/images/Aplicações/
+public/images/Soluções/
 public/api/data/cms-data.json
 public/api/data/cms-data.json.tmp
 public_html/api/data/
 .claude/
 public_html/.builds/
-Prime-Products-novo-main.zip  
- 
+Prime-Products-novo-main.zip
+
 # Scripts temporarios
 scripts/output/
 scripts/tmp/
@@ -24,4 +23,5 @@ arquivados/
 public_html/
 Prime-Products-novo-main/
 
- api_config/
+api_config/
+backup_pre_fase2/

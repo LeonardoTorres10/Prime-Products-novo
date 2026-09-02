@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Home -->
+  <url>
+    <loc>https://www.primeproducts.ind.br/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-br" href="https://www.primeproducts.ind.br/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.primeproducts.ind.br/es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.primeproducts.ind.br/en" />
+  </url>
+  <url>
+    <loc>https://www.primeproducts.ind.br/es</loc>
+    <xhtml:link rel="alternate" hreflang="pt-br" href="https://www.primeproducts.ind.br/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.primeproducts.ind.br/es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.primeproducts.ind.br/en" />
+  </url>
+  <url>
+    <loc>https://www.primeproducts.ind.br/en</loc>
+    <xhtml:link rel="alternate" hreflang="pt-br" href="https://www.primeproducts.ind.br/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.primeproducts.ind.br/es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.primeproducts.ind.br/en" />
+  </url>
+
+  <!-- About -->
+  <url>
+    <loc>https://www.primeproducts.ind.br/sobre</loc>
+    <xhtml:link rel="alternate" hreflang="pt-br" href="https://www.primeproducts.ind.br/sobre" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.primeproducts.ind.br/es/sobre" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.primeproducts.ind.br/en/about" />
+  </url>
+  <url>
+    <loc>https://www.primeproducts.ind.br/es/sobre</loc>
+    <xhtml:link rel="alternate" hreflang="pt-br" href="https://www.primeproducts.ind.br/sobre" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.primeproducts.ind.br/es/sobre" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.primeproducts.ind.br/en/about" />
+  </url>
+  <url>
+    <loc>https://www.primeproducts.ind.br/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="pt-br" href="https://www.primeproducts.ind.br/sobre" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.primeproducts.ind.br/es/sobre" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.primeproducts.ind.br/en/about" />
+  </url>
+
+  <!-- Solutions -->
+  <url>
+    <loc>https://www.primeproducts.ind.br/solucoes</loc>
+    <xhtml:link rel="alternate" hreflang="pt-br" href="https://www.primeproducts.ind.br/solucoes" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.primeproducts.ind.br/es/soluciones" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.primeproducts.ind.br/en/solutions" />
+  </url>
+  <url>
+    <loc>https://www.primeproducts.ind.br/es/soluciones</loc>
+    <xhtml:link rel="alternate" hreflang="pt-br" href="https://www.primeproducts.ind.br/solucoes" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.primeproducts.ind.br/es/soluciones" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.primeproducts.ind.br/en/solutions" />
+  </url>
+  <url>
+    <loc>https://www.primeproducts.ind.br/en/solutions</loc>
+    <xhtml:link rel="alternate" hreflang="pt-br" href="https://www.primeproducts.ind.br/solucoes" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.primeproducts.ind.br/es/soluciones" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.primeproducts.ind.br/en/solutions" />
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://www.primeproducts.ind.br/contato</loc>
+    <xhtml:link rel="alternate" hreflang="pt-br" href="https://www.primeproducts.ind.br/contato" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.primeproducts.ind.br/es/contacto" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.primeproducts.ind.br/en/contact" />
+  </url>
+  <url>
+    <loc>https://www.primeproducts.ind.br/es/contacto</loc>
+    <xhtml:link rel="alternate" hreflang="pt-br" href="https://www.primeproducts.ind.br/contato" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.primeproducts.ind.br/es/contacto" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.primeproducts.ind.br/en/contact" />
+  </url>
+  <url>
+    <loc>https://www.primeproducts.ind.br/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="pt-br" href="https://www.primeproducts.ind.br/contato" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.primeproducts.ind.br/es/contacto" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.primeproducts.ind.br/en/contact" />
+  </url>
+</urlset>

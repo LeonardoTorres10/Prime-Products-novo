@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getEquivalentRoute } from '../data/routeMappings';
 
 type ElementType = 'text' | 'image' | 'button' | 'link' | 'icon' | 'container';
 
@@ -26,10 +28,18 @@ export function EditableElement({
   as,
   ...rest
 }: Props) {
-  const content = defaultContent;
-  const href = defaultHref;
-  const style: React.CSSProperties = { ...defaultStyle };
+  const { language, t } = useLanguage();
 
+  // Resolve content translation using global dictionary
+  const content = t(id, defaultContent);
+
+  // Localize internal links/hrefs if applicable
+  let href = defaultHref;
+  if (href && href.startsWith('/')) {
+    href = getEquivalentRoute(href, language);
+  }
+
+  const style: React.CSSProperties = { ...defaultStyle };
   const Tag = as ?? (type === 'text' || type === 'icon' ? 'span' : 'div');
 
   if (type === 'image') {

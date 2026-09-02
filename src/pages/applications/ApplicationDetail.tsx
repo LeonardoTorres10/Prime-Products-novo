@@ -6,6 +6,8 @@ import { SectionContainer } from '../../components/SectionContainer';
 import HydrogenEnergyPage from './HydrogenEnergyPage';
 import FarmaceuticaPage from './FarmaceuticaPage';
 import AutomotivaPage from './AutomotivaPage';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { getCanonicalSlug, getEquivalentRoute } from '../../data/routeMappings';
 
 const APP_GALLERY: Record<string, string[]> = {
   'laboratorios-analiticos': ['/images/aplicacoes/laboratorio-analitico/about-lab.jpg', '/images/aplicacoes/laboratorio-analitico/sol-analitica-00.png', '/images/aplicacoes/laboratorio-analitico/sol-analitica-02.png', '/images/aplicacoes/laboratorio-analitico/whatsapp-image-2026-03-24-at-17.03.49.jpeg'],
@@ -79,7 +81,7 @@ const APPLICATION_DATA: Record<string, {
     img: '/images/aplicacoes/app-hospitalar-leito.jpg',
     desc: 'O setor hospitalar exige gases medicinais certificados, sistemas de distribuição confiáveis e equipamentos que garantam a segurança de pacientes e profissionais. A Prime atende hospitais, clínicas e centros cirúrgicos com soluções completas e suporte técnico especializado.',
     challenges: ['Fornecimento contínuo e confiável de gases medicinais', 'Conformidade com normas ABNT NBR 12188 e ANVISA', 'Sistemas de geração de oxigênio para independência de fornecedores', 'Segurança na distribuição e detecção de vazamentos'],
-    solutions: ['Centrais de gases medicinais (O₂, N₂O, ar medicinal, CO₂)', 'Geradores de oxigênio PSA para produção on-site', 'Sistemas de distribuição em cobre e ramais de gases', 'Detectores de vazamento e alarmes de segurança hospitalar'],
+    solutions: ['Centrais de gases medicinais (O₂, N₂O, ar medicinal, CO₂)', 'Geradores de oxigênio PSA para produção on-site', 'Sistemas de distribuição in cobre e ramais de gases', 'Detectores de vazamento e alarmes de segurança hospitalar'],
     products: [
       { name: 'Geração de Oxigênio e Anestesia', path: '/produto/geracao-oxigenio' },
       { name: 'Cilindros de Alumínio', path: '/produto/cilindros-aluminio' },
@@ -91,7 +93,7 @@ const APPLICATION_DATA: Record<string, {
     name: 'Óleo & Gás',
     cat: 'Processos Industriais',
     img: '/images/aplicacoes/segmento-oleo-gas.png',
-    desc: 'Refinarias, plantas de GNL, plataformas e instalações de óleo & gás exigem instrumentação certificada para áreas classificadas, sistemas de detecção de gases tóxicos e inflamáveis e soluções de segurança funcional com certificação SIL.',
+    desc: 'Refinarias, plantas de GNL, plataformas e instalações de óleo & gás exigem instrumentação certificada para áreas classificadas, sistemas de detecção de gases tóxicos e inflamáveis e soluções de segurança functional com certificação SIL.',
     challenges: ['Instrumentação certificada ATEX/IECEx para zonas classificadas', 'Detecção de H₂S, CO, LEL e outros gases de risco', 'Certificação de segurança funcional SIL 2/3', 'Alta disponibilidade e confiabilidade em ambientes críticos'],
     solutions: ['Transmissores de pressão com certificação ATEX e SIL', 'Detectores de gases tóxicos e inflamáveis com saída 4-20 mA/HART', 'Sistemas de supressão de incêndio por agentes limpos', 'Reguladores e válvulas para gases de processo em alta pressão'],
     products: [
@@ -211,47 +213,69 @@ const APPLICATION_DATA: Record<string, {
 };
 
 export function ApplicationDetail() {
-  const { id } = useParams<{ id: string }>();
-  const app = id ? APPLICATION_DATA[id] : null;
-  const galleryImages = id ? (APP_GALLERY[id] ?? []) : [];
+  const { id: urlId } = useParams<{ id: string }>();
+  const { language, t } = useLanguage();
+  const canonicalId = urlId ? getCanonicalSlug(urlId, 'application') : undefined;
+
+  const app = canonicalId ? APPLICATION_DATA[canonicalId] : null;
+  const galleryImages = canonicalId ? (APP_GALLERY[canonicalId] ?? []) : [];
 
   if (!app) {
-    return <div className="text-center py-20 text-gray-500">Aplicação não encontrada</div>;
+    return (
+      <div className="text-center py-20 text-gray-500">
+        {t('app_not_found', 'Aplicação não encontrada')}
+      </div>
+    );
   }
 
-  // Intercept the render if it is the Hydrogen page
-  if (id === 'energia-transicao-energetica') {
+  // Intercept standard rendering for subpages
+  if (canonicalId === 'energia-transicao-energetica') {
     return <HydrogenEnergyPage />;
   }
 
-  // Intercept Farmaceutica
-  if (id === 'farmaceutica') {
+  if (canonicalId === 'farmaceutica') {
     return <FarmaceuticaPage />;
   }
 
-  // Intercept Automotiva
-  if (id === 'automotivo') {
+  if (canonicalId === 'automotivo') {
     return <AutomotivaPage />;
   }
+
+  // Apply localization
+  const localizedApp = {
+    ...app,
+    name: t(`app_${canonicalId}_name`, app.name),
+    cat: t(`app_${canonicalId}_cat`, app.cat),
+    desc: t(`app_${canonicalId}_desc`, app.desc),
+    challenges: app.challenges.map((c, idx) => t(`app_${canonicalId}_challenges_${idx}`, c)),
+    solutions: app.solutions.map((s, idx) => t(`app_${canonicalId}_solutions_${idx}`, s)),
+    products: app.products.map((p) => {
+      const prodSlug = p.path.split('/').pop() || '';
+      return {
+        name: t(`product_${prodSlug}_name`, p.name),
+        path: getEquivalentRoute(p.path, language)
+      };
+    })
+  };
 
   return (
     <>
       <EditableElement
-        id={`app_${id}_hero`}
+        id={`app_${canonicalId}_hero`}
         type="container"
         as="section"
         className="prime-bg-standard relative min-h-[65vh] flex items-end bg-secondary overflow-hidden pb-16 pt-40"
         defaultStyle={{
-          backgroundImage: `url('${app.img}')`,
+          backgroundImage: `url('${localizedApp.img}')`,
           backgroundSize: 'cover',
-          backgroundPosition: id === 'farmaceutica' ? 'center 15%' : 'center'
+          backgroundPosition: 'center'
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/60 to-transparent" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <span className="inline-block bg-primary text-white text-xs font-bold uppercase tracking-wider px-3 py-1 mb-4">{app.cat}</span>
+          <span className="inline-block bg-primary text-white text-xs font-bold uppercase tracking-wider px-3 py-1 mb-4">{localizedApp.cat}</span>
           <h1 className="text-3xl md:text-5xl font-black text-white leading-tight">
-            <EditableElement id={`app_${id}_title`} defaultContent={app.name} />
+            <EditableElement id={`app_${canonicalId}_title`} defaultContent={localizedApp.name} />
           </h1>
         </div>
       </EditableElement>
@@ -259,23 +283,26 @@ export function ApplicationDetail() {
       <section className="bg-surface py-16">
         <SectionContainer className="py-0">
           <div className="mb-8">
-            <Link to="/aplicacoes" className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline">
-              <ArrowLeft size={16} /> Voltar para Aplicações
+            <Link 
+              to={getEquivalentRoute('/aplicacoes', language)} 
+              className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline"
+            >
+              <ArrowLeft size={16} /> {t('back_to_applications', 'Voltar para Aplicações')}
             </Link>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2 space-y-8">
               <div className="bg-white p-8 shadow-md">
-                <h2 className="text-xl font-bold text-secondary mb-4">Sobre esta Aplicação</h2>
+                <h2 className="text-xl font-bold text-secondary mb-4">{t('about_app_title', 'Sobre esta Aplicação')}</h2>
                 <p className="text-gray-600 leading-relaxed">
-                  <EditableElement id={`app_${id}_desc`} defaultContent={app.desc} />
+                  <EditableElement id={`app_${canonicalId}_desc`} defaultContent={localizedApp.desc} />
                 </p>
               </div>
 
               <div className="bg-white p-8 shadow-md">
-                <h2 className="text-xl font-bold text-secondary mb-6">Principais Desafios</h2>
+                <h2 className="text-xl font-bold text-secondary mb-6">{t('challenges_title', 'Principais Desafios')}</h2>
                 <ul className="space-y-3">
-                  {app.challenges.map((c, i) => (
+                  {localizedApp.challenges.map((c, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <CheckCircle size={18} className="text-primary mt-0.5 shrink-0" />
                       <span className="text-gray-700 text-sm">{c}</span>
@@ -284,9 +311,9 @@ export function ApplicationDetail() {
                 </ul>
               </div>
               <div className="bg-white p-8 shadow-md">
-                <h2 className="text-xl font-bold text-secondary mb-6">Soluções Prime Products</h2>
+                <h2 className="text-xl font-bold text-secondary mb-6">{t('solutions_title', 'Soluções Prime Products')}</h2>
                 <ul className="space-y-3">
-                  {app.solutions.map((s, i) => (
+                  {localizedApp.solutions.map((s, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <ArrowRight size={16} className="text-primary mt-0.5 shrink-0" />
                       <span className="text-gray-700 text-sm">{s}</span>
@@ -294,28 +321,33 @@ export function ApplicationDetail() {
                   ))}
                 </ul>
               </div>
-
-
             </div>
 
             {/* Sidebar (Solicitar Informações e Produtos Relacionados) */}
             <div className="space-y-6">
               <div className="bg-secondary text-white p-8 rounded-sm shadow-lg">
-                <h3 className="font-bold text-lg mb-4">Solicitar Informações</h3>
-                <p className="text-gray-400 text-sm mb-6">Nossa equipe técnica está pronta para atender sua demanda.</p>
+                <h3 className="font-bold text-lg mb-4">{t('solicitar_informacoes', 'Solicitar Informações')}</h3>
+                <p className="text-gray-400 text-sm mb-6">{t('equipe_pronta', 'Nossa equipe técnica está pronta para atender sua demanda.')}</p>
                 <div className="space-y-3 text-sm mb-6">
                   <div className="flex items-center gap-3"><Phone size={16} className="text-primary" /><span>(31) 9 8670-8742</span></div>
                   <div className="flex items-center gap-3"><Mail size={16} className="text-primary" /><span>info@primeproducts.ind.br</span></div>
                 </div>
-                <Link to="/contato" className="block w-full bg-primary hover:bg-primary-hover text-white text-center py-3 font-bold uppercase tracking-wider rounded-sm transition-all">
-                  Solicitar Cotação
+                <Link 
+                  to={getEquivalentRoute('/contato', language)} 
+                  className="block w-full bg-primary hover:bg-primary-hover text-white text-center py-3 font-bold uppercase tracking-wider rounded-sm transition-all"
+                >
+                  {t('btn_quote', 'Solicitar Orçamento / Suporte')}
                 </Link>
               </div>
               <div className="bg-white p-6 shadow-md rounded-sm">
-                <h3 className="font-bold text-secondary mb-4 text-sm uppercase tracking-wide">Produtos Relacionados</h3>
+                <h3 className="font-bold text-secondary mb-4 text-sm uppercase tracking-wide">{t('related_products_title', 'Produtos Relacionados')}</h3>
                 <div className="space-y-2">
-                  {app.products.map(({ name, path }) => (
-                    <Link key={path} to={path} className="block text-sm text-gray-600 hover:text-primary transition-colors py-1 border-b border-gray-100 last:border-0 flex items-center gap-2">
+                  {localizedApp.products.map(({ name, path }) => (
+                    <Link 
+                      key={path} 
+                      to={path} 
+                      className="block text-sm text-gray-600 hover:text-primary transition-colors py-1 border-b border-gray-100 last:border-0 flex items-center gap-2"
+                    >
                       <ArrowRight size={12} className="text-primary shrink-0" /> {name}
                     </Link>
                   ))}
@@ -327,7 +359,7 @@ export function ApplicationDetail() {
           {/* Galeria de Imagens Técnicas e Complementares (Full Width) */}
           {galleryImages.length > 0 && (
             <div className="mt-16 border-t border-gray-200 pt-12">
-              <h2 className="text-3xl font-bold text-secondary mb-8 text-center">Galeria de Aplicações Técnicas</h2>
+              <h2 className="text-3xl font-bold text-secondary mb-8 text-center">{t('app_gallery_title', 'Galeria de Aplicações Técnicas')}</h2>
               <AnimateOnScroll>
                 <div className={`grid gap-6 ${galleryImages.length === 1 ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'}`}>
                   {galleryImages.map((src: string, i: number) => {
@@ -339,7 +371,7 @@ export function ApplicationDetail() {
                       <div key={i} className={`relative group overflow-hidden rounded-sm shadow-md ${colSpan}`}>
                         <img 
                           src={src} 
-                          alt={`${app.name} - Imagem Técnica ${i + 1}`} 
+                          alt={`${localizedApp.name} - Imagem Técnica ${i + 1}`} 
                           className={`w-full ${height} group-hover:scale-[1.02] transition-transform duration-700`} 
                           referrerPolicy="no-referrer" 
                         />

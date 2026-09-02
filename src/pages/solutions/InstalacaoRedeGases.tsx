@@ -3,6 +3,8 @@ import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { AnimateOnScroll } from '../../components/AnimateOnScroll';
 import { EditableElement } from '../../components/EditableElement';
 import { SectionContainer } from '../../components/SectionContainer';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { getEquivalentRoute } from '../../data/routeMappings';
 
 const PRODUCTS = [
   { path: '/produto/reguladores-especiais', img: '/images/produtos/aplicacao-real.webp', name: 'Reguladores de Gases Especiais', desc: 'Reguladores de alta performance para gases especiais, alta pressão e calibração.' },
@@ -12,6 +14,8 @@ const PRODUCTS = [
 ];
 
 export function InstalacaoRedeGases() {
+  const { language, t } = useLanguage();
+
   return (
     <>
       <EditableElement
@@ -42,8 +46,11 @@ export function InstalacaoRedeGases() {
       <section className="bg-white py-16">
         <SectionContainer className="py-0">
           <div className="mb-8">
-            <Link to="/solucoes" className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline mb-8">
-              <ArrowLeft size={16} /> Voltar para Soluções
+            <Link 
+              to={getEquivalentRoute('/solucoes', language)} 
+              className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline mb-8"
+            >
+              <ArrowLeft size={16} /> {t('back_to_solutions', 'Voltar para Soluções')}
             </Link>
           </div>
 
@@ -112,7 +119,7 @@ export function InstalacaoRedeGases() {
                     Atuamos com gases como nitrogênio, oxigênio, argônio, ar comprimido, dióxido de carbono, hidrogênio e misturas gasosas, sempre considerando as necessidades específicas de cada processo, incluindo pressão, vazão, pureza, distância entre a central e os pontos de consumo, segurança e facilidade de manutenção.
                   </p>
                   <p>
-                    As instalações podem incluir centrais de cilindros, painéis de regulagem, redes de distribuição, pontos de consumo, válvulas de bloqueio, dispositivos de segurança, identificação das tubulações, testes de pressão, testes de estanqueidade e entrega técnica del sistema.
+                    As instalações podem incluir centrais de cilindros, painéis de regulagem, redes de distribuição, pontos de consumo, válvulas de bloqueio, dispositivos de segurança, identificação das tubulações, testes de pressão, testes de estanqueidade e entrega técnica do sistema.
                   </p>
                   <p>
                     Nosso objetivo é entregar instalações industriais robustas, seguras e tecnicamente adequadas às exigências operacionais de cada cliente.
@@ -200,31 +207,46 @@ export function InstalacaoRedeGases() {
       <section className="bg-surface py-20 border-t border-gray-100">
         <SectionContainer className="py-0">
           <div className="mb-10 text-center">
-            <h2 className="text-2xl font-bold text-secondary">Equipamentos Relacionados</h2>
-            <p className="text-gray-500 text-sm mt-1">Componentes críticos utilizados na montagem das redes de gases.</p>
+            <h2 className="text-2xl font-bold text-secondary">{t('related_equipment_title', 'Equipamentos Relacionados')}</h2>
+            <p className="text-gray-500 text-sm mt-1">{t('related_equipment_desc', 'Componentes críticos utilizados na montagem das redes de gases.')}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {PRODUCTS.map(({ path, img, name, desc }, i) => (
-              <AnimateOnScroll key={i} delay={i * 100}>
-                <Link to={path} className="group bg-white shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 block overflow-hidden h-full flex flex-col">
-                  <div className="h-40 overflow-hidden">
-                    <img src={img} alt={name} className="prime-image-standard w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="p-5 flex flex-col flex-1 border-b-4 border-transparent group-hover:border-primary transition-colors">
-                    <h3 className="font-bold text-secondary text-sm mb-2 group-hover:text-primary transition-colors">{name}</h3>
-                    <p className="text-gray-500 text-xs leading-relaxed flex-1 mb-3">{desc}</p>
-                    <span className="flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-3 transition-all">Ver produto <ArrowRight size={13} /></span>
-                  </div>
-                </Link>
-              </AnimateOnScroll>
-            ))}
+            {PRODUCTS.map(({ path, img, name, desc }, i) => {
+              const prodSlug = path.split('/').pop() || '';
+              return (
+                <AnimateOnScroll key={i} delay={i * 100}>
+                  <Link 
+                    to={getEquivalentRoute(path, language)} 
+                    className="group bg-white shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 block overflow-hidden h-full flex flex-col"
+                  >
+                    <div className="h-40 overflow-hidden">
+                      <img src={img} alt={name} className="prime-image-standard w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <div className="p-5 flex flex-col flex-1 border-b-4 border-transparent group-hover:border-primary transition-colors">
+                      <h3 className="font-bold text-secondary text-sm mb-2 group-hover:text-primary transition-colors">
+                        {t(`product_${prodSlug}_name`, name)}
+                      </h3>
+                      <p className="text-gray-500 text-xs leading-relaxed flex-1 mb-3">
+                        {t(`product_${prodSlug}_desc`, desc)}
+                      </p>
+                      <span className="flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-3 transition-all">
+                        {t('btn_view_product', 'Ver produto')} <ArrowRight size={13} />
+                      </span>
+                    </div>
+                  </Link>
+                </AnimateOnScroll>
+              );
+            })}
           </div>
 
           <div className="mt-16 text-center">
-            <h2 className="text-2xl font-bold text-secondary mb-4">Precisa de um projeto de distribuição de gases?</h2>
-            <p className="text-gray-500 mb-6">Entre em contato com nossa equipe técnica para um dimensionamento sob medida.</p>
-            <Link to="/contato" className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 py-3 font-bold uppercase rounded-sm transition-all">
-              Solicitar Cotação <ArrowRight size={16} />
+            <h2 className="text-2xl font-bold text-secondary mb-4">{t('gases_project_title', 'Precisa de um projeto de distribuição de gases?')}</h2>
+            <p className="text-gray-500 mb-6">{t('gases_project_desc', 'Entre em contato com nossa equipe técnica para um dimensionamento sob medida.')}</p>
+            <Link 
+              to={getEquivalentRoute('/contato', language)} 
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 py-3 font-bold uppercase rounded-sm transition-all"
+            >
+              {t('btn_quote', 'Solicitar Cotação')} <ArrowRight size={16} />
             </Link>
           </div>
         </SectionContainer>

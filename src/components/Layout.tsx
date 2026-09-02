@@ -6,12 +6,77 @@ import {
 } from 'lucide-react';
 import { EditableElement } from './EditableElement';
 import { defaultNavItems } from '../data/navItems';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getEquivalentRoute } from '../data/routeMappings';
+
+function LanguageSelector() {
+  const { language, changeLanguage } = useLanguage();
+
+  const options = [
+    { code: 'pt', flagUrl: '/images/flags/br.svg', name: 'Português' },
+    { code: 'es', flagUrl: '/images/flags/es.svg', name: 'Español' },
+    { code: 'en', flagUrl: '/images/flags/us.svg', name: 'English' }
+  ] as const;
+
+  return (
+    <div className="flex items-center gap-1.5" role="group" aria-label="Seletor de idioma">
+      {options.map((opt) => (
+        <button
+          key={opt.code}
+          onClick={() => changeLanguage(opt.code)}
+          title={opt.name}
+          className={`flex items-center justify-center w-8 h-8 rounded-full border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary hover:scale-110 overflow-hidden ${
+            language === opt.code
+              ? 'bg-primary/10 border-primary shadow-sm scale-110'
+              : 'bg-white border-gray-200 hover:bg-gray-50'
+          }`}
+          aria-label={`Mudar idioma para ${opt.name}`}
+          aria-current={language === opt.code ? 'true' : undefined}
+        >
+          <img src={opt.flagUrl} alt={opt.name} className="w-full h-full object-cover p-[2px] rounded-full" />
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function LanguageSelectorMobile() {
+  const { language, changeLanguage } = useLanguage();
+
+  const options = [
+    { code: 'pt', flagUrl: '/images/flags/br.svg', name: 'Português' },
+    { code: 'es', flagUrl: '/images/flags/es.svg', name: 'Español' },
+    { code: 'en', flagUrl: '/images/flags/us.svg', name: 'English' }
+  ] as const;
+
+  return (
+    <div className="flex justify-center gap-4 py-2" role="group" aria-label="Seletor de idioma">
+      {options.map((opt) => (
+        <button
+          key={opt.code}
+          onClick={() => changeLanguage(opt.code)}
+          title={opt.name}
+          className={`flex items-center justify-center w-12 h-12 rounded-full border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary overflow-hidden ${
+            language === opt.code
+              ? 'bg-primary/10 border-primary shadow-sm scale-110'
+              : 'bg-white border-gray-200 hover:bg-gray-50'
+          }`}
+          aria-label={`Mudar idioma para ${opt.name}`}
+          aria-current={language === opt.code ? 'true' : undefined}
+        >
+          <img src={opt.flagUrl} alt={opt.name} className="w-full h-full object-cover p-[3px] rounded-full" />
+        </button>
+      ))}
+    </div>
+  );
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const location = useLocation();
+  const { language, t } = useLanguage();
 
   const [newsEmail, setNewsEmail] = useState('');
   const [newsStatus, setNewsStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
@@ -44,8 +109,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <EditableElement id="layout_topbar_email" defaultContent="info@primeproducts.ind.br" />
             </span>
           </div>
-          <div className="flex items-center">
-            <span className="flex items-center gap-2 font-bold cursor-default">
+          <div className="flex items-center gap-6">
+            <span className="flex items-center gap-2 cursor-default">
               <Phone size={14} className="text-white fill-current" />
               <EditableElement id="layout_topbar_phone" defaultContent="(31) 9 8670-8742" />
             </span>
@@ -62,7 +127,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-14">
             {/* Logo */}
-            <Link to="/" className="flex items-center group shrink-0 h-full">
+            <Link to={getEquivalentRoute('/', language)} className="flex items-center group shrink-0 h-full">
               <div className="h-10 md:h-12 w-auto">
                 <EditableElement
                   id="layout_logo_img"
@@ -75,64 +140,73 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
             {/* Desktop nav */}
             <nav className="hidden xl:flex space-x-1 items-center">
-              {defaultNavItems.map((item: any, i: number) => (
-                <div key={item.path} className="relative group px-3 py-2">
-                  {item.subItems ? (
-                    <>
+              {defaultNavItems.map((item: any, i: number) => {
+                const localizedPath = getEquivalentRoute(item.path, language);
+                const localizedLabel = t(`nav_item_${i}`, item.label);
+                return (
+                  <div key={item.path} className="relative group px-3 py-2">
+                    {item.subItems ? (
+                      <>
+                        <NavLink
+                          to={localizedPath}
+                          className={({ isActive }) =>
+                            `flex items-center text-xs font-bold uppercase tracking-widest transition-colors whitespace-nowrap gap-1 ${
+                              isActive ? 'text-primary' : 'text-gray-600 hover:text-primary'
+                            }`
+                          }
+                        >
+                          <span>{localizedLabel}</span>
+                          <ChevronDown size={12} />
+                        </NavLink>
+                        <div className="absolute left-0 top-full pt-2 opacity-0 translate-y-2 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-200 w-56">
+                          <div className="bg-white shadow-xl rounded-sm border-t-4 border-primary p-2 flex flex-col gap-1 max-h-[80vh] overflow-y-auto custom-scrollbar">
+                            {item.subItems.map((sub: any, j: number) => {
+                              const localizedSubPath = getEquivalentRoute(sub.path, language);
+                              const localizedSubLabel = t(`nav_sub_item_${i}_${j}`, sub.label);
+                              return (
+                                <NavLink
+                                  key={j}
+                                  to={localizedSubPath}
+                                  className={({ isActive }) =>
+                                    `block px-4 py-3 text-sm font-bold text-gray-600 hover:text-white hover:bg-primary rounded-sm transition-colors ${
+                                      isActive && localizedSubPath === location.pathname ? 'bg-gray-100 text-primary' : ''
+                                    }`
+                                  }
+                                >
+                                  {localizedSubLabel}
+                                </NavLink>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </>
+                    ) : (
                       <NavLink
-                        to={item.path}
+                        to={localizedPath}
                         className={({ isActive }) =>
-                          `flex items-center text-xs font-bold uppercase tracking-widest transition-colors whitespace-nowrap gap-1 ${
-                            isActive ? 'text-primary' : 'text-gray-600 hover:text-primary'
+                          `text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors whitespace-nowrap ${
+                            isActive ? 'text-primary' : 'text-gray-600'
                           }`
                         }
                       >
-                        <EditableElement id={`nav_item_${i}`} defaultContent={item.label} />
-                        <ChevronDown size={12} />
+                        <span>{localizedLabel}</span>
                       </NavLink>
-                      <div className="absolute left-0 top-full pt-2 opacity-0 translate-y-2 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-200 w-56">
-                        <div className="bg-white shadow-xl rounded-sm border-t-4 border-primary p-2 flex flex-col gap-1 max-h-[80vh] overflow-y-auto custom-scrollbar">
-                          {item.subItems.map((sub: any, j: number) => (
-                            <NavLink
-                              key={j}
-                              to={sub.path}
-                              className={({ isActive }) =>
-                                `block px-4 py-3 text-sm font-bold text-gray-600 hover:text-white hover:bg-primary rounded-sm transition-colors ${
-                                  isActive && sub.path === location.pathname ? 'bg-gray-100 text-primary' : ''
-                                }`
-                              }
-                            >
-                              {sub.label}
-                            </NavLink>
-                          ))}
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    <NavLink
-                      to={item.path}
-                      className={({ isActive }) =>
-                        `text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors whitespace-nowrap ${
-                          isActive ? 'text-primary' : 'text-gray-600'
-                        }`
-                      }
-                    >
-                      <EditableElement id={`nav_item_${i}`} defaultContent={item.label} />
-                    </NavLink>
-                  )}
-                </div>
-              ))}
+                    )}
+                  </div>
+                );
+              })}
             </nav>
 
-            {/* CTA + mobile toggle */}
-            <div className="hidden xl:block shrink-0 ml-4">
+            {/* CTA + Language Selector + mobile toggle */}
+            <div className="hidden xl:flex items-center gap-4 shrink-0 ml-4">
+              <LanguageSelector />
               <EditableElement
                 id="layout_nav_cta"
                 type="button"
                 defaultContent="FALE CONOSCO"
                 defaultHref="/contato"
                 as={Link}
-                to="/contato"
+                to={getEquivalentRoute('/contato', language)}
                 className="bg-primary hover:bg-primary-hover text-white px-6 py-3 text-sm font-bold uppercase tracking-wider transition-all transform hover:-translate-y-0.5 shadow-sm inline-block rounded-sm whitespace-nowrap"
               />
             </div>
@@ -150,70 +224,79 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {mobileOpen && (
           <div className="xl:hidden bg-white border-t border-gray-100 absolute w-full shadow-2xl z-50 animate-fade-in-up">
             <div className="px-4 pt-4 pb-6 space-y-2 h-[80vh] overflow-y-auto">
-              {defaultNavItems.map((item: any, i: number) => (
-                <div key={item.path}>
-                  {item.subItems ? (
-                    <div>
-                      <div className="flex items-center">
-                        <NavLink
-                          to={item.path}
-                          className={({ isActive }) =>
-                            `flex-grow px-4 py-3 text-sm font-bold uppercase tracking-wide rounded-sm transition-colors ${
-                              isActive ? 'text-primary bg-primary/5' : 'text-secondary hover:bg-gray-50'
-                            }`
-                          }
-                          onClick={() => setMobileOpen(false)}
-                        >
-                          <EditableElement id={`nav_item_${i}_mobile`} defaultContent={item.label} />
-                        </NavLink>
-                        <button
-                          onClick={() => setMobileExpanded(mobileExpanded === item.label ? null : item.label)}
-                          className={`px-4 py-3 text-secondary transition-colors ${mobileExpanded === item.label ? 'text-primary' : ''}`}
-                        >
-                          <ChevronDown size={20} className={`transition-transform ${mobileExpanded === item.label ? 'rotate-180' : ''}`} />
-                        </button>
-                      </div>
-                      {mobileExpanded === item.label && (
-                        <div className="pl-6 space-y-1 mt-1 border-l-2 border-primary/20 ml-4">
-                          {item.subItems.map((sub: any, j: number) => (
-                            <NavLink
-                              key={j}
-                              to={sub.path}
-                              onClick={() => setMobileOpen(false)}
-                              className={({ isActive }) =>
-                                `block px-4 py-3 text-sm font-medium text-gray-600 hover:text-primary ${
-                                  isActive && sub.path === location.pathname ? 'text-primary' : ''
-                                }`
-                              }
-                            >
-                              {sub.label}
-                            </NavLink>
-                          ))}
+              {defaultNavItems.map((item: any, i: number) => {
+                const localizedPath = getEquivalentRoute(item.path, language);
+                const localizedLabel = t(`nav_item_${i}_mobile`, item.label);
+                return (
+                  <div key={item.path}>
+                    {item.subItems ? (
+                      <div>
+                        <div className="flex items-center">
+                          <NavLink
+                            to={localizedPath}
+                            className={({ isActive }) =>
+                              `flex-grow px-4 py-3 text-sm font-bold uppercase tracking-wide rounded-sm transition-colors ${
+                                isActive ? 'text-primary bg-primary/5' : 'text-secondary hover:bg-gray-50'
+                              }`
+                            }
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            <span>{localizedLabel}</span>
+                          </NavLink>
+                          <button
+                            onClick={() => setMobileExpanded(mobileExpanded === item.label ? null : item.label)}
+                            className={`px-4 py-3 text-secondary transition-colors ${mobileExpanded === item.label ? 'text-primary' : ''}`}
+                          >
+                            <ChevronDown size={20} className={`transition-transform ${mobileExpanded === item.label ? 'rotate-180' : ''}`} />
+                          </button>
                         </div>
-                      )}
-                    </div>
-                  ) : (
-                    <NavLink
-                      to={item.path}
-                      className={({ isActive }) =>
-                        `block px-4 py-3 text-sm font-bold uppercase tracking-wide rounded-sm transition-colors ${
-                          isActive ? 'text-primary bg-primary/5' : 'text-secondary hover:bg-gray-50'
-                        }`
-                      }
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      <EditableElement id={`nav_item_${i}_mobile`} defaultContent={item.label} />
-                    </NavLink>
-                  )}
-                </div>
-              ))}
-              <div className="pt-4 mt-4 border-t border-gray-100">
+                        {mobileExpanded === item.label && (
+                          <div className="pl-6 space-y-1 mt-1 border-l-2 border-primary/20 ml-4">
+                            {item.subItems.map((sub: any, j: number) => {
+                              const localizedSubPath = getEquivalentRoute(sub.path, language);
+                              const localizedSubLabel = t(`nav_sub_item_${i}_${j}`, sub.label);
+                              return (
+                                <NavLink
+                                  key={j}
+                                  to={localizedSubPath}
+                                  onClick={() => setMobileOpen(false)}
+                                  className={({ isActive }) =>
+                                    `block px-4 py-3 text-sm font-medium text-gray-600 hover:text-primary ${
+                                      isActive && localizedSubPath === location.pathname ? 'text-primary' : ''
+                                    }`
+                                  }
+                                >
+                                  {localizedSubLabel}
+                                </NavLink>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <NavLink
+                        to={localizedPath}
+                        className={({ isActive }) =>
+                          `block px-4 py-3 text-sm font-bold uppercase tracking-wide rounded-sm transition-colors ${
+                            isActive ? 'text-primary bg-primary/5' : 'text-secondary hover:bg-gray-50'
+                          }`
+                        }
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        <span>{localizedLabel}</span>
+                      </NavLink>
+                    )}
+                  </div>
+                );
+              })}
+              <div className="pt-4 mt-4 border-t border-gray-100 space-y-4">
+                <LanguageSelectorMobile />
                 <Link
-                  to="/contato"
+                  to={getEquivalentRoute('/contato', language)}
                   className="block w-full text-center bg-primary text-white py-3 rounded-sm font-bold uppercase"
                   onClick={() => setMobileOpen(false)}
                 >
-                  FALE CONOSCO
+                  {t('layout_nav_cta', 'FALE CONOSCO')}
                 </Link>
               </div>
             </div>
@@ -240,9 +323,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </a>
 
       {/* Footer */}
-      <footer className={`${['/produtos', '/aplicacoes', '/solucoes'].includes(location.pathname) ? 'bg-transparent border-t border-gray-800' : 'bg-secondary border-t-4 border-primary'} text-gray-400 flex flex-col relative z-10`}>
+      <footer className={`${['/produtos', '/aplicacoes', '/solucoes', '/es/productos', '/es/aplicaciones', '/es/soluciones', '/en/products', '/en/applications', '/en/solutions'].includes(location.pathname) ? 'bg-transparent border-t border-gray-800' : 'bg-secondary border-t-4 border-primary'} text-gray-400 flex flex-col relative z-10`}>
         {/* Banner Institucional (Substitui o Logo) */}
-        {!['/produtos', '/aplicacoes', '/solucoes'].includes(location.pathname) && (
+        {!['/produtos', '/aplicacoes', '/solucoes', '/es/productos', '/es/aplicaciones', '/es/soluciones', '/en/products', '/en/applications', '/en/solutions'].includes(location.pathname) && (
           <div className="bg-white w-full py-6 sm:py-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
               <EditableElement
@@ -270,27 +353,31 @@ export function Layout({ children }: { children: React.ReactNode }) {
             {/* Navigation */}
             <div>
               <h3 className="text-white font-bold uppercase tracking-wider mb-8 text-sm border-b border-gray-800 pb-2 inline-block">
-                Navegação
+                {t('footer_nav_heading', 'Navegação')}
               </h3>
               <ul className="space-y-3">
-                {defaultNavItems.map((item: any, i: number) => (
-                  <li key={item.path}>
-                    <Link
-                      to={item.path}
-                      className="text-sm hover:text-white hover:translate-x-2 transition-all flex items-center group"
-                    >
-                      <ChevronRight size={14} className="mr-2 text-primary group-hover:text-white transition-colors" />
-                      <EditableElement id={`footer_nav_${i}`} defaultContent={item.label} />
-                    </Link>
-                  </li>
-                ))}
+                {defaultNavItems.map((item: any, i: number) => {
+                  const localizedPath = getEquivalentRoute(item.path, language);
+                  const localizedLabel = t(`nav_item_${i}`, item.label);
+                  return (
+                    <li key={item.path}>
+                      <Link
+                        to={localizedPath}
+                        className="text-sm hover:text-white hover:translate-x-2 transition-all flex items-center group"
+                      >
+                        <ChevronRight size={14} className="mr-2 text-primary group-hover:text-white transition-colors" />
+                        <span>{localizedLabel}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 
             {/* Contact */}
             <div>
               <h3 className="text-white font-bold uppercase tracking-wider mb-8 text-sm border-b border-gray-800 pb-2 inline-block">
-                Fale conosco
+                {t('footer_contact_heading', 'Fale conosco')}
               </h3>
               <ul className="space-y-5 text-sm">
                 <li className="flex items-start group">
@@ -311,7 +398,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   </div>
                   <span><EditableElement id="footer_phone_1" defaultContent="(31) 9 8670-8742" /></span>
                 </li>
-<li className="flex items-center group">
+                <li className="flex items-center group">
                   <div className="p-2 bg-primary/10 rounded mr-3 group-hover:bg-primary group-hover:text-white transition-colors">
                     <Mail size={18} className="text-primary group-hover:text-white" />
                   </div>
@@ -323,13 +410,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
             {/* Newsletter */}
             <div>
               <h3 className="text-white font-bold uppercase tracking-wider mb-8 text-sm border-b border-gray-800 pb-2 inline-block">
-                Newsletter
+                {t('footer_newsletter_title', 'Newsletter')}
               </h3>
-              <p className="text-sm mb-6">Receba artigos técnicos e novidades do setor.</p>
+              <p className="text-sm mb-6">{t('newsletter_desc', 'Receba artigos técnicos e novidades do setor.')}</p>
               
               {newsStatus === 'success' ? (
                 <div className="bg-primary/20 text-white p-4 rounded-sm border border-primary/50 text-sm">
-                  Obrigado por se inscrever!
+                  {t('newsletter_success', 'Obrigado por se inscrever!')}
                 </div>
               ) : (
                 <form 
@@ -338,6 +425,22 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     e.preventDefault();
                     if (!newsEmail) return;
                     setNewsStatus('sending');
+                    
+                    if (import.meta.env.VITE_FORM_MODE === 'mock') {
+                      console.log('[MOCK] Newsletter Form successfully intercepted locally.');
+                      console.log({
+                        type: 'newsletter',
+                        email: newsEmail,
+                        rota: window.location.pathname,
+                        _hp: ''
+                      });
+                      setTimeout(() => {
+                        setNewsStatus('success');
+                        setNewsEmail('');
+                      }, 500);
+                      return;
+                    }
+
                     try {
                       const res = await fetch('/api/send-mail.php', {
                         method: 'POST',
@@ -365,20 +468,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     type="email"
                     value={newsEmail}
                     onChange={(e) => setNewsEmail(e.target.value)}
-                    placeholder="Seu e-mail profissional"
+                    placeholder={t('newsletter_placeholder', 'Seu e-mail profissional')}
                     required
                     disabled={newsStatus === 'sending'}
                     className="bg-secondary-dark border border-gray-700 text-white px-4 py-3 text-sm focus:outline-none focus:border-primary rounded-sm transition-colors disabled:opacity-50"
                   />
                   {newsStatus === 'error' && (
-                    <span className="text-red-400 text-xs">Ocorreu um erro. Tente novamente.</span>
+                    <span className="text-red-400 text-xs">{t('newsletter_error', 'Ocorreu um erro. Tente novamente.')}</span>
                   )}
                   <button
                     type="submit"
                     disabled={newsStatus === 'sending'}
                     className="bg-primary hover:bg-primary-hover text-white px-4 py-3 text-sm font-bold uppercase rounded-sm transition-all hover:shadow-lg disabled:opacity-50"
                   >
-                    {newsStatus === 'sending' ? 'Enviando...' : 'Inscrever-se'}
+                    {newsStatus === 'sending' ? t('newsletter_btn_sending', 'Enviando...') : t('newsletter_btn', 'Inscrever-se')}
                   </button>
                 </form>
               )}
@@ -388,9 +491,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
         {/* Bottom bar */}
         <div className="bg-secondary-dark py-6 text-center text-xs text-gray-600 border-t border-gray-800 flex justify-center items-center gap-4">
-          <p>© 2026 Prime Products — Excelência em Engenharia.</p>
+          <p>{t('footer_copyright', '© 2026 Prime Products — Excelência em Engenharia.')}</p>
           <Link
-            to="/login"
+            to={getEquivalentRoute('/login', language)}
             className="flex items-center gap-1 text-gray-600 hover:text-primary transition-colors"
           >
             <Lock size={10} />

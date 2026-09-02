@@ -3,7 +3,7 @@
 @source "../index.html";
 
 @theme {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Malgun Gothic", "Segoe UI", Arial, sans-serif;
 
   --color-primary: #1564c0;
   --color-primary-hover: #0d47a1;

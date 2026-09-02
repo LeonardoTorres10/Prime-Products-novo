@@ -11,6 +11,8 @@ import { SectionContainer } from '../components/SectionContainer';
 import { Counter } from '../components/Counter';
 import { ParticleCanvas } from '../components/ParticleCanvas';
 import { defaultArticles } from '../data/defaultArticles';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getEquivalentRoute } from '../data/routeMappings';
 
 const SOLUTIONS = [
   { icon: Gauge, id: 'sol_1', label: 'Instrumentação de Processos', path: '/solucoes/instrumentacao-medicao', desc: 'Transmissores, sensores, reguladores e sistemas de medição de precisão.', img: '/images/solucoes-integradas/instrumentacao-medicao/capa-medicao-nova.jpg' },
@@ -104,6 +106,7 @@ const STATS = [
 const SHOW_TESTIMONIALS = false;
 
 export function Home() {
+  const { language, t } = useLanguage();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const data: Record<string, string> = {};
   const isEditing = false;
@@ -142,20 +145,18 @@ export function Home() {
             </AnimateOnScroll>
             <AnimateOnScroll delay={400}>
               <div className="border-l-4 border-primary pl-6 mb-10 bg-secondary/30 backdrop-blur-sm py-2 rounded-r">
-                <div className="text-lg md:text-xl text-white leading-relaxed font-light opacity-90">
+                <div className="text-lg md:text-xl text-white leading-relaxed font-light opacity-90 mb-6">
                   <EditableElement id="home_hero_desc" defaultContent="Equipamentos, integração técnica e engenharia aplicada para processos críticos na indústria, pesquisa e aplicações médicas." />
                 </div>
-              </div>
-            </AnimateOnScroll>
-            <AnimateOnScroll delay={600}>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/solucoes" className="bg-primary hover:bg-primary-hover text-white px-8 py-4 font-bold uppercase tracking-wider flex items-center gap-2 transition-all shadow-lg hover:shadow-primary/40 hover:-translate-y-0.5 rounded-sm">
-                  <EditableElement id="home_hero_btn1" defaultContent="NOSSAS SOLUÇÕES" />
-                  <ArrowRight size={18} />
-                </Link>
-                <Link to="/sobre" className="bg-white/10 border-2 border-white/20 backdrop-blur-sm text-white px-8 py-4 font-bold uppercase tracking-wider hover:bg-white hover:text-secondary transition-all rounded-sm">
-                  <EditableElement id="home_hero_btn2" defaultContent="QUEM SOMOS" />
-                </Link>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link to={getEquivalentRoute('/solucoes', language)} className="bg-primary hover:bg-primary-hover text-white px-8 py-4 font-bold uppercase tracking-wider flex items-center gap-2 transition-all shadow-lg hover:shadow-primary/40 hover:-translate-y-0.5 rounded-sm">
+                    <EditableElement id="home_hero_btn1" defaultContent="NOSSAS SOLUÇÕES" />
+                    <ArrowRight size={18} />
+                  </Link>
+                  <Link to={getEquivalentRoute('/sobre', language)} className="bg-white/10 border-2 border-white/20 backdrop-blur-sm text-white px-8 py-4 font-bold uppercase tracking-wider hover:bg-white hover:text-secondary transition-all rounded-sm">
+                    <EditableElement id="home_hero_btn2" defaultContent="QUEM SOMOS" />
+                  </Link>
+                </div>
               </div>
             </AnimateOnScroll>
           </div>
@@ -226,7 +227,7 @@ export function Home() {
                     </div>
                   </div>
                 </div>
-                <Link to="/sobre" className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 py-3 font-bold uppercase tracking-wider transition-all hover:-translate-y-0.5 shadow-md rounded-sm">
+                <Link to={getEquivalentRoute('/sobre', language)} className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 py-3 font-bold uppercase tracking-wider transition-all hover:-translate-y-0.5 shadow-md rounded-sm">
                   <EditableElement id="home_about_btn" defaultContent="Conheça a Prime" /> <ArrowRight size={18} />
                 </Link>
               </AnimateOnScroll>
@@ -279,7 +280,7 @@ export function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {SOLUTIONS.map(({ icon: Icon, label, path, desc, img }, i) => (
               <AnimateOnScroll key={i} delay={i * 100}>
-                <Link to={path} className="group bg-white shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 block overflow-hidden h-full flex flex-col">
+                <Link to={getEquivalentRoute(path, language)} className="group bg-white shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 block overflow-hidden h-full flex flex-col">
                   <div className="h-44 overflow-hidden relative">
                     <img src={img} alt={label} className="prime-image-standard w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div className="absolute inset-0 bg-gradient-to-t from-secondary/70 to-transparent" />
@@ -295,7 +296,7 @@ export function Home() {
                       <EditableElement id={`home_sol_${i}_desc`} defaultContent={desc} />
                     </p>
                     <span className="flex items-center gap-2 text-primary font-bold text-sm group-hover:gap-4 transition-all">
-                      Ver mais <ArrowRight size={16} />
+                      {t('view_more', 'Ver mais')} <ArrowRight size={16} />
                     </span>
                   </div>
                 </Link>
@@ -303,7 +304,7 @@ export function Home() {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Link to="/produtos" className="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white px-10 py-4 font-bold uppercase tracking-wider transition-all rounded-sm">
+            <Link to={getEquivalentRoute('/produtos', language)} className="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white px-10 py-4 font-bold uppercase tracking-wider transition-all rounded-sm">
               <EditableElement id="home_prod_btn" defaultContent="Linha de Produtos" /> <ArrowRight size={18} />
             </Link>
           </div>
@@ -327,7 +328,7 @@ export function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {APPLICATIONS.map(({ label, desc, path, img }, i) => (
               <AnimateOnScroll key={i} delay={i * 150}>
-                <Link to={path} className="group relative overflow-hidden block h-64 rounded-sm">
+                <Link to={getEquivalentRoute(path, language)} className="group relative overflow-hidden block h-64 rounded-sm">
                   <img src={img} alt={label === 'Laboratórios Analíticos' ? 'Painel de gases de alta pureza em ambiente laboratorial analítico com tubulação em inox e instrumentação técnica.' : label === 'Hospitalar' ? 'Infraestrutura hospitalar de gases medicinais com painel técnico e saídas de oxigênio, ar e vácuo.' : label === 'Óleo & Gás' ? 'Ambiente offshore de óleo & gás com instrumentação de processo e infraestrutura técnica.' : label} className="prime-image-standard w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" referrerPolicy="no-referrer" />
                   <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/60 to-transparent" />
                   <div className="absolute bottom-0 left-0 p-6">
@@ -346,8 +347,8 @@ export function Home() {
             ))}
           </div>
           <div className="text-center mt-10">
-            <Link to="/aplicacoes" className="inline-flex items-center gap-2 border-2 border-white/30 text-white hover:border-primary hover:text-primary px-10 py-4 font-bold uppercase tracking-wider transition-all rounded-sm">
-              Ver Todas Aplicações <ArrowRight size={18} />
+            <Link to={getEquivalentRoute('/aplicacoes', language)} className="inline-flex items-center gap-2 border-2 border-white/30 text-white hover:border-primary hover:text-primary px-10 py-4 font-bold uppercase tracking-wider transition-all rounded-sm">
+              {t('btn_view_all_applications', 'Ver Todas Aplicações')} <ArrowRight size={18} />
             </Link>
           </div>
         </SectionContainer>
@@ -427,15 +428,15 @@ export function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {latestArticles.map((article, i) => (
                 <AnimateOnScroll key={article.id} delay={i * 100}>
-                  <Link to={`/artigo/${article.id}`} className="group block bg-white border border-gray-100 hover:border-primary shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden h-full">
+                  <Link to={getEquivalentRoute(`/artigo/${article.id}`, language)} className="group block bg-white border border-gray-100 hover:border-primary shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden h-full">
                     {article.image && (
                       <div className="h-40 overflow-hidden">
                         <img src={article.image} alt={article.title} className="prime-image-standard w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
                       </div>
                     )}
                     <div className="p-5">
-                      <span className="text-xs font-bold uppercase text-primary tracking-wider">{article.category}</span>
-                      <h3 className="font-bold text-secondary mt-2 mb-2 text-sm leading-tight group-hover:text-primary transition-colors line-clamp-3">{article.title}</h3>
+                      <span className="text-xs font-bold uppercase text-primary tracking-wider">{t('category_' + article.category.toLowerCase(), article.category)}</span>
+                      <h3 className="font-bold text-secondary mt-2 mb-2 text-sm leading-tight group-hover:text-primary transition-colors line-clamp-3">{t('article_' + article.id + '_title', article.title)}</h3>
                       <p className="text-xs text-gray-500">{article.date}</p>
                     </div>
                   </Link>
@@ -443,8 +444,8 @@ export function Home() {
               ))}
             </div>
             <div className="text-center mt-10">
-              <Link to="/conteudo" className="inline-flex items-center gap-2 border-2 border-secondary text-secondary hover:bg-secondary hover:text-white px-10 py-4 font-bold uppercase tracking-wider transition-all rounded-sm">
-                Ver Todo Conteúdo <ArrowRight size={18} />
+              <Link to={getEquivalentRoute('/conteudo', language)} className="inline-flex items-center gap-2 border-2 border-secondary text-secondary hover:bg-secondary hover:text-white px-10 py-4 font-bold uppercase tracking-wider transition-all rounded-sm">
+                {t('btn_view_all_content', 'Ver Todo Conteúdo')} <ArrowRight size={18} />
               </Link>
             </div>
           </SectionContainer>
@@ -511,11 +512,11 @@ export function Home() {
                 <EditableElement id="home_cta_desc" defaultContent="Sente-se à mesa com nossos especialistas. Desenvolvemos skids e painéis customizados para os processos mais críticos da indústria." />
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link to="/contato" className="w-full sm:w-auto bg-secondary text-white font-bold py-4 px-8 rounded hover:bg-gray-800 transition-colors shadow-lg flex items-center justify-center gap-2">
+                <Link to={getEquivalentRoute('/contato', language)} className="w-full sm:w-auto bg-secondary text-white font-bold py-4 px-8 rounded hover:bg-gray-800 transition-colors shadow-lg flex items-center justify-center gap-2">
                   <PhoneCall size={20} />
                   <EditableElement id="home_cta_btn1" defaultContent="Discutir meu projeto" />
                 </Link>
-                <Link to="/solucoes" className="w-full sm:w-auto bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded hover:bg-white hover:text-primary transition-colors flex items-center justify-center gap-2">
+                <Link to={getEquivalentRoute('/solucoes', language)} className="w-full sm:w-auto bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded hover:bg-white hover:text-primary transition-colors flex items-center justify-center gap-2">
                   <Wrench size={20} />
                   <EditableElement id="home_cta_btn2" defaultContent="Ver Soluções Integradas" />
                 </Link>

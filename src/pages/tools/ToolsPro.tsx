@@ -1,8 +1,11 @@
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { ArrowLeft, Activity, ArrowLeftRight, Gauge, Zap, Ruler } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { AnimateOnScroll } from '../../components/AnimateOnScroll';
 import { EditableElement } from '../../components/EditableElement';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { getEquivalentRoute } from '../../data/routeMappings';
 
 // ─── Estilos comuns ────────────────────────────────────────────────────────────
 const card  = 'bg-[#0d1929] border border-white/10 rounded-2xl p-6 shadow-2xl';
@@ -12,6 +15,7 @@ const unit  = 'bg-black/40 border border-white/10 text-white/70 text-xs px-2 py-
 
 // ─── Dimensionamento Cv/Kv ────────────────────────────────────────────────────
 function CvKvCalc() {
+  const { t } = useLanguage();
   const [tab, setTab] = useState<'liquid' | 'gas'>('liquid');
 
   // Líquidos
@@ -113,7 +117,7 @@ function CvKvCalc() {
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className={label}>Temperatura (°C)</label>
+              <label className={label}>{t('temperature_c', 'Temperatura (°C)')}</label>
               <input className={input} type="number" placeholder="20" value={gT} onChange={(e) => setGT(e.target.value)} />
             </div>
             <div>
@@ -563,6 +567,12 @@ function PipeVelocity() {
 
 // ─── Página principal ─────────────────────────────────────────────────────────
 export function ToolsPro() {
+  const { language, t } = useLanguage();
+  useEffect(() => {
+    document.title = t('meta_tools_pro_title', 'Calculadoras Prime | Prime Products');
+    const descMeta = document.querySelector('meta[name="description"]');
+    if (descMeta) descMeta.setAttribute('content', t('meta_tools_pro_desc', 'Dimensionamento de Cv/Kv e conversores de grandezas avançadas.'));
+  }, [language]);
   return (
     <>
       <EditableElement
@@ -597,10 +607,10 @@ export function ToolsPro() {
       <section className="bg-[#060f1a] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8 flex items-center justify-between">
-            <Link to="/ferramentas" className="inline-flex items-center gap-2 text-white/40 hover:text-primary text-xs font-bold uppercase tracking-wider transition-colors">
-              <ArrowLeft size={14} /> Voltar para Ferramentas
+            <Link to={getEquivalentRoute('/ferramentas', language)} className="inline-flex items-center gap-2 text-white/40 hover:text-primary text-xs font-bold uppercase tracking-wider transition-colors">
+              <ArrowLeft size={14} /> {t('back_to_tools', 'Voltar para Ferramentas')}
             </Link>
-            <span className="text-white/20 text-xs">5 ferramentas disponíveis</span>
+            <span className="text-white/20 text-xs">{t('tools_available_count', '5 ferramentas disponíveis')}</span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">

@@ -3,6 +3,8 @@ import { Award, TrendingUp, Target, Eye, Heart, Compass, Wrench, Truck, ShieldCh
 import { AnimateOnScroll } from '../components/AnimateOnScroll';
 import { EditableElement } from '../components/EditableElement';
 import { SectionContainer } from '../components/SectionContainer';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getEquivalentRoute } from '../data/routeMappings';
 
 const ABOUT_TESTIMONIALS = [
   {
@@ -78,6 +80,7 @@ const TABLE_DATA = [
 const SHOW_TESTIMONIALS = false;
 
 export function About() {
+  const { language, t } = useLanguage();
   return (
     <>
       {/* 1. Fundo Fixo */}
@@ -182,7 +185,9 @@ export function About() {
         <SectionContainer>
           <div className="text-center mb-16 max-w-4xl mx-auto">
             <AnimateOnScroll>
-              <h4 className="text-primary font-bold uppercase tracking-widest text-sm mb-3">Como Trabalhamos</h4>
+              <h4 className="text-primary font-bold uppercase tracking-widest text-sm mb-3">
+                <EditableElement id="como_trabalhamos_label" defaultContent="Como Trabalhamos" />
+              </h4>
               <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-6">
                 <EditableElement id="about_table_title" defaultContent="Soluções técnicas com visão completa do processo" />
               </h2>
@@ -228,8 +233,12 @@ export function About() {
         <SectionContainer>
           <div className="text-center mb-16">
             <AnimateOnScroll>
-              <h4 className="text-primary font-bold uppercase tracking-widest text-sm mb-3">Identidade Corporativa</h4>
-              <h2 className="text-3xl md:text-4xl font-bold text-secondary">Missão, Visão e Valores</h2>
+              <h4 className="text-primary font-bold uppercase tracking-widest text-sm mb-3">
+                <EditableElement id="identidade_corp_label" defaultContent="Identidade Corporativa" />
+              </h4>
+              <h2 className="text-3xl md:text-4xl font-bold text-secondary">
+                <EditableElement id="missao_visao_valores_title" defaultContent="Missão, Visão e Valores" />
+              </h2>
               <div className="w-16 h-1 bg-primary mx-auto mt-4" />
             </AnimateOnScroll>
           </div>
@@ -242,7 +251,9 @@ export function About() {
                   <div className="w-14 h-14 bg-primary/10 rounded-sm flex items-center justify-center mb-6">
                     <Icon size={28} className="text-primary" />
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-widest text-primary mb-2 block">{label}</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-primary mb-2 block">
+                    {t(label === 'Missão' ? 'missao_lbl' : 'visao_lbl', label)}
+                  </span>
                   <h3 className="font-bold text-secondary text-2xl mb-4">
                     <EditableElement id={id_title} defaultContent={defaultTitle} />
                   </h3>
@@ -283,8 +294,12 @@ export function About() {
         <SectionContainer className="relative z-10">
           <div className="text-center mb-16">
             <AnimateOnScroll>
-              <h4 className="text-primary font-bold uppercase tracking-widest text-sm mb-3">Por que escolher a Prime Products</h4>
-              <h2 className="text-3xl md:text-4xl font-bold text-white">Nossos Diferenciais</h2>
+              <h4 className="text-primary font-bold uppercase tracking-widest text-sm mb-3">
+                <EditableElement id="por_que_escolher_label" defaultContent="Por que escolher a Prime Products" />
+              </h4>
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                <EditableElement id="about_diff_title" defaultContent="Nossos Diferenciais" />
+              </h2>
               <div className="w-16 h-1 bg-primary mx-auto mt-4" />
             </AnimateOnScroll>
           </div>
@@ -378,13 +393,13 @@ export function About() {
                 <EditableElement id="about_cta_desc" defaultContent="Nossa equipe está disponível para entender a sua aplicação e propor a solução técnica mais adequada ao seu processo." />
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link to="/contato" className="w-full sm:w-auto bg-secondary text-white font-bold py-4 px-8 rounded hover:bg-gray-800 transition-colors shadow-lg flex items-center justify-center gap-2">
+                <Link to={getEquivalentRoute('/contato', language)} className="w-full sm:w-auto bg-secondary text-white font-bold py-4 px-8 rounded hover:bg-gray-800 transition-colors shadow-lg flex items-center justify-center gap-2">
                   <PhoneCall size={20} />
-                  Falar com um especialista
+                  {t('about_cta_btn1', 'Falar com um especialista')}
                 </Link>
-                <Link to="/solucoes" className="w-full sm:w-auto bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded hover:bg-white hover:text-primary transition-colors flex items-center justify-center gap-2">
+                <Link to={getEquivalentRoute('/solucoes', language)} className="w-full sm:w-auto bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded hover:bg-white hover:text-primary transition-colors flex items-center justify-center gap-2">
                   <Wrench size={20} />
-                  Conhecer nossas soluções
+                  {t('about_cta_btn2', 'Conhecer nossas soluções')}
                 </Link>
               </div>
             </AnimateOnScroll>

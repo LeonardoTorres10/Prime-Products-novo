@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom';
-import { Scan, Box, Layers, Database, ShieldCheck, Cpu, Camera, Crosshair, Map, CheckCircle } from 'lucide-react';
+import { Scan, Box, Layers, Database, ShieldCheck, Cpu, Camera, Crosshair, Map, CheckCircle, ArrowLeft } from 'lucide-react';
 import { AnimateOnScroll } from '../../components/AnimateOnScroll';
 import { SectionContainer } from '../../components/SectionContainer';
 import { EditableElement } from '../../components/EditableElement';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { getEquivalentRoute } from '../../data/routeMappings';
 
 export function EngenhariaDigital3D() {
+  const { language, t } = useLanguage();
+
   return (
     <>
       {/* Hero Section */}
@@ -23,7 +27,7 @@ export function EngenhariaDigital3D() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
           <AnimateOnScroll>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/20 text-primary font-bold uppercase tracking-widest text-xs mb-6 rounded-full border border-primary/30 shadow-[0_0_15px_rgba(0,111,208,0.3)]">
-              <Scan size={14} /> Solução Premium
+              <Scan size={14} /> {t('premium_solution', 'Solução Premium')}
             </div>
           </AnimateOnScroll>
           <AnimateOnScroll delay={200}>
@@ -44,8 +48,20 @@ export function EngenhariaDigital3D() {
 
       <div id="conteudo" className="bg-white relative z-10">
         
+        {/* Back button */}
+        <section className="pt-8 bg-gray-50">
+          <SectionContainer className="py-0">
+            <Link 
+              to={getEquivalentRoute('/solucoes', language)} 
+              className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline"
+            >
+              <ArrowLeft size={16} /> {t('back_to_solutions', 'Voltar para Soluções')}
+            </Link>
+          </SectionContainer>
+        </section>
+
         {/* Diferencial / Princípio de Confiabilidade */}
-        <section className="py-20 border-b border-gray-100 bg-gray-50">
+        <section className="py-20 border-b border-gray-100 bg-gray-50 pt-12">
           <SectionContainer>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <AnimateOnScroll>
@@ -222,12 +238,15 @@ export function EngenhariaDigital3D() {
         <section className="py-20 text-center">
           <SectionContainer>
             <AnimateOnScroll>
-              <h2 className="text-3xl font-bold text-secondary mb-6">Pronto para digitalizar sua instalação?</h2>
-              <p className="text-gray-500 mb-10 max-w-2xl mx-auto">
-                Recomendamos iniciar com um <strong>Projeto-Piloto de 300 a 1.000 m²</strong>, permitindo validar o fluxo completo (desde a captura em campo até o uso do modelo 3D pela sua equipe) antes de escalar para a planta inteira.
+              <h2 className="text-3xl font-bold text-secondary mb-6">{t('digitalize_plant_title', 'Pronto para digitalizar sua instalação?')}</h2>
+              <p className="text-gray-500 mb-10 max-w-2xl mx-auto font-light">
+                {t('digitalize_plant_desc', 'Recomendamos iniciar com um Projeto-Piloto de 300 a 1.000 m², permitindo validar o fluxo completo (desde a captura em campo até o uso do modelo 3D pela sua equipe) antes de escalar para a planta inteira.')}
               </p>
-              <Link to="/contato" className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-bold rounded-lg hover:bg-primary-hover transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
-                Solicitar Avaliação Técnica
+              <Link 
+                to={getEquivalentRoute('/contato', language)} 
+                className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-bold rounded-lg hover:bg-primary-hover transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+              >
+                {t('btn_request_technical_evaluation', 'Solicitar Avaliação Técnica')}
               </Link>
             </AnimateOnScroll>
           </SectionContainer>

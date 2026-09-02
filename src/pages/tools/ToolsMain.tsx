@@ -1,8 +1,11 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ExternalLink, Calculator, Gauge, Thermometer, Wind, Droplets, Zap } from 'lucide-react';
 import { AnimateOnScroll } from '../../components/AnimateOnScroll';
 import { EditableElement } from '../../components/EditableElement';
 import { SectionContainer } from '../../components/SectionContainer';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { getEquivalentRoute } from '../../data/routeMappings';
 
 const WEB_TOOLS = [
   {
@@ -44,6 +47,12 @@ const WEB_TOOLS = [
 ];
 
 export function ToolsMain() {
+  const { language, t } = useLanguage();
+  useEffect(() => {
+    document.title = t('meta_tools_title', 'Ferramentas | Prime Products');
+    const descMeta = document.querySelector('meta[name="description"]');
+    if (descMeta) descMeta.setAttribute('content', t('meta_tools_desc', 'Simuladores e conversores técnicos online de referência.'));
+  }, [language]);
   return (
     <>
       <EditableElement
@@ -76,8 +85,8 @@ export function ToolsMain() {
       <section className="py-20 relative z-10">
         <SectionContainer className="py-0">
           <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-white mb-3">Ferramentas Online</h2>
-            <p className="text-gray-300 max-w-2xl mx-auto">Links para conversores e simuladores externos de referência técnica.</p>
+            <h2 className="text-3xl font-bold text-white mb-3">{t('tools_online_title', 'Ferramentas Online')}</h2>
+            <p className="text-gray-300 max-w-2xl mx-auto">{t('tools_online_desc', 'Links para conversores e simuladores externos de referência técnica.')}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {WEB_TOOLS.map(({ icon: Icon, name, desc, url }, i) => (
@@ -86,10 +95,10 @@ export function ToolsMain() {
                   <div className="w-12 h-12 bg-primary/10 group-hover:bg-primary flex items-center justify-center mb-5 transition-colors rounded-sm">
                     <Icon size={22} className="text-primary group-hover:text-white transition-colors" />
                   </div>
-                  <h3 className="font-bold text-secondary text-lg mb-2 group-hover:text-primary transition-colors">{name}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-4">{desc}</p>
+                  <h3 className="font-bold text-secondary text-lg mb-2 group-hover:text-primary transition-colors">{t('tool_' + i + '_name', name)}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-4">{t('tool_' + i + '_desc', desc)}</p>
                   <span className="flex items-center gap-2 text-primary font-bold text-sm">
-                    Acessar <ExternalLink size={14} />
+                    {t('access', 'Acessar')} <ExternalLink size={14} />
                   </span>
                 </a>
               </AnimateOnScroll>
@@ -98,12 +107,12 @@ export function ToolsMain() {
 
           <div className="bg-secondary rounded-sm p-10 text-center">
             <Calculator size={48} className="text-primary mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-white mb-3">Calculadoras Prime Avançadas</h2>
+            <h2 className="text-2xl font-bold text-white mb-3">{t('tools_pro_title', 'Calculadoras Prime Avançadas')}</h2>
             <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
-              Acesse nossas calculadoras especializadas para dimensionamento de reguladores, seleção de cilindros e tabelas de conversão rápida.
+              {t('tools_pro_desc', 'Acesse nossas calculadoras especializadas para dimensionamento de reguladores, seleção de cilindros e tabelas de conversão rápida.')}
             </p>
-            <Link to="/ferramentas-pro" className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 py-3 font-bold uppercase rounded-sm transition-all">
-              Calculadoras Prime <ArrowRight size={16} />
+            <Link to={getEquivalentRoute('/ferramentas-pro', language)} className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 py-3 font-bold uppercase rounded-sm transition-all">
+              {t('tools_pro_btn', 'Calculadoras Prime')} <ArrowRight size={16} />
             </Link>
           </div>
         </SectionContainer>

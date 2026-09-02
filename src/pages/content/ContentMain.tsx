@@ -4,8 +4,11 @@ import { AnimateOnScroll } from '../../components/AnimateOnScroll';
 import { EditableElement } from '../../components/EditableElement';
 import { SectionContainer } from '../../components/SectionContainer';
 import { defaultArticles } from '../../data/defaultArticles';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { getEquivalentRoute } from '../../data/routeMappings';
 
 export function ContentMain() {
+  const { language, t } = useLanguage();
   const articles = defaultArticles;
 
   return (
@@ -48,7 +51,7 @@ export function ContentMain() {
             <>
               {/* Featured article */}
               <AnimateOnScroll>
-                <Link to={`/artigo/${articles[0].id}`} className="group block mb-12 bg-white shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
+                <Link to={getEquivalentRoute(`/artigo/${articles[0].id}`, language)} className="group block mb-12 bg-white shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
                   <div className="grid grid-cols-1 lg:grid-cols-2">
                     <div className="h-64 lg:h-full min-h-[320px] overflow-hidden relative bg-gray-100 flex items-center justify-center">
                       {!articles[0].image ? (
@@ -56,7 +59,7 @@ export function ContentMain() {
                       ) : (
                         <img
                           src={articles[0].image}
-                          alt={articles[0].title}
+                          alt={t('article_' + articles[0].id + '_title', articles[0].title)}
                           className="prime-image-standard absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                           referrerPolicy="no-referrer"
                           onError={(e) => { 
@@ -71,16 +74,16 @@ export function ContentMain() {
                     </div>
                     <div className="p-10 flex flex-col justify-center">
                       <span className="inline-flex items-center gap-1 text-xs font-bold uppercase text-primary tracking-wider mb-4">
-                        <Tag size={12} /> {articles[0].category}
+                        <Tag size={12} /> {t('category_' + articles[0].category.toLowerCase(), articles[0].category)}
                       </span>
                       <h2 className="text-2xl font-black text-secondary mb-4 group-hover:text-primary transition-colors leading-tight">
                         {articles[0].title}
                       </h2>
-                      <p className="text-gray-500 mb-6 leading-relaxed">{articles[0].summary}</p>
+                      <p className="text-gray-500 mb-6 leading-relaxed">{t('article_' + articles[0].id + '_summary', articles[0].summary)}</p>
                       <div className="flex items-center justify-between">
                         <span className="flex items-center gap-1 text-xs text-gray-400"><Calendar size={12} /> {articles[0].date}</span>
                         <span className="flex items-center gap-2 text-primary font-bold text-sm group-hover:gap-4 transition-all">
-                          Ler artigo <ArrowRight size={14} />
+                          {t('read_article', 'Ler artigo')} <ArrowRight size={14} />
                         </span>
                       </div>
                     </div>
@@ -92,19 +95,19 @@ export function ContentMain() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {articles.slice(1).map(({ id, title, category, date, summary, image }, i) => (
                   <AnimateOnScroll key={id} delay={(i % 3) * 80}>
-                    <Link to={`/artigo/${id}`} className="group bg-white shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 block overflow-hidden h-full flex flex-col">
+                    <Link to={getEquivalentRoute(`/artigo/${id}`, language)} className="group bg-white shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 block overflow-hidden h-full flex flex-col">
                       <div className="h-48 overflow-hidden">
                         <img src={image} alt={title} className="prime-image-standard w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
                       </div>
                       <div className="p-6 flex flex-col flex-1">
                         <div className="flex items-center justify-between mb-3">
-                          <span className="text-xs font-bold uppercase text-primary tracking-wider">{category}</span>
+                          <span className="text-xs font-bold uppercase text-primary tracking-wider">{t('category_' + category.toLowerCase(), category)}</span>
                           <span className="flex items-center gap-1 text-xs text-gray-400"><Calendar size={11} /> {date}</span>
                         </div>
-                        <h3 className="font-bold text-secondary mb-3 leading-tight group-hover:text-primary transition-colors flex-1">{title}</h3>
-                        <p className="text-xs text-gray-500 leading-relaxed mb-4">{summary}</p>
+                        <h3 className="font-bold text-secondary mb-3 leading-tight group-hover:text-primary transition-colors flex-1">{t('article_' + id + '_title', title)}</h3>
+                        <p className="text-xs text-gray-500 leading-relaxed mb-4">{t('article_' + id + '_summary', summary)}</p>
                         <span className="flex items-center gap-1 text-primary font-bold text-xs group-hover:gap-3 transition-all">
-                          Ler artigo <ArrowRight size={12} />
+                          {t('read_article', 'Ler artigo')} <ArrowRight size={12} />
                         </span>
                       </div>
                     </Link>

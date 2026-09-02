@@ -1,8 +1,17 @@
 import { useEffect } from 'react';
 import { ArrowLeft, CheckCircle, Activity, Droplets, FlaskConical, Settings } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { getEquivalentRoute } from '../../data/routeMappings';
 
 const FarmaceuticaPage = () => {
+  const { language, t } = useLanguage();
+  useEffect(() => {
+    document.title = t('meta_farmaceutica_title', 'Processos Farmacêuticos | Prime Products');
+    const descMeta = document.querySelector('meta[name="description"]');
+    if (descMeta) descMeta.setAttribute('content', t('meta_farmaceutica_desc', 'Sistemas de gases de processo, utilidades críticas e skids para indústrias farmacêuticas.'));
+  }, [language]);
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -37,15 +46,15 @@ const FarmaceuticaPage = () => {
       <section className="bg-surface py-12">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="mb-8">
-            <Link to="/aplicacoes" className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline">
-              <ArrowLeft size={16} /> Voltar para Aplicações
+            <Link to={getEquivalentRoute('/aplicacoes', language)} className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline">
+              <ArrowLeft size={16} /> {t('pharma_back_btn', 'Voltar para Aplicações')}
             </Link>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
             <div className="lg:col-span-2 space-y-12">
               <div className="bg-white p-8 shadow-sm border-t-4 border-primary">
-                <h2 className="text-2xl font-bold text-secondary mb-4">Utilidades e Sistemas de Processo para Ambientes Regulados</h2>
+                <h2 className="text-2xl font-bold text-secondary mb-4">{t('pharma_hero_title', 'Utilidades e Sistemas de Processo para Ambientes Regulados')}</h2>
                 <p className="text-gray-600 leading-relaxed font-medium mb-4">
                   Projetos, fornecimento e montagens integradas, com foco em qualidade, segurança operacional, rastreabilidade e preparação para qualificação.
                 </p>
@@ -61,7 +70,7 @@ const FarmaceuticaPage = () => {
               <div className="bg-white p-8 shadow-sm">
                 <div className="flex items-center gap-3 mb-6">
                   <Activity className="text-primary h-6 w-6" />
-                  <h2 className="text-2xl font-bold text-secondary">Gases de Processo e Utilidades Críticas</h2>
+                  <h2 className="text-2xl font-bold text-secondary">{t('pharma_sec1_title', 'Gases de Processo e Utilidades Críticas')}</h2>
                 </div>
                 <p className="text-gray-600 mb-6">
                   Projetamos e instalamos sistemas centralizados para gases especiais, gases de processo, nitrogênio, dióxido de carbono, oxigênio, argônio, ar comprimido e outras utilidades gasosas.

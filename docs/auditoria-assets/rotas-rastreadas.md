@@ -1,0 +1,53 @@
+# Relatório de Rotas Rastreadas
+
+| Nº | Rota | Imagens Requisitadas | 404s |
+|---|---|---|---|
+| 1 | / | 25 | 0 |
+| 2 | /sobre | 5 | 0 |
+| 3 | /solucoes | 9 | 0 |
+| 4 | /solucoes/instrumentacao-medicao | 13 | 0 |
+| 5 | /solucoes/instrumentacao-analitica | 13 | 0 |
+| 6 | /solucoes/gases-seguranca-automacao | 15 | 0 |
+| 7 | /solucoes/integradas | 13 | 0 |
+| 8 | /solucoes/instalacao-rede-gases | 7 | 0 |
+| 9 | /solucoes/ar-comprimido-industrial-guia-tecnico | 3 | 0 |
+| 10 | /solucoes/engenharia-digital-3d | 3 | 0 |
+| 11 | /produtos | 15 | 0 |
+| 12 | /aplicacoes | 14 | 0 |
+| 13 | /ferramentas | 2 | 0 |
+| 14 | /ferramentas-pro | 3 | 0 |
+| 15 | /conteudo | 21 | 0 |
+| 16 | /contato | 2 | 0 |
+| 17 | /login | 2 | 0 |
+| 18 | /produto/reguladores-especiais | 24 | 0 |
+| 19 | /produto/cilindros-aluminio | 5 | 0 |
+| 20 | /produto/cilindros-tipo-4 | 5 | 0 |
+| 21 | /produto/dewars-criogenicos | 5 | 0 |
+| 22 | /produto/conexoes-instrumentacao | 46 | 0 |
+| 23 | /produto/corte-solda | 23 | 0 |
+| 24 | /produto/valvulas-alta-pressao | 2 | 0 |
+| 25 | /produto/transmissores-pressao | 35 | 0 |
+| 26 | /produto/gas-calibracao | 2 | 0 |
+| 27 | /produto/geracao-oxigenio | 7 | 0 |
+| 28 | /produto/detectores-gases | 2 | 0 |
+| 29 | /produto/sistemas-hidraulicos | 2 | 0 |
+| 30 | /aplicacao/oleo-gas | 5 | 0 |
+| 31 | /aplicacao/hospitalar | 5 | 0 |
+| 32 | /aplicacao/laboratorio-analitico | 2 | 0 |
+| 33 | /aplicacao/aeroespacial | 2 | 0 |
+| 34 | /aplicacao/automotivo | 6 | 0 |
+| 35 | /aplicacao/pesquisa-desenvolvimento | 2 | 0 |
+| 36 | /artigo/seguranca-producao-hidrogenio-anp | 7 | 0 |
+| 37 | /artigo/principios-seguranca-hidrogenio | 7 | 0 |
+| 38 | /artigo/manual-projeto-abrigos-cilindros | 7 | 0 |
+| 39 | /artigo/conversao-diesel-hidrogenio | 9 | 0 |
+| 40 | /artigo/instrumentacao-analitica-utilidades | 7 | 0 |
+| 41 | /artigo/compatibilidade-elgiloy-h2s | 6 | 0 |
+| 42 | /artigo/instrumentacao-industria-4-0 | 6 | 0 |
+| 43 | /artigo/seguranca-sistemas-gases | 6 | 0 |
+| 44 | /artigo/engenharia-aplicada-processos | 6 | 0 |
+| 45 | /artigo/confiabilidade-operacional | 6 | 0 |
+| 46 | /artigo/boas-praticas-calibracao | 6 | 0 |
+| 47 | /artigo/analise-processo-vs-laboratorio | 6 | 0 |
+| 48 | /artigo/conformidade-rastreabilidade | 6 | 0 |
+| 49 | /artigo/tendencias-instrumentacao | 6 | 0 |

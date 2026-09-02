@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Droplets, Wind, Zap, Bug, CheckCircle, ArrowDown, Activity } from 'lucide-react';
+import { ArrowRight, Droplets, Wind, Zap, Bug, CheckCircle, ArrowDown, Activity, ArrowLeft } from 'lucide-react';
 import { AnimateOnScroll } from '../../components/AnimateOnScroll';
 import { SectionContainer } from '../../components/SectionContainer';
 import { EditableElement } from '../../components/EditableElement';
 import { useState } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { getEquivalentRoute } from '../../data/routeMappings';
 
 export function GuiaArComprimido() {
+  const { language, t } = useLanguage();
   const [activeTab, setActiveTab] = useState<'particulas' | 'agua' | 'oleo'>('particulas');
   
   // Calculator State
@@ -31,7 +34,7 @@ export function GuiaArComprimido() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
           <AnimateOnScroll>
             <div className="inline-block px-4 py-1.5 bg-primary/20 text-primary font-bold uppercase tracking-widest text-xs mb-6 rounded-full border border-primary/30">
-              Guia Técnico
+              {t('technical_guide', 'Guia Técnico')}
             </div>
           </AnimateOnScroll>
           <AnimateOnScroll delay={200}>
@@ -51,8 +54,21 @@ export function GuiaArComprimido() {
       </section>
 
       <div id="conteudo" className="bg-transparent text-white relative z-10">
+        
+        {/* Back button */}
+        <section className="pt-8 bg-black/10">
+          <SectionContainer className="py-0">
+            <Link 
+              to={getEquivalentRoute('/solucoes', language)} 
+              className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline"
+            >
+              <ArrowLeft size={16} /> {t('back_to_solutions', 'Voltar para Soluções')}
+            </Link>
+          </SectionContainer>
+        </section>
+
         {/* Contaminantes */}
-        <section className="py-20 border-b border-white/10">
+        <section className="py-20 border-b border-white/10 pt-12">
           <SectionContainer>
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold text-white mb-4">A Cadeia de Contaminação</h2>
@@ -227,8 +243,8 @@ export function GuiaArComprimido() {
           <SectionContainer>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h4 className="text-primary font-bold uppercase tracking-widest text-sm mb-3 flex items-center gap-2"><Zap size={16} /> Ferramenta Expressa</h4>
-                <h2 className="text-3xl font-bold text-white mb-4">Estimativa de Queda de Pressão</h2>
+                <h4 className="text-primary font-bold uppercase tracking-widest text-sm mb-3 flex items-center gap-2"><Zap size={16} /> {t('express_tool', 'Ferramenta Expressa')}</h4>
+                <h2 className="text-3xl font-bold text-white mb-4">{t('pressure_drop_estimation', 'Estimativa de Queda de Pressão')}</h2>
                 <p className="text-gray-300 mb-6">O diâmetro domina a queda de pressão. Tubulações estranguladas obrigam o compressor a trabalhar com pressão mais alta, aumentando o consumo de energia artificialmente.</p>
                 <div className="bg-yellow-500/20 backdrop-blur-md border-l-4 border-yellow-400 p-4 rounded-r-md">
                   <p className="text-sm text-yellow-100 font-medium">Regra Prática do DOE: Elevar a pressão de descarga em apenas 2 psi aumenta o consumo de energia em até 2%.</p>
@@ -289,10 +305,13 @@ export function GuiaArComprimido() {
               </div>
               <div className="bg-gradient-to-br from-primary to-secondary p-10 rounded-xl text-white text-center shadow-2xl">
                 <Activity size={48} className="mx-auto mb-6 opacity-80" />
-                <h2 className="text-2xl font-bold mb-4">Precisa dimensionar seu sistema?</h2>
-                <p className="text-primary-100 mb-8">A engenharia da Prime Products realiza o diagnóstico de vazão, auditoria da qualidade ISO 8573 e projeto completo de redes para otimizar sua planta e garantir a eficiência energética.</p>
-                <Link to="/contato" className="inline-flex items-center gap-2 bg-white text-primary px-8 py-3 rounded-sm font-bold uppercase hover:bg-gray-100 transition-colors">
-                  Solicitar Diagnóstico <ArrowRight size={18} />
+                <h2 className="text-2xl font-bold mb-4">{t('dimension_system_title', 'Precisa dimensionar seu sistema?')}</h2>
+                <p className="text-primary-100 mb-8">{t('dimension_system_desc', 'A engenharia da Prime Products realiza o diagnóstico de vazão, auditoria da qualidade ISO 8573 e projeto completo de redes para otimizar sua planta e garantir a eficiência energética.')}</p>
+                <Link 
+                  to={getEquivalentRoute('/contato', language)} 
+                  className="inline-flex items-center gap-2 bg-white text-primary px-8 py-3 rounded-sm font-bold uppercase hover:bg-gray-100 transition-colors"
+                >
+                  {t('btn_request_diagnosis', 'Solicitar Diagnóstico')} <ArrowRight size={18} />
                 </Link>
               </div>
             </div>
