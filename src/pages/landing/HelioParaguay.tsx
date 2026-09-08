@@ -6,7 +6,7 @@ export function HelioParaguay() {
       {/* Hero Section */}
       <div 
         className="relative bg-cover bg-center py-24 px-4" 
-        style={{ backgroundImage: 'linear-gradient(to right, rgba(0, 51, 102, 0.9), rgba(0, 51, 102, 0.7)), url("/images/home/hero-bg.jpg")' }}
+        style={{ backgroundImage: 'linear-gradient(to right, rgba(0, 51, 102, 0.9), rgba(0, 51, 102, 0.7)), url("/images/home/hero-bg-novo.png")' }}
       >
         <div className="container mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Soluciones Técnicas para Aplicaciones con Helio</h1>

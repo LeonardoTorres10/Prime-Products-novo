@@ -111,7 +111,7 @@ export function CryotecHome() {
       <section 
         className="relative bg-slate-900 text-white overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(to right, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.8)), url("/images/home/hero-bg.jpg")',
+          backgroundImage: 'linear-gradient(to right, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.8)), url("/images/home/hero-bg-novo.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}

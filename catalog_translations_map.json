@@ -1191,8 +1191,8 @@
   },
   "product_cilindros-aluminio_table_2_title": {
     "pt": "Cilindros de Alumínio: MEDICAL (Padrão Internacional)",
-    "es": "Cilindros de Alumínio: MEDICAL (Padrão Internacional)",
-    "en": "Cilindros de Alumínio: MEDICAL (Padrão Internacional)"
+    "es": "Cilindros de Aluminio: LÍNEA MÉDICA (Estándar Internacional)",
+    "en": "Aluminum Cylinders: MEDICAL (International Standard)"
   },
   "product_cilindros-aluminio_table_2_col_0": {
     "pt": "Product",
@@ -1996,8 +1996,8 @@
   },
   "product_cilindros-aluminio_table_3_title": {
     "pt": "Cilindros de Alumínio: SPECIALTY GAS (Padrão Internacional)",
-    "es": "Cilindros de Alumínio: SPECIALTY GAS (Padrão Internacional)",
-    "en": "Cilindros de Alumínio: SPECIALTY GAS (Padrão Internacional)"
+    "es": "Cilindros de Aluminio: GASES ESPECIALES (Estándar Internacional)",
+    "en": "Aluminum Cylinders: SPECIALTY GAS (International Standard)"
   },
   "product_cilindros-aluminio_table_3_col_0": {
     "pt": "Product",
@@ -2881,8 +2881,8 @@
   },
   "product_cilindros-tipo-4_table_0_col_3": {
     "pt": "Pressão de Serviço",
-    "es": "Pressão de Serviço",
-    "en": "Pressão de Serviço"
+    "es": "Presión de Trabajo (WP)",
+    "en": "Working Pressure (WP)"
   },
   "product_cilindros-tipo-4_table_0_col_4": {
     "pt": "Capacidade / Dimensões",
@@ -3906,28 +3906,28 @@
   },
   "product_detectores-vazamento_table_0_title": {
     "pt": "DETECTORES E SISTEMAS DE DETECÇÃO",
-    "es": "DETECTORES E SISTEMAS DE DETECÇÃO",
-    "en": "DETECTORES E SISTEMAS DE DETECÇÃO"
+    "es": "DETECTORES Y SISTEMAS DE DETECCIÓN",
+    "en": "DETECTORS AND GAS DETECTION SYSTEMS"
   },
   "product_detectores-vazamento_table_0_col_0": {
     "pt": "IMAGEM",
-    "es": "IMAGEM",
-    "en": "IMAGEM"
+    "es": "IMAGEN",
+    "en": "IMAGE"
   },
   "product_detectores-vazamento_table_0_col_1": {
     "pt": "MODELO / TIPO",
     "es": "MODELO / TIPO",
-    "en": "MODELO / TIPO"
+    "en": "MODEL / TYPE"
   },
   "product_detectores-vazamento_table_0_col_2": {
     "pt": "DESCRIÇÃO RESUMIDA",
-    "es": "DESCRIÇÃO RESUMIDA",
-    "en": "DESCRIÇÃO RESUMIDA"
+    "es": "DESCRIPCIÓN RESUMIDA",
+    "en": "SUMMARY DESCRIPTION"
   },
   "product_detectores-vazamento_table_0_col_3": {
     "pt": "APLICAÇÃO",
-    "es": "APLICAÇÃO",
-    "en": "APLICAÇÃO"
+    "es": "APLICACIÓN",
+    "en": "APPLICATION"
   },
   "product_detectores-vazamento_table_0_row_0_cell_0": {
     "pt": "<img src=\"/images/produtos/detectores-de-vazamentos/cat-gastron-1.png\" alt=\"GTM-2000\" class=\"w-32 h-32 object-contain mix-blend-multiply transition-transform duration-300 flex-shrink-0 hover:!scale-125\" />",
@@ -3936,18 +3936,18 @@
   },
   "product_detectores-vazamento_table_0_row_0_cell_1": {
     "pt": "GTM-2000\nDetector fixo multigás",
-    "es": "GTM-2000\nDetector fixo multigás",
-    "en": "GTM-2000\nDetector fixo multigás"
+    "es": "GTM-2000\nDetector fijo multigás",
+    "en": "GTM-2000\nFixed Multi-Gas Detector"
   },
   "product_detectores-vazamento_table_0_row_0_cell_2": {
     "pt": "Sistema fixo por amostragem para monitoramento simultâneo de gases inflamáveis, refrigerantes, oxigênio e gases tóxicos. Possui display gráfico, autodiagnóstico, registro de eventos, alarmes e integração por 4-20 mA e RS-485.",
-    "es": "Sistema fixo por amostragem para monitoramento simultâneo de gases inflamables, refrigerantes, oxigênio e gases tóxicos. Possui display gráfico, autodiagnóstico, registro de eventos, alarmes e integração por 4-20 mA e RS-485.",
-    "en": "Sistema fixo por amostragem para monitoramento simultâneo de flammable gases, refrigerantes, oxigênio e toxic gases. Possui display gráfico, autodiagnóstico, registro de eventos, alarmes e integração por 4-20 mA e RS-485."
+    "es": "Sistema fijo por muestreo para monitoreo simultáneo de gases inflamables, refrigerantes, oxígeno y gases tóxicos. Cuenta con pantalla gráfica, autodiagnóstico, registro de eventos, alarmas e integración vía 4-20 mA y RS-485.",
+    "en": "Fixed extractive sampling system for continuous simultaneous monitoring of combustible gases, refrigerants, oxygen, and toxic gases. Features graphical display, self-diagnostics, event logging, alarms, and 4-20 mA / RS-485 integration."
   },
   "product_detectores-vazamento_table_0_row_0_cell_3": {
     "pt": "Salas de gases, gabinetes de processo, laboratórios, semicondutores e utilidades críticas.",
-    "es": "Salas de gases, gabinetes de processo, laboratórios, semicondutores e utilidades críticas.",
-    "en": "Salas de gases, gabinetes de processo, laboratórios, semicondutores e utilidades críticas."
+    "es": "Salas de gases, gabinetes de proceso, laboratorios, semiconductores y servicios críticos.",
+    "en": "Gas storage rooms, process gas cabinets, laboratories, semiconductor manufacturing, and critical utilities."
   },
   "product_detectores-vazamento_table_0_row_1_cell_0": {
     "pt": "<img src=\"/images/produtos/detectores-de-vazamentos/cat-gastron-2.png\" alt=\"GTD-5100F\" class=\"w-32 h-32 object-contain mix-blend-multiply transition-transform duration-300 flex-shrink-0 hover:!scale-125\" />",
@@ -3956,18 +3956,18 @@
   },
   "product_detectores-vazamento_table_0_row_1_cell_1": {
     "pt": "GTD-5100F\nDetector fixo de VOC",
-    "es": "GTD-5100F\nDetector fijo de VOC (Compuestos Orgánicos Volátiles)",
-    "en": "GTD-5100F\nFixed VOC Gas Detector"
+    "es": "GTD-5100F\nDetector fijo de VOC",
+    "en": "GTD-5100F\nFixed VOC Detector"
   },
   "product_detectores-vazamento_table_0_row_1_cell_2": {
     "pt": "Detector à prova de explosão com amostragem forçada e sensor PID para baixas concentrações de compostos orgânicos voláteis. Utiliza sensor tipo cartucho, controle de fluxo, display local e sinais para integração ao sistema de monitoramento.",
-    "es": "Detector a prueba de explosión com amostragem forçada e sensor PID para baixas concentrações de compostos orgânicos voláteis. Utiliza sensor tipo cartucho, controle de fluxo, display local e sinais para integração ao sistema de monitoramento.",
-    "en": "Detector explosion-proof (Ex d) com amostragem forçada e sensor PID para baixas concentrações de compostos orgânicos voláteis. Utiliza sensor tipo cartucho, controle de fluxo, display local e sinais para integração ao sistema de monitoramento."
+    "es": "Detector a prueba de explosión con muestreo forzado y sensor PID para bajas concentraciones de compuestos orgánicos volátiles (VOC). Utiliza sensor tipo cartucho, control de flujo, pantalla local y señales para integración a sistemas de monitoreo.",
+    "en": "Explosion-proof detector with forced pump sampling and photoionization detection (PID) sensor for low-concentration volatile organic compounds (VOCs). Features smart cartridge sensor, flow control, local display, and supervisory integration signals."
   },
   "product_detectores-vazamento_table_0_row_1_cell_3": {
     "pt": "Indústria química, farmacêutica, pintura, solventes, laboratórios e áreas classificadas.",
-    "es": "Indústria química, farmacêutica, pintura, solventes, laboratórios e áreas classificadas.",
-    "en": "Indústria química, farmacêutica, pintura, solventes, laboratórios e áreas classificadas."
+    "es": "Industria química, farmacéutica, pintura, solventes, laboratorios y áreas clasificadas.",
+    "en": "Chemical, pharmaceutical, paint booths, solvent handling, analytical laboratories, and hazardous areas."
   },
   "product_detectores-vazamento_table_0_row_2_cell_0": {
     "pt": "<img src=\"/images/produtos/detectores-de-vazamentos/cat-gastron-3.png\" alt=\"GIR-3000A / GTD-5100F IR\" class=\"w-32 h-32 object-contain mix-blend-multiply transition-transform duration-300 flex-shrink-0 hover:!scale-125\" />",
@@ -3976,18 +3976,18 @@
   },
   "product_detectores-vazamento_table_0_row_2_cell_1": {
     "pt": "GIR-3000A / GTD-5100F IR\nDetector fixo infravermelho",
-    "es": "GIR-3000A / GTD-5100F IR\nDetector fixo infravermelho",
-    "en": "GIR-3000A / GTD-5100F IR\nDetector fixo infravermelho"
+    "es": "GIR-3000A / GTD-5100F IR\nDetector fijo infrarrojo",
+    "en": "GIR-3000A / GTD-5100F IR\nFixed Infrared Detector"
   },
   "product_detectores-vazamento_table_0_row_2_cell_2": {
     "pt": "Linha por infravermelho para detecção contínua de gases inflamáveis e gases como CO₂, CO e N₂O. Indicada para áreas classificadas, com resposta rápida, longa vida útil do sensor, display local e comunicação industrial.",
-    "es": "Linha por infravermelho para detecção contínua de gases inflamables e gases como CO₂, CO e N₂O. Indicada para áreas classificadas, com resposta rápida, longa vida útil do sensor, display local e comunicação industrial.",
-    "en": "Linha por infravermelho para detecção contínua de flammable gases e gases como CO₂, CO e N₂O. Indicada para áreas classificadas, com resposta rápida, longa vida útil do sensor, display local e comunicação industrial."
+    "es": "Línea por infrarrojos para detección continua de gases inflamables y gases como CO₂, CO y N₂O. Diseñada para áreas clasificadas, con respuesta rápida, vida útil prolongada del sensor, pantalla local y comunicación industrial.",
+    "en": "Non-dispersive infrared (NDIR) line for continuous monitoring of combustible gases, CO₂, CO, and N₂O. Built for hazardous areas with rapid response time, long sensor service life, local display, and industrial fieldbus communications."
   },
   "product_detectores-vazamento_table_0_row_2_cell_3": {
     "pt": "Hidrogênio, gás natural, GLP, CO₂, processos industriais e áreas com baixa disponibilidade de oxigênio.",
-    "es": "Hidrogênio, gás natural, GLP, CO₂, processos industriais e áreas com baixa disponibilidade de oxigênio.",
-    "en": "Hidrogênio, gás natural, GLP, CO₂, processos industriais e áreas com baixa disponibilidade de oxigênio."
+    "es": "Hidrógeno, gas natural, GLP, CO₂, procesos industriales y áreas con baja disponibilidad de oxígeno.",
+    "en": "Hydrogen, natural gas, LPG, CO₂, industrial processes, and oxygen-deficient atmospheres."
   },
   "product_detectores-vazamento_table_0_row_3_cell_0": {
     "pt": "<img src=\"/images/produtos/detectores-de-vazamentos/cat-gastron-4.png\" alt=\"GTD-5100F / GTD-2000Ex\" class=\"w-32 h-32 object-contain mix-blend-multiply transition-transform duration-300 flex-shrink-0 hover:!scale-125\" />",
@@ -3996,18 +3996,18 @@
   },
   "product_detectores-vazamento_table_0_row_3_cell_1": {
     "pt": "GTD-5100F / GTD-2000Ex\nDetector fixo de gases inflamáveis",
-    "es": "GTD-5100F / GTD-2000Ex\nDetector fixo de gases inflamables",
-    "en": "GTD-5100F / GTD-2000Ex\nDetector fixo de flammable gases"
+    "es": "GTD-5100F / GTD-2000Ex\nDetector fijo de gases inflamables",
+    "en": "GTD-5100F / GTD-2000Ex\nFixed Combustible Gas Detector"
   },
   "product_detectores-vazamento_table_0_row_3_cell_2": {
     "pt": "Detector para monitoramento contínuo de gases combustíveis, disponível em versões por difusão ou amostragem. Pode operar com tecnologias catalítica ou infravermelha, com alarmes locais e saídas analógicas e digitais.",
-    "es": "Detector para monitoramento contínuo de gases combustíveis, disponível em versões por difusão ou amostragem. Pode operar com tecnologias catalítica ou infravermelha, com alarmes locais e saídas analógicas e digitais.",
-    "en": "Detector para monitoramento contínuo de gases combustíveis, disponível em versões por difusão ou amostragem. Pode operar com tecnologias catalítica ou infravermelha, com alarmes locais e saídas analógicas e digitais."
+    "es": "Detector para monitoreo continuo de gases combustibles, disponible en configuraciones por difusión o muestreo forzado. Opera con tecnologías catalítica o infrarroja, con alarmas locales y salidas analógicas y digitales.",
+    "en": "Continuous monitoring detector for flammable and combustible gases, available in diffusion or extractive sampling configurations. Operates with catalytic bead or NDIR sensors, providing local visual alarms and analog/digital outputs."
   },
   "product_detectores-vazamento_table_0_row_3_cell_3": {
     "pt": "H₂, metano, LNG, GLP, butano, salas de cilindros, plantas de processo e geração de energia.",
-    "es": "H₂, metano, LNG, GLP, butano, salas de cilindros, plantas de processo e geração de energia.",
-    "en": "H₂, metano, LNG, GLP, butano, salas de cilindros, plantas de processo e geração de energia."
+    "es": "H₂, metano, GNL, GLP, butano, salas de cilindros, plantas de proceso y generación de energía.",
+    "en": "H₂, methane, LNG, LPG, butane, gas cylinder manifolds, process plants, and power generation facilities."
   },
   "product_detectores-vazamento_table_0_row_4_cell_0": {
     "pt": "<img src=\"/images/produtos/detectores-de-vazamentos/cat-gastron-5.png\" alt=\"GTD-5100F / GTD-3000Tx\" class=\"w-32 h-32 object-contain mix-blend-multiply transition-transform duration-300 flex-shrink-0 hover:!scale-125\" />",
@@ -4016,18 +4016,18 @@
   },
   "product_detectores-vazamento_table_0_row_4_cell_1": {
     "pt": "GTD-5100F / GTD-3000Tx\nDetector fixo de oxigênio e tóxicos",
-    "es": "GTD-5100F / GTD-3000Tx\nDetector fixo de oxigênio e tóxicos",
-    "en": "GTD-5100F / GTD-3000Tx\nDetector fixo de oxigênio e tóxicos"
+    "es": "GTD-5100F / GTD-3000Tx\nDetector fijo de oxígeno y gases tóxicos",
+    "en": "GTD-5100F / GTD-3000Tx\nFixed Oxygen & Toxic Gas Detector"
   },
   "product_detectores-vazamento_table_0_row_4_cell_2": {
     "pt": "Linha fixa para deficiência ou enriquecimento de oxigênio e para gases tóxicos. Configurações por difusão ou amostragem, com sensores eletroquímicos, autodiagnóstico, alarmes e integração a painéis e supervisórios.",
-    "es": "Linha fixa para deficiência ou enriquecimento de oxigênio e para gases tóxicos. Configurações por difusão ou amostragem, com sensores eletroquímicos, autodiagnóstico, alarmes e integração a painéis e supervisórios.",
-    "en": "Linha fixa para deficiência ou enriquecimento de oxigênio e para toxic gases. Configurações por difusão ou amostragem, com sensores eletroquímicos, autodiagnóstico, alarmes e integração a painéis e supervisórios."
+    "es": "Línea fija para deficiencia o enriquecimiento de oxígeno y detección de gases tóxicos. Configuraciones por difusión o muestreo, equipada con sensores electroquímicos, autodiagnóstico, alarmas e integración a sistemas SCADA y PLC.",
+    "en": "Fixed detector for oxygen deficiency/enrichment and toxic gas monitoring. Available in diffusion or extractive sampling, featuring electrochemical sensors, continuous self-diagnostics, alarm relays, and DCS/PLC integration."
   },
   "product_detectores-vazamento_table_0_row_4_cell_3": {
     "pt": "O₂, CO, H₂S, NH₃, Cl₂ e outros gases tóxicos em laboratórios, indústria e áreas confinadas.",
-    "es": "O₂, CO, H₂S, NH₃, Cl₂ e outros gases tóxicos em laboratórios, indústria e áreas confinadas.",
-    "en": "O₂, CO, H₂S, NH₃, Cl₂ e outros toxic gases em laboratórios, indústria e áreas confinadas."
+    "es": "O₂, CO, H₂S, NH₃, Cl₂ y otros gases tóxicos en laboratorios, industria y espacios confinados.",
+    "en": "O₂, CO, H₂S, NH₃, Cl₂, and other toxic gases in laboratories, industrial processing, and confined spaces."
   },
   "product_detectores-vazamento_table_0_row_5_cell_0": {
     "pt": "<img src=\"/images/produtos/detectores-de-vazamentos/cat-gastron-6.png\" alt=\"SafEye Quasar 900\" class=\"w-32 h-32 object-contain mix-blend-multiply transition-transform duration-300 flex-shrink-0 hover:!scale-125\" />",
@@ -4036,18 +4036,18 @@
   },
   "product_detectores-vazamento_table_0_row_5_cell_1": {
     "pt": "SafEye Quasar 900\nDetector de caminho aberto",
-    "es": "SafEye Quasar 900\nDetector óptico de línea de vista (Open Path)",
-    "en": "SafEye Quasar 900\nOpen Path Optical Gas Detector"
+    "es": "SafEye Quasar 900\nDetector de haz abierto",
+    "en": "SafEye Quasar 900\nOpen Path Gas Detector"
   },
   "product_detectores-vazamento_table_0_row_5_cell_2": {
     "pt": "Sistema infravermelho de caminho aberto para detectar nuvens de gás em grandes áreas. Compensa chuva, neblina e variações ambientais, possui óptica aquecida e sinais de diagnóstico para bloqueio de feixe ou falha.",
-    "es": "Sistema infravermelho de caminho aberto para detectar nuvens de gás em grandes áreas. Compensa chuva, neblina e variações ambientais, possui óptica aquecida e sinais de diagnóstico para bloqueio de feixe ou falha.",
-    "en": "Sistema infravermelho de caminho aberto para detectar nuvens de gás em grandes áreas. Compensa chuva, neblina e variações ambientais, possui óptica aquecida e sinais de diagnóstico para bloqueio de feixe ou falha."
+    "es": "Sistema infrarrojo de haz abierto (Open Path) para detección de nubes de gas combustible en grandes áreas. Compensa lluvia, niebla y variaciones climáticas, cuenta con óptica calefaccionada y diagnósticos de bloqueo de haz y falla.",
+    "en": "Open-path infrared detection system designed to detect flammable hydrocarbon gas clouds over long distances. Resilient to heavy rain, fog, and extreme weather, featuring heated optics and advanced beam-block/fault diagnostic telemetry."
   },
   "product_detectores-vazamento_table_0_row_5_cell_3": {
     "pt": "Perímetros industriais, tanques, dutos, refinarias, petroquímica, offshore e grandes áreas externas.",
-    "es": "Perímetros industriais, tanques, dutos, refinarias, petroquímica, offshore e grandes áreas externas.",
-    "en": "Perímetros industriais, tanques, dutos, refinarias, petroquímica, offshore e grandes áreas externas."
+    "es": "Perímetros industriales, parques de tanques, gasoductos, refinerías, petroquímica, offshore y grandes áreas exteriores.",
+    "en": "Industrial perimeter monitoring, tank farms, pipeline distribution, refineries, petrochemical plants, offshore platforms, and open outdoor processing units."
   },
   "product_detectores-vazamento_table_0_row_6_cell_0": {
     "pt": "<img src=\"/images/produtos/detectores-de-vazamentos/cat-gastron-7.png\" alt=\"ChemLogic 96\" class=\"w-32 h-32 object-contain mix-blend-multiply transition-transform duration-300 flex-shrink-0 hover:!scale-125\" />",
@@ -4056,18 +4056,18 @@
   },
   "product_detectores-vazamento_table_0_row_6_cell_1": {
     "pt": "ChemLogic 96\nMonitor colorimétrico multiponto",
-    "es": "ChemLogic 96\nMonitor colorimétrico multiponto",
-    "en": "ChemLogic 96\nMonitor colorimétrico multiponto"
+    "es": "ChemLogic 96\nMonitor colorimétrico multipunto",
+    "en": "ChemLogic 96\nMultipoint Colorimetric Gas Monitor"
   },
   "product_detectores-vazamento_table_0_row_6_cell_2": {
     "pt": "Sistema de monitoramento contínuo por tecnologia colorimétrica para gases tóxicos em concentrações muito baixas. Permite múltiplos pontos de amostragem e centraliza a leitura em um único equipamento.",
-    "es": "Sistema de monitoramento contínuo por tecnologia colorimétrica para gases tóxicos em concentrações muito baixas. Permite múltiplos pontos de amostragem e centraliza a leitura em um único equipamento.",
-    "en": "Sistema de monitoramento contínuo por tecnologia colorimétrica para toxic gases em concentrações muito baixas. Permite múltiplos pontos de amostragem e centraliza a leitura em um único equipamento."
+    "es": "Sistema de monitoreo continuo mediante tecnología colorimétrica de cinta óptica (paper tape) para gases tóxicos en concentraciones ultra bajas (ppb). Permite múltiples puntos de muestreo y centraliza la supervisión en un único equipo.",
+    "en": "Continuous colorimetric chemcassette monitoring system for ultra-low concentration toxic gas detection (ppb range). Provides multi-point sequential sampling and centralized telemetry in a single industrial chassis."
   },
   "product_detectores-vazamento_table_0_row_6_cell_3": {
     "pt": "Semicondutores, salas limpas, gases especiais, processos de alta pureza e fabricação eletrônica.",
-    "es": "Semicondutores, salas limpas, gases especiales, processos de alta pureza e fabricação eletrônica.",
-    "en": "Semicondutores, salas limpas, specialty gases, processos de high purity e fabricação eletrônica."
+    "es": "Semiconductores, salas limpias, gases especiales, procesos de alta pureza y manufactura electrónica.",
+    "en": "Semiconductor fabrication, ISO cleanrooms, specialty gas distribution, high-purity synthesis, and advanced electronics manufacturing."
   },
   "product_detectores-vazamento_table_0_row_7_cell_0": {
     "pt": "<img src=\"/images/produtos/detectores-de-vazamentos/cat-gastron-8.png\" alt=\"G-Finder Single / GPD-100\" class=\"w-32 h-32 object-contain mix-blend-multiply transition-transform duration-300 flex-shrink-0 hover:!scale-125\" />",
@@ -4076,18 +4076,18 @@
   },
   "product_detectores-vazamento_table_0_row_7_cell_1": {
     "pt": "G-Finder Single / GPD-100\nDetector portátil de gases",
-    "es": "G-Finder Single / GPD-100\nDetector portátil multigás y monogás",
+    "es": "G-Finder Single / GPD-100\nDetector portátil de gases y vapores",
     "en": "G-Finder Single / GPD-100\nPortable Gas Detector"
   },
   "product_detectores-vazamento_table_0_row_7_cell_2": {
     "pt": "Linha portátil para detecção individual ou múltipla, com leitura em tempo real e alarmes visuais, sonoros e vibratórios. Há opções por difusão e por amostragem, conforme o risco e a aplicação.",
-    "es": "Linha portátil para detecção individual ou múltipla, com leitura em tempo real e alarmes visuais, sonoros e vibratórios. Há opções por difusão e por amostragem, conforme o risco e a aplicação.",
-    "en": "Linha portátil para detecção individual ou múltipla, com leitura em tempo real e alarmes visuais, sonoros e vibratórios. Há opções por difusão e por amostragem, conforme o risco e a aplicação."
+    "es": "Línea portátil para detección monogás o multigás, con visualización en tiempo real y alarmas visuales, sonoras y por vibración. Disponible en configuraciones de difusión o con bomba de muestreo según el riesgo operacional.",
+    "en": "Portable single-gas and multi-gas detection series delivering real-time concentration readouts with multi-tier visual, audible, and vibration alarms. Available in diffusion or motorized suction pump configurations."
   },
   "product_detectores-vazamento_table_0_row_7_cell_3": {
     "pt": "Inspeção de campo, manutenção, entrada em espaços confinados, resposta a emergências e liberação de áreas.",
-    "es": "Inspeção de campo, manutenção, entrada em espaços confinados, resposta a emergências e liberação de áreas.",
-    "en": "Inspeção de campo, manutenção, entrada em espaços confinados, resposta a emergências e liberação de áreas."
+    "es": "Inspección de campo, mantenimiento preventivo, entrada a espacios confinados, respuesta a emergencias y habilitación de áreas de trabajo.",
+    "en": "Field inspections, plant maintenance, confined space entry (CSE), HazMat emergency response, and hot-work site clearance."
   },
   "product_detectores-vazamento_table_0_row_8_cell_0": {
     "pt": "<img src=\"/images/produtos/detectores-de-vazamentos/cat-gastron-9.png\" alt=\"GTF-1100U / GTF-1100T\" class=\"w-32 h-32 object-contain mix-blend-multiply transition-transform duration-300 flex-shrink-0 hover:!scale-125\" />",
@@ -4096,18 +4096,18 @@
   },
   "product_detectores-vazamento_table_0_row_8_cell_1": {
     "pt": "GTF-1100U / GTF-1100T\nDetector de chama UV/IR e IR3",
-    "es": "GTF-1100U / GTF-1100T\nDetector óptico de llama UV/IR e IR3",
-    "en": "GTF-1100U / GTF-1100T\nUV/IR and Triple-IR (IR3) Optical Flame Detector"
+    "es": "GTF-1100U / GTF-1100T\nDetector de llama UV/IR e IR3",
+    "en": "GTF-1100U / GTF-1100T\nUV/IR and Triple IR (IR3) Flame Detector"
   },
   "product_detectores-vazamento_table_0_row_8_cell_2": {
     "pt": "Detector óptico para reconhecimento rápido de chama, disponível em versões UV/IR e triplo infravermelho. Possui autodiagnóstico, ampla cobertura e interfaces para alarme e integração ao sistema de segurança.",
-    "es": "Detector óptico para reconhecimento rápido de chama, disponível em versões UV/IR e triplo infravermelho. Possui autodiagnóstico, ampla cobertura e interfaces para alarme e integração ao sistema de segurança.",
-    "en": "Detector óptico para reconhecimento rápido de chama, disponível em versões UV/IR e triplo infravermelho. Possui autodiagnóstico, ampla cobertura e interfaces para alarme e integração ao sistema de segurança."
+    "es": "Detector óptico para detección ultra rápida de llama, disponible en versiones UV/IR y triple infrarrojo (IR3). Cuenta con autodiagnóstico óptico continuo (Built-In Test), amplio cono de visión y salidas de relé para sistemas de extinción de incendios.",
+    "en": "High-speed optical flame detector available in combined UV/IR and Triple Infrared (IR3) spectrum configurations. Features continuous optical path self-testing (BIT), broad field-of-view coverage, and direct fire suppression system interlocks."
   },
   "product_detectores-vazamento_table_0_row_8_cell_3": {
     "pt": "Óleo e gás, química, energia, armazenamento de combustíveis, salas de máquinas e áreas industriais críticas.",
-    "es": "Óleo e gás, química, energia, armazenamento de combustíveis, salas de máquinas e áreas industriais críticas.",
-    "en": "Óleo e gás, química, energia, armazenamento de combustíveis, salas de máquinas e áreas industriais críticas."
+    "es": "Petróleo y gas, química, generación eléctrica, almacenamiento de hidrocarburos, salas de compresores y áreas industriales de alto riesgo.",
+    "en": "Oil & gas, petrochemical complexes, power plants, fuel storage terminals, machinery enclosures, and critical high-hazard industrial assets."
   },
   "product_detectores-vazamento_table_0_row_9_cell_0": {
     "pt": "<img src=\"/images/produtos/detectores-de-vazamentos/cat-gastron-10.png\" alt=\"Incus\" class=\"w-32 h-32 object-contain mix-blend-multiply transition-transform duration-300 flex-shrink-0 hover:!scale-125\" />",
@@ -4116,48 +4116,48 @@
   },
   "product_detectores-vazamento_table_0_row_9_cell_1": {
     "pt": "Incus\nDetector ultrassônico de vazamento",
-    "es": "Incus\nDetector ultrasónico acústico de fugas de gas",
-    "en": "Incus\nUltrasonic Acoustic Gas Leak Detector"
+    "es": "Incus\nDetector ultrasónico de fugas",
+    "en": "Incus\nUltrasonic Gas Leak Detector"
   },
   "product_detectores-vazamento_table_0_row_9_cell_2": {
     "pt": "Detector que identifica o ruído ultrassônico produzido por vazamentos de gás pressurizado, independentemente de o gás ser combustível, tóxico ou inerte. Oferece resposta praticamente instantânea e elevada cobertura em ambientes severos.",
-    "es": "Detector que identifica o ruído ultrassônico produzido por vazamentos de gás pressurizado, independentemente de o gás ser combustível, tóxico ou inerte. Oferece resposta praticamente instantânea e elevada cobertura em ambientes severos.",
-    "en": "Detector que identifica o ruído ultrassônico produzido por vazamentos de gás pressurizado, independentemente de o gás ser combustível, tóxico ou inerte. Oferece resposta praticamente instantânea e elevada cobertura em ambientes severos."
+    "es": "Detector acústico que identifica el ruido ultrasónico característico generado por fugas de gas a alta presión, independientemente de si el gas es inflamable, tóxico o inerte. Proporciona detección instantánea inmune a condiciones de viento extremo.",
+    "en": "Acoustic sensor that detects high-frequency ultrasonic noise generated by pressurized gas escapes, irrespective of whether the gas is flammable, toxic, or inert. Delivers instantaneous speed of sound detection unhindered by wind dispersion."
   },
   "product_detectores-vazamento_table_0_row_9_cell_3": {
     "pt": "Compressores, manifolds, linhas de alta pressão, plataformas, plantas petroquímicas e áreas externas ventiladas.",
-    "es": "Compressores, manifolds, linhas de alta pressão, plataformas, plantas petroquímicas e áreas externas ventiladas.",
-    "en": "Compressores, manifolds, linhas de alta pressão, plataformas, plantas petroquímicas e áreas externas ventiladas."
+    "es": "Compresores, manifolds de cabezal, tuberías de alta presión, plataformas offshore, plantas petroquímicas y áreas exteriores abiertas con alta ventilación.",
+    "en": "Compressor shelters, high-pressure manifolds, gas export lines, offshore production platforms, petrochemical cracking units, and ventilated outdoor process areas."
   },
   "product_dewars-criogenicos_table_0_title": {
     "pt": "LIQUID CYLINDERS (CILINDROS DE LÍQUIDO)",
-    "es": "LIQUID CYLINDERS (CILINDROS DE LÍQUIDO)",
-    "en": "LIQUID CYLINDERS (CILINDROS DE LÍQUIDO)"
+    "es": "CILINDROS DE LÍQUIDO CRIOGÉNICO (LIQUID CYLINDERS)",
+    "en": "CRYOGENIC LIQUID CYLINDERS (DEWARS)"
   },
   "product_dewars-criogenicos_table_0_col_0": {
     "pt": "IMAGEM",
-    "es": "IMAGEM",
-    "en": "IMAGEM"
+    "es": "IMAGEN",
+    "en": "IMAGE"
   },
   "product_dewars-criogenicos_table_0_col_1": {
     "pt": "MODELO",
     "es": "MODELO",
-    "en": "MODELO"
+    "en": "MODEL"
   },
   "product_dewars-criogenicos_table_0_col_2": {
     "pt": "DESCRIÇÃO",
-    "es": "DESCRIÇÃO",
-    "en": "DESCRIÇÃO"
+    "es": "DESCRIPCIÓN",
+    "en": "DESCRIPTION"
   },
   "product_dewars-criogenicos_table_0_col_3": {
     "pt": "APLICAÇÃO",
-    "es": "APLICAÇÃO",
-    "en": "APLICAÇÃO"
+    "es": "APLICACIÓN",
+    "en": "APPLICATION"
   },
   "product_dewars-criogenicos_table_0_col_4": {
     "pt": "CARACTERÍSTICAS TÉCNICAS",
     "es": "CARACTERÍSTICAS TÉCNICAS",
-    "en": "CARACTERÍSTICAS TÉCNICAS"
+    "en": "TECHNICAL SPECIFICATIONS"
   },
   "product_dewars-criogenicos_table_0_row_0_cell_0": {
     "pt": "<div class=\"flex items-center justify-center\"><img src=\"/images/produtos/dewers-criogenicos/cylinder-tw.png\" alt=\"Produto Criogênico\" class=\"w-28 h-28 object-contain  mix-blend-multiply transition-transform duration-300 flex-shrink-0 hover:!scale-125\" /></div>",
@@ -4166,23 +4166,23 @@
   },
   "product_dewars-criogenicos_table_0_row_0_cell_1": {
     "pt": "Série XL (Ex: XL-45, XL-50)",
-    "es": "Série XL (Ex: XL-45, XL-50)",
-    "en": "Série XL (Ex: XL-45, XL-50)"
+    "es": "Serie XL (Ej: XL-45, XL-50)",
+    "en": "XL Series (e.g., XL-45, XL-50)"
   },
   "product_dewars-criogenicos_table_0_row_0_cell_2": {
     "pt": "Cilindros de líquidos portáteis com isolamento a vácuo avançado.",
-    "es": "Cilindros de líquidos portáteis com isolamento a vácuo avançado.",
-    "en": "Cilindros de líquidos portáteis com isolamento a vácuo avançado."
+    "es": "Cilindros de líquidos portátiles con aislamiento al vacío avanzado.",
+    "en": "Portable liquid cryogenic cylinders with high-efficiency multi-layer vacuum insulation."
   },
   "product_dewars-criogenicos_table_0_row_0_cell_3": {
     "pt": "Armazenamento e transporte de LIN, LOX, LAR e CO2.",
-    "es": "Armazenamento e transporte de LIN, LOX, LAR e CO2.",
-    "en": "Armazenamento e transporte de LIN, LOX, LAR e CO2."
+    "es": "Almacenamiento y transporte seguro de LIN, LOX, LAR y CO₂.",
+    "en": "Storage and distribution of liquid nitrogen (LIN), liquid oxygen (LOX), liquid argon (LAR), and CO₂."
   },
   "product_dewars-criogenicos_table_0_row_0_cell_4": {
     "pt": "• Garantia de 5 anos no vácuo\n• Capacidade de 70 a 450 Litros\n• Anel de proteção contra choques (Full Circle Shock-Mount Ring)\n• Indicador de nível não-obstrutivo\n• Válvulas de alívio codificadas por cor",
-    "es": "• Garantia de 5 anos no vácuo\n• Capacidade de 70 a 450 Litros\n• Anel de proteção contra choques (Full Circle Shock-Mount Ring)\n• Indicador de nível não-obstrutivo\n• Válvulas de alívio codificadas por cor",
-    "en": "• Garantia de 5 anos no vácuo\n• Capacidade de 70 a 450 Litros\n• Anel de proteção contra choques (Full Circle Shock-Mount Ring)\n• Indicador de nível não-obstrutivo\n• Válvulas de alívio codificadas por cor"
+    "es": "• Garantía de 5 años en la integridad del vacío\n• Capacidad de 70 a 450 litros\n• Anillo perimetral de protección contra impactos (Full Circle Shock-Mount Ring)\n• Indicador de nivel continuo no invasivo\n• Válvulas de seguridad y alivio con código de color",
+    "en": "• 5-year vacuum integrity warranty\n• Capacity range from 70 to 450 liters\n• Full-circle shock-mount protective ring\n• Non-intrusive continuous level indicator\n• Color-coded safety relief valves"
   },
   "product_dewars-criogenicos_table_0_row_1_cell_0": {
     "pt": "<div class=\"flex items-center justify-center\"><img src=\"/images/produtos/dewers-criogenicos/prod-dewars-2.png\" alt=\"Produto Criogênico\" class=\"w-28 h-28 object-contain  mix-blend-multiply transition-transform duration-300 flex-shrink-0 hover:!scale-125\" /></div>",
@@ -4191,23 +4191,23 @@
   },
   "product_dewars-criogenicos_table_0_row_1_cell_1": {
     "pt": "Série LSN / XP",
-    "es": "Série LSN / XP",
-    "en": "Série LSN / XP"
+    "es": "Serie LSN / XP",
+    "en": "LSN / XP Series"
   },
   "product_dewars-criogenicos_table_0_row_1_cell_2": {
     "pt": "Dewars para armazenamento seguro de gases liquefeitos com alta eficiência térmica.",
-    "es": "Dewars para armazenamento seguro de gases liquefeitos com alta eficiência térmica.",
-    "en": "Dewars para armazenamento seguro de gases liquefeitos com alta eficiência térmica."
+    "es": "Dewars para almacenamiento seguro de gases licuados con máxima eficiencia térmica.",
+    "en": "Cryogenic dewars for safe storage and extraction of liquefied gases with optimal thermal performance."
   },
   "product_dewars-criogenicos_table_0_row_1_cell_3": {
     "pt": "Aplicações industriais e de pesquisa.",
-    "es": "Aplicações industriais e de pesquisa.",
-    "en": "Aplicações industriais e de pesquisa."
+    "es": "Aplicaciones industriales, biológicas y centros de investigación.",
+    "en": "Industrial, biological, and scientific research applications."
   },
   "product_dewars-criogenicos_table_0_row_1_cell_4": {
     "pt": "• Construção robusta e durável\n• Isolamento multicamadas de alta performance\n• Base reforçada",
-    "es": "• Construção robusta e durável\n• Isolamento multicamadas de alta performance\n• Base reforçada",
-    "en": "• Construção robusta e durável\n• Isolamento multicamadas de alta performance\n• Base reforçada"
+    "es": "• Construcción robusta en acero inoxidable para servicio pesado\n• Aislamiento multicapa de alto rendimiento (MLI)\n• Base reforzada para transporte seguro",
+    "en": "• Heavy-duty stainless steel structural design\n• High-performance multi-layer superinsulation (MLI)\n• Reinforced shock-absorbing base"
   },
   "product_dewars-criogenicos_table_0_row_2_cell_0": {
     "pt": "<div class=\"flex items-center justify-center\"><img src=\"/images/produtos/dewers-criogenicos/prod-dewars-3.png\" alt=\"Produto Criogênico\" class=\"w-28 h-28 object-contain  mix-blend-multiply transition-transform duration-300 flex-shrink-0 hover:!scale-125\" /></div>",
@@ -4216,53 +4216,53 @@
   },
   "product_dewars-criogenicos_table_0_row_2_cell_1": {
     "pt": "Série TPED / GB",
-    "es": "Série TPED / GB",
-    "en": "Série TPED / GB"
+    "es": "Serie TPED / GB",
+    "en": "TPED / GB Series"
   },
   "product_dewars-criogenicos_table_0_row_2_cell_2": {
     "pt": "Cilindros criogênicos certificados para o mercado global.",
-    "es": "Recipientes criogénicos certificados según estándares globales (DOT-4L / TPED).",
-    "en": "Cryogenic liquid cylinders certified to international standards (DOT-4L / TPED)."
+    "es": "Cilindros criogénicos certificados para el mercado global.",
+    "en": "Globally certified cryogenic liquid cylinders."
   },
   "product_dewars-criogenicos_table_0_row_2_cell_3": {
     "pt": "Transporte internacional e uso geral.",
-    "es": "Transporte internacional e uso geral.",
-    "en": "Transporte internacional e uso geral."
+    "es": "Transporte transfronterizo y suministro general de fluidos criogénicos.",
+    "en": "International transport and general cryogenic fluid distribution."
   },
   "product_dewars-criogenicos_table_0_row_2_cell_4": {
     "pt": "• Aprovações DOT-4L, TPED e GB Code\n• Opções para extração de líquido e gás\n• Design seguro para ambientes exigentes",
-    "es": "• Aprovações DOT-4L, TPED e GB Code\n• Opções para extração de líquido e gás\n• Design seguro para ambientes exigentes",
-    "en": "• Aprovações DOT-4L, TPED e GB Code\n• Opções para extração de líquido e gás\n• Design seguro para ambientes exigentes"
+    "es": "• Certificaciones DOT-4L, TPED y código GB\n• Tomas dobles para extracción de fase líquida y gaseosa\n• Diseño de alta seguridad para ambientes industriales exigentes",
+    "en": "• Certified to DOT-4L, TPED, and GB codes\n• Dual liquid withdrawal and gas vaporization ports\n• Robust design engineered for demanding operating environments"
   },
   "product_dewars-criogenicos_table_1_title": {
     "pt": "VACUUM INSULATED PIPING (TUBULAÇÃO ISOLADA A VÁCUO)",
-    "es": "VACUUM INSULATED PIPING (TUBULAÇÃO ISOLADA A VÁCUO)",
-    "en": "VACUUM INSULATED PIPING (TUBULAÇÃO ISOLADA A VÁCUO)"
+    "es": "TUBERÍA CON AISLAMIENTO AL VACÍO (VACUUM INSULATED PIPING - VIP)",
+    "en": "VACUUM INSULATED PIPING (VIP SYSTEMS)"
   },
   "product_dewars-criogenicos_table_1_col_0": {
     "pt": "IMAGEM",
-    "es": "IMAGEM",
-    "en": "IMAGEM"
+    "es": "IMAGEN",
+    "en": "IMAGE"
   },
   "product_dewars-criogenicos_table_1_col_1": {
     "pt": "SISTEMA",
     "es": "SISTEMA",
-    "en": "SISTEMA"
+    "en": "SYSTEM"
   },
   "product_dewars-criogenicos_table_1_col_2": {
     "pt": "DESCRIÇÃO",
-    "es": "DESCRIÇÃO",
-    "en": "DESCRIÇÃO"
+    "es": "DESCRIPCIÓN",
+    "en": "DESCRIPTION"
   },
   "product_dewars-criogenicos_table_1_col_3": {
     "pt": "APLICAÇÃO",
-    "es": "APLICAÇÃO",
-    "en": "APLICAÇÃO"
+    "es": "APLICACIÓN",
+    "en": "APPLICATION"
   },
   "product_dewars-criogenicos_table_1_col_4": {
     "pt": "CARACTERÍSTICAS TÉCNICAS",
     "es": "CARACTERÍSTICAS TÉCNICAS",
-    "en": "CARACTERÍSTICAS TÉCNICAS"
+    "en": "TECHNICAL SPECIFICATIONS"
   },
   "product_dewars-criogenicos_table_1_row_0_cell_0": {
     "pt": "<div class=\"flex items-center justify-center\"><img src=\"/images/produtos/dewers-criogenicos/piping-tw.jpg\" alt=\"Produto Criogênico\" class=\"w-28 h-28 object-contain  mix-blend-multiply transition-transform duration-300 flex-shrink-0 hover:!scale-125\" /></div>",
@@ -4271,23 +4271,23 @@
   },
   "product_dewars-criogenicos_table_1_row_0_cell_1": {
     "pt": "Tubulações VJP (Vacuum Jacketed Piping)",
-    "es": "Tubulações VJP (Vacuum Jacketed Piping)",
-    "en": "Tubulações VJP (Vacuum Jacketed Piping)"
+    "es": "Tuberías VJP (Vacuum Jacketed Piping)",
+    "en": "Vacuum Jacketed Piping (VJP Lines)"
   },
   "product_dewars-criogenicos_table_1_row_0_cell_2": {
     "pt": "Tubulação dupla (inner/outer) com vácuo intermediário, garantindo a menor taxa de evaporação (boil-off) do mercado.",
-    "es": "Tubulação dupla (inner/outer) com vácuo intermediário, garantindo a menor taxa de evaporação (boil-off) do mercado.",
-    "en": "Tubulação dupla (inner/outer) com vácuo intermediário, garantindo a menor taxa de evaporação (boil-off) do mercado."
+    "es": "Tubería concéntrica de doble pared con cámara de alto vacío intermedia, garantizando la menor tasa de evaporación (boil-off) del mercado.",
+    "en": "Concentric double-wall rigid piping with intermediate high-vacuum jacket, delivering industry-leading lowest boil-off rates."
   },
   "product_dewars-criogenicos_table_1_row_0_cell_3": {
     "pt": "Transferência de líquidos criogênicos em plantas de gás, indústrias e laboratórios.",
-    "es": "Transferência de líquidos criogênicos em plantas de gás, indústrias e laboratórios.",
-    "en": "Transferência de líquidos criogênicos em plantas de gás, indústrias e laboratórios."
+    "es": "Transferencia de fluidos criogénicos en plantas de fraccionamiento de aire, plantas químicas y laboratorios.",
+    "en": "Cryogenic liquid transfer lines for air separation units (ASU), chemical plants, and testing labs."
   },
   "product_dewars-criogenicos_table_1_row_0_cell_4": {
     "pt": "• Tubulação interna em Inox 304/316L (ASTM A312)\n• Retenção de vácuo garantida\n• Diâmetros de 1/2\" a 6\"\n• Pressão de projeto de até 40 barg\n• Limpeza Padrão Oxigênio (Oxygen Clean Standards)",
-    "es": "• Tubulação interna em Inox 304/316L (ASTM A312)\n• Retenção de vácuo garantida\n• Diâmetros de 1/2\" a 6\"\n• Pressão de projeto de até 40 barg\n• Limpeza Padrão Oxigênio (Oxygen Clean Standards)",
-    "en": "• Tubulação interna em Inox 304/316L (ASTM A312)\n• Retenção de vácuo garantida\n• Diâmetros de 1/2\" a 6\"\n• Pressão de projeto de até 40 barg\n• Limpeza Padrão Oxigênio (Oxygen Clean Standards)"
+    "es": "• Línea interna en acero inoxidable 304/316L (ASTM A312)\n• Retención dinámica de vacío certificada\n• Diámetros nominales de 1/2\" a 6\"\n• Presión de diseño de hasta 40 barg\n• Limpieza conforme a estándares de oxígeno (Oxygen Cleaning)",
+    "en": "• Inner core in 304/316L stainless steel (ASTM A312)\n• Certified long-term vacuum retention\n• Nominal diameters from 1/2\" to 6\"\n• Design working pressures up to 40 barg\n• Cleaned per CGA G-4.1 Oxygen Cleaning Standards"
   },
   "product_dewars-criogenicos_table_1_row_1_cell_0": {
     "pt": "<div class=\"flex items-center justify-center\"><img src=\"/images/produtos/dewers-criogenicos/piping-tw.jpg\" alt=\"Produto Criogênico\" class=\"w-28 h-28 object-contain  mix-blend-multiply transition-transform duration-300 flex-shrink-0 hover:!scale-125\" /></div>",
@@ -4296,23 +4296,23 @@
   },
   "product_dewars-criogenicos_table_1_row_1_cell_1": {
     "pt": "Conexões tipo Baioneta",
-    "es": "Conexões tipo Baioneta",
-    "en": "Conexões tipo Baioneta"
+    "es": "Conexiones tipo Bayoneta Criogénica",
+    "en": "Cryogenic Bayonet Connections"
   },
   "product_dewars-criogenicos_table_1_row_1_cell_2": {
     "pt": "Design proprietário para conexões livres de vazamentos e congelamento externo.",
-    "es": "Design proprietário para conexões livres de vazamentos e congelamento externo.",
-    "en": "Design proprietário para conexões livres de vazamentos e congelamento externo."
+    "es": "Diseño propietario para acoplamientos libres de fugas y sin escarcha o condensación externa.",
+    "en": "Proprietary close-tolerance bayonets engineered for zero-leakage, frost-free cryogenic transfer."
   },
   "product_dewars-criogenicos_table_1_row_1_cell_3": {
     "pt": "Sistemas modulares de transferência criogênica.",
-    "es": "Sistemas modulares de transferência criogênica.",
-    "en": "Sistemas modulares de transferência criogênica."
+    "es": "Sistemas modulares de distribución y conexión de equipos criogénicos.",
+    "en": "Modular distribution systems and cryogenic equipment interface lines."
   },
   "product_dewars-criogenicos_table_1_row_1_cell_4": {
     "pt": "• Conexões mecânicas de alta confiabilidade\n• Instalação rápida (Bayonet ou Field Weld)\n• Livre de manutenção a longo prazo",
-    "es": "• Conexões mecânicas de alta confiabilidade\n• Instalação rápida (Bayonet ou Field Weld)\n• Livre de manutenção a longo prazo",
-    "en": "• Conexões mecânicas de alta confiabilidade\n• Instalação rápida (Bayonet ou Field Weld)\n• Livre de manutenção a longo prazo"
+    "es": "• Acoplamientos mecánicos de ultra alta confiabilidad\n• Montaje rápido en campo (Bayonet o soldadura orbital)\n• Libre de mantenimiento a largo plazo",
+    "en": "• Ultra high-reliability mechanical joint technology\n• Rapid field assembly (Bayonet or orbital field weld)\n• Maintenance-free long-term operational lifecycle"
   },
   "product_dewars-criogenicos_table_1_row_2_cell_0": {
     "pt": "<div class=\"flex items-center justify-center\"><img src=\"/images/produtos/dewers-criogenicos/prod-dewars-criogenicos-new.jpg\" alt=\"Produto Criogênico\" class=\"w-28 h-28 object-contain  mix-blend-multiply transition-transform duration-300 flex-shrink-0 hover:!scale-125\" /></div>",
@@ -4321,48 +4321,48 @@
   },
   "product_dewars-criogenicos_table_1_row_2_cell_1": {
     "pt": "Acessórios e Mangueiras VIP",
-    "es": "Acessórios e Mangueiras VIP",
-    "en": "Acessórios e Mangueiras VIP"
+    "es": "Accesorios y Mangueras VIP",
+    "en": "VIP Flexible Hoses & Cryogenic Accessories"
   },
   "product_dewars-criogenicos_table_1_row_2_cell_2": {
     "pt": "Mangueiras flexíveis e acessórios integrados com isolamento a vácuo.",
-    "es": "Mangueiras flexíveis e acessórios integrados com isolamento a vácuo.",
-    "en": "Mangueiras flexíveis e acessórios integrados com isolamento a vácuo."
+    "es": "Mangueras flexibles y accesorios integrados con chaqueta de aislamiento al vacío.",
+    "en": "Vacuum-insulated flexible hoses and integrated cryogenic accessories."
   },
   "product_dewars-criogenicos_table_1_row_2_cell_3": {
     "pt": "Conexões móveis e interfaces de equipamentos.",
-    "es": "Conexões móveis e interfaces de equipamentos.",
-    "en": "Conexões móveis e interfaces de equipamentos."
+    "es": "Conexiones móviles, brazos de carga e interfaces de equipos.",
+    "en": "Dynamic piping interfaces, loading stations, and movable machinery connections."
   },
   "product_dewars-criogenicos_table_1_row_2_cell_4": {
     "pt": "• Altamente flexíveis\n• Proteção anti-congelamento\n• Compatível com ASME B31.3",
-    "es": "• Altamente flexíveis\n• Proteção anti-congelamento\n• Compatível com ASME B31.3",
-    "en": "• Altamente flexíveis\n• Proteção anti-congelamento\n• Compatível com ASME B31.3"
+    "es": "• Alta flexibilidad mecánica bajo temperaturas criogénicas\n• Protección contra congelamiento exterior\n• Cumplimiento integral con código de tuberías ASME B31.3",
+    "en": "• Maximum mechanical flexibility under deep cryogenic temperatures\n• Frost-free outer jacket protection\n• Full compliance with ASME B31.3 process piping code"
   },
   "product_dewars-criogenicos_extra_0_title": {
     "pt": "A Solução Ideal em Criogenia",
-    "es": "A Solução Ideal em Criogenia",
-    "en": "A Solução Ideal em Criogenia"
+    "es": "La Solución Integral en Criogenia",
+    "en": "Complete Cryogenic Engineering Solutions"
   },
   "product_dewars-criogenicos_extra_0_desc": {
     "pt": "Os produtos fornecem desempenho superior na retenção térmica para os fluidos mais frios do mundo. Combinando os recipientes criogênicos (Liquid Cylinders) com a linha completa de Tubulações Isoladas a Vácuo (VIP), sua planta pode operar com mínima perda por evaporação (boil-off), resultando em alta economia e segurança operacional.",
-    "es": "Os produtos fornecem desempenho superior na retenção térmica para os fluidos mais frios do mundo. Combinando os recipientes criogênicos (Liquid Cylinders) com a linha completa de Tubulações Isoladas a Vácuo (VIP), sua planta pode operar com mínima perda por evaporação (boil-off), resultando em alta economia e segurança operacional.",
-    "en": "Os produtos fornecem desempenho superior na retenção térmica para os fluidos mais frios do mundo. Combinando os recipientes criogênicos (Liquid Cylinders) com a linha completa de Tubulações Isoladas a Vácuo (VIP), sua planta pode operar com mínima perda por evaporação (boil-off), resultando em alta economia e segurança operacional."
+    "es": "Nuestra gama provee un desempeño térmico superior para los fluidos más fríos del planeta. Al combinar los recipientes criogénicos (Liquid Cylinders) con la línea integral de tuberías aisladas al vacío (VIP), su planta opera con mínimas pérdidas por evaporación (boil-off), maximizando el ahorro energético y la seguridad operacional.",
+    "en": "Our systems deliver superior thermal insulation for the world's most demanding cryogenic fluids. Combining portable liquid cylinders with engineered Vacuum Insulated Piping (VIP), your facility achieves minimal boil-off losses, superior cost efficiency, and unmatched operational safety."
   },
   "product_dewars-criogenicos_extra_0_list_0": {
     "pt": "Garantia prolongada do vácuo",
-    "es": "Garantia prolongada do vácuo",
-    "en": "Garantia prolongada do vácuo"
+    "es": "Garantía extendida de retención de vacío",
+    "en": "Extended vacuum integrity warranty"
   },
   "product_dewars-criogenicos_extra_0_list_1": {
     "pt": "Atende normas DOT-4L, TPED e ASME B31.3",
-    "es": "Atende normas DOT-4L, TPED e ASME B31.3",
-    "en": "Atende normas DOT-4L, TPED e ASME B31.3"
+    "es": "Cumplimiento normativo DOT-4L, TPED y ASME B31.3",
+    "en": "Compliant with DOT-4L, TPED, and ASME B31.3 codes"
   },
   "product_dewars-criogenicos_extra_0_list_2": {
     "pt": "Extensa variedade de capacidades e pressões de operação",
-    "es": "Extensa variedade de capacidades e pressões de operação",
-    "en": "Extensa variedade de capacidades e pressões de operação"
+    "es": "Amplia variedad de volúmenes y presiones de trabajo",
+    "en": "Broad range of storage volumes and operating pressures"
   },
   "product_geracao-oxigenio-anestesia_table_0_title": {
     "pt": "Modular Oxygen Generators (O200 Nordic Series)",
@@ -4391,8 +4391,8 @@
   },
   "product_geracao-oxigenio-anestesia_table_0_col_4": {
     "pt": "Pressão (bar)",
-    "es": "Pressão (bar)",
-    "en": "Pressão (bar)"
+    "es": "Presión (bar)",
+    "en": "Pressure (bar)"
   },
   "product_geracao-oxigenio-anestesia_table_0_col_5": {
     "pt": "Dimensões (mm)",
@@ -4546,8 +4546,8 @@
   },
   "product_geracao-oxigenio-anestesia_table_1_col_4": {
     "pt": "Aplicações",
-    "es": "Aplicações",
-    "en": "Aplicações"
+    "es": "Aplicaciones",
+    "en": "Applications"
   },
   "product_geracao-oxigenio-anestesia_table_1_row_0_cell_0": {
     "pt": "<img src=\"/images/produtos/geracao-de-oxigenio/oxymat-two-coulmn-for-blog.jpg\" class=\"h-16 object-contain rounded-sm mx-auto mix-blend-multiply\" />",
@@ -4756,23 +4756,23 @@
   },
   "product_geracao-oxigenio-anestesia_table_3_row_0_cell_4": {
     "pt": "Projetos Turn-key, Mineração remota",
-    "es": "Projetos Turn-key, Mineração remota",
-    "en": "Projetos Turn-key, Mineração remota"
+    "es": "Proyectos llave en mano, Minería remota",
+    "en": "Turnkey Projects, Remote Mining Operations"
   },
   "product_geracao-oxigenio-anestesia_extra_0_title": {
     "pt": "Soluções Oxymat Originais (Representação)",
-    "es": "Soluções Oxymat Originais (Representação)",
-    "en": "Soluções Oxymat Originais (Representação)"
+    "es": "Soluciones Oxymat Originales (Representación Oficial)",
+    "en": "Authentic Oxymat PSA Solutions (Official Representation)"
   },
   "product_geracao-oxigenio-anestesia_extra_0_desc": {
     "pt": "Como fornecedores das soluções Oxymat, trazemos a tecnologia líder mundial em separação de gases para o seu projeto. Sistemas modulares escaláveis e de alta eficiência energética, testados e montados para entregar performance contínua e segura na sua planta.",
-    "es": "Como fornecedores das soluções Oxymat, trazemos a tecnologia líder mundial em separação de gases para o seu projeto. Sistemas modulares escaláveis e de alta eficiência energética, testados e montados para entregar performance contínua e segura na sua planta.",
-    "en": "Como fornecedores das soluções Oxymat, trazemos a tecnologia líder mundial em separação de gases para o seu projeto. Sistemas modulares escaláveis e de alta eficiência energética, testados e montados para entregar performance contínua e segura na sua planta."
+    "es": "Como distribuidores de las soluciones Oxymat, incorporamos la tecnología líder mundial en separación de gases a su proyecto. Sistemas modulares escalables y de alta eficiencia energética, probados y ensamblados para brindar un rendimiento continuo y seguro en su planta.",
+    "en": "As suppliers of Oxymat systems, we deliver world-leading gas separation technology to your project. Scalable, high-energy-efficiency modular PSA systems tested and assembled for continuous, safe on-site generation."
   },
   "product_geracao-oxigenio-anestesia_extra_0_warning": {
     "pt": "Nota: A configuração exata de vazão, pureza e pressão de cada modelo varia de acordo com o dimensionamento da rede de ar comprimido. Consulte nossa engenharia.",
-    "es": "Nota: A configuração exata de vazão, pureza e pressão de cada modelo varia de acordo com o dimensionamento da rede de ar comprimido. Consulte nossa engenharia.",
-    "en": "Nota: A configuração exata de vazão, pureza e pressão de cada modelo varia de acordo com o dimensionamento da rede de ar comprimido. Consulte nossa engenharia."
+    "es": "Nota: La configuración exacta de caudal, pureza y presión de cada modelo varía según el dimensionamiento de la red de aire comprimido. Consulte a nuestro departamento de ingeniería.",
+    "en": "Note: Exact flow rate, purity, and discharge pressure specifications vary depending on compressed air supply design. Contact our engineering team for sizing."
   },
   "product_geracao-oxigenio-anestesia_extra_0_list_0": {
     "pt": "Pureza consistente de 93% a 95%, certificada.",
@@ -4892,7 +4892,7 @@
   "product_corte-solda_table_1_col_2": {
     "pt": "Tipo de Uso",
     "es": "Tipo de Uso",
-    "en": "Tipo de Uso"
+    "en": "Duty Classification"
   },
   "product_corte-solda_table_1_row_0_cell_0": {
     "pt": "<img src=\"/images/produtos/corte-solda/lx-g02-g1-00a.png\" class=\"h-16 object-contain rounded-sm mx-auto mix-blend-multiply\" />",
@@ -5051,8 +5051,8 @@
   },
   "product_corte-solda_table_3_col_2": {
     "pt": "Família de Equipamento",
-    "es": "Família de Equipamento",
-    "en": "Família de Equipamento"
+    "es": "Familia de Equipamiento",
+    "en": "Equipment Series"
   },
   "product_corte-solda_table_3_row_0_cell_0": {
     "pt": "<img src=\"/images/produtos/corte-solda/lx-bzl40kd.png\" class=\"h-16 object-contain rounded-sm mx-auto mix-blend-multiply\" />",
@@ -5161,8 +5161,8 @@
   },
   "product_corte-solda_table_4_row_1_cell_2": {
     "pt": "Eletrodos de Grafite/Carvão para Goivagem",
-    "es": "Eletrodos de Grafite/Carvão para Goivagem",
-    "en": "Eletrodos de Grafite/Carvão para Goivagem"
+    "es": "Electrodos de Grafito/Carbón para Resanado (Arc Gouging)",
+    "en": "Carbon Arc Gouging Electrodes"
   },
   "product_corte-solda_table_4_row_2_cell_0": {
     "pt": "<img src=\"/images/produtos/corte-solda/lx-tungsten-electrode-1.png\" class=\"h-16 object-contain rounded-sm mx-auto mix-blend-multiply\" />",
@@ -5196,33 +5196,33 @@
   },
   "product_corte-solda_extra_0_title": {
     "pt": "Longxing: Excelência Mundial em Corte e Solda",
-    "es": "Longxing: Excelência Mundial em Corte e Solda",
-    "en": "Longxing: Excelência Mundial em Corte e Solda"
+    "es": "Longxing: Excelencia Mundial en Corte y Soldadura",
+    "en": "Longxing: Global Excellence in Cutting & Welding"
   },
   "product_corte-solda_extra_0_desc": {
     "pt": "Como representantes dos equipamentos Longxing, a Prime Products entrega o mais alto padrão em tecnologia para processos metalúrgicos, caldeiraria e fabricação.",
-    "es": "Como representantes dos equipamentos Longxing, a Prime Products entrega o mais alto padrão em tecnologia para processos metalúrgicos, caldeiraria e fabricação.",
-    "en": "Como representantes dos equipamentos Longxing, a Prime Products entrega o mais alto padrão em tecnologia para processos metalúrgicos, caldeiraria e fabricação."
+    "es": "Como distribuidores de los equipos Longxing, Prime Products ofrece los más altos estándares tecnológicos para procesos metalúrgicos, calderería y fabricación pesada.",
+    "en": "As representatives of Longxing industrial equipment, Prime Products delivers the highest standard of technology for metallurgy, boilermaking, and heavy fabrication."
   },
   "product_corte-solda_extra_0_list_0": {
     "pt": "Maçaricos ergonômicos desenhados para reduzir a fadiga do operador e aumentar a segurança.",
-    "es": "Maçaricos ergonômicos desenhados para reduzir a fadiga do operador e aumentar a segurança.",
-    "en": "Maçaricos ergonômicos desenhados para reduzir a fadiga do operador e aumentar a segurança."
+    "es": "Sopletes de corte ergonómicos diseñados para reducir la fatiga del operador y elevar la seguridad laboral.",
+    "en": "Ergonomic oxy-fuel cutting torches engineered to minimize operator fatigue and maximize operational safety."
   },
   "product_corte-solda_extra_0_list_1": {
     "pt": "Máquinas de Corte (Tartarugas) com eletrônica embarcada para precisão milimétrica em chanfros e cortes retos.",
-    "es": "Máquinas de Corte (Tartarugas) com eletrônica embarcada para precisão milimétrica em chanfros e cortes retos.",
-    "en": "Máquinas de Corte (Tartarugas) com eletrônica embarcada para precisão milimétrica em chanfros e cortes retos."
+    "es": "Máquinas de corte tipo tortuga con control electrónico para precisión milimétrica en biselados y cortes rectos.",
+    "en": "Motorized track cutting machines with onboard electronic speed control for millimeter-precise straight-line and bevel cuts."
   },
   "product_corte-solda_extra_0_list_2": {
     "pt": "Linha completa de tochas MIG/TIG e consumíveis Plasma para operações contínuas e severas.",
-    "es": "Linha completa de tochas MIG/TIG e consumíveis Plasma para operações contínuas e severas.",
-    "en": "Linha completa de tochas MIG/TIG e consumíveis Plasma para operações contínuas e severas."
+    "es": "Línea integral de antorchas MIG/TIG y consumibles de plasma para operaciones industriales continuas y severas.",
+    "en": "Complete portfolio of heavy-duty MIG/TIG torches and high-durability plasma cutting consumables."
   },
   "product_corte-solda_extra_0_list_3": {
     "pt": "Reguladores forjados de alta durabilidade para controle preciso de fluxo e pressão de gases industriais.",
-    "es": "Reguladores forjados de alta durabilidade para controle preciso de fluxo e pressão de gases industriais.",
-    "en": "Reguladores forjados de alta durabilidade para controle preciso de fluxo e pressão de gases industriais."
+    "es": "Reguladores de latón forjado de alta durabilidad para control exacto de caudal y presión de gases industriales.",
+    "en": "Forged brass heavy-duty cylinder regulators for high-precision pressure and flow control of industrial gases."
   },
   "product_reguladores-especiais_table_0_title": {
     "pt": "ULTRA HIGH PURITY (UHP) REGULATORS",
@@ -6681,8 +6681,8 @@
   },
   "product_combate-incendio_table_0_title": {
     "pt": "Válvulas de Ativação e Sistemas FiwaGuard",
-    "es": "Válvulas de Ativação e Sistemas FiwaGuard",
-    "en": "Válvulas de Ativação e Sistemas FiwaGuard"
+    "es": "Válvulas de Activación y Sistemas FiwaGuard",
+    "en": "FiwaGuard Release Valves & Automatic Suppression Systems"
   },
   "product_combate-incendio_table_0_col_0": {
     "pt": "Ref Visual",
@@ -7406,8 +7406,8 @@
   },
   "product_combate-incendio_table_4_title": {
     "pt": "Difusores, Conexões e Acessórios",
-    "es": "Difusores, Conexões e Acessórios",
-    "en": "Difusores, Conexões e Acessórios"
+    "es": "Difusores, Conexiones y Accesorios",
+    "en": "Discharge Nozzles, Fittings & System Accessories"
   },
   "product_combate-incendio_table_4_col_0": {
     "pt": "Ref Visual",
@@ -7581,18 +7581,18 @@
   },
   "product_combate-incendio_extra_0_desc": {
     "pt": "Nossos sistemas utilizam o tubo detector de calor inteligente da Fiwarec, atuando como um sensor linear de detecção e disparo automático diretamente na fonte do foco de incêndio.",
-    "es": "Nossos sistemas utilizam o tubo detector de calor inteligente da Fiwarec, atuando como um sensor linear de detecção e disparo automático diretamente na fonte do foco de incêndio.",
-    "en": "Nossos sistemas utilizam o tubo detector de calor inteligente da Fiwarec, atuando como um sensor linear de detecção e disparo automático diretamente na fonte do foco de incêndio."
+    "es": "Nuestros sistemas emplean el tubo termosensible inteligente Fiwarec, que opera como sensor lineal de detección y disparo automático localizado directamente sobre el foco de ignición.",
+    "en": "Our systems utilize the Fiwarec intelligent heat-detection polymer tubing, acting as a continuous linear thermal sensor and automatic release mechanism at the exact source of fire."
   },
   "product_combate-incendio_extra_0_list_0": {
     "pt": "Ativação puramente pneumática, sem dependência de energia elétrica.",
-    "es": "Ativação puramente pneumática, sem dependência de energia elétrica.",
-    "en": "Ativação puramente pneumática, sem dependência de energia elétrica."
+    "es": "Activación puramente neumática, sin dependencia de energía eléctrica.",
+    "en": "Purely pneumatic thermal activation, operating independent of electrical power."
   },
   "product_combate-incendio_extra_0_list_1": {
     "pt": "Sistemas de Ação Direta (DLP) e Indireta (ILP) aprovados pela UL e LPCB.",
-    "es": "Sistemas de Ação Direta (DLP) e Indireta (ILP) aprovados pela UL e LPCB.",
-    "en": "Sistemas de Ação Direta (DLP) e Indireta (ILP) aprovados pela UL e LPCB."
+    "es": "Sistemas de Acción Directa (DLP) e Indirecta (ILP) certificados por UL y LPCB.",
+    "en": "Direct Low Pressure (DLP) and Indirect Low Pressure (ILP) systems certified by UL and LPCB."
   },
   "product_combate-incendio_extra_0_list_2": {
     "pt": "Válvulas projetadas para Novec, FM200, N2, CO2 e Gases Inertes até 360 bar.",
@@ -7601,8 +7601,8 @@
   },
   "product_combate-incendio_extra_0_list_3": {
     "pt": "Tubos detectores de resposta rápida e 100% à prova de falhas mecânicas.",
-    "es": "Tubos detectores de resposta rápida e 100% à prova de falhas mecânicas.",
-    "en": "Tubos detectores de resposta rápida e 100% à prova de falhas mecânicas."
+    "es": "Tubos detectores de respuesta ultra rápida y 100% a prueba de fallos mecánicos.",
+    "en": "Rapid-response polymer detection tubing, 100% fail-safe against mechanical failure."
   },
   "product_transmissores-pressao_table_0_title": {
     "pt": "Industrial Pressure Transmitter",
@@ -8646,8 +8646,8 @@
   },
   "product_valvulas-industriais_table_1_row_5_cell_2": {
     "pt": "Proteção contra sobrepressão em linhas e equipamentos, garantindo a segurança operacional.",
-    "es": "Proteção contra sobrepressão em linhas e equipamentos, garantindo a segurança operacional.",
-    "en": "Proteção contra sobrepressão em linhas e equipamentos, garantindo a segurança operacional."
+    "es": "Protección contra sobrepresión en líneas y equipos, garantizando la seguridad operacional.",
+    "en": "Overpressure protection for process lines and equipment, ensuring operational safety."
   },
   "product_valvulas-industriais_table_1_row_5_cell_3": {
     "pt": "General Industrial",
@@ -8666,8 +8666,8 @@
   },
   "product_valvulas-industriais_table_1_row_6_cell_2": {
     "pt": "Isolam instrumentos de medição (manômetros e transmissores) para manutenção sem despressurizar a linha.",
-    "es": "Isolam instrumentos de medição (manômetros e transmissores) para manutenção sem despressurizar a linha.",
-    "en": "Isolam instrumentos de medição (manômetros e transmissores) para manutenção sem despressurizar a linha."
+    "es": "Aíslan instrumentos de medición (manómetros y transmisores) para mantenimiento sin despresurizar la línea de proceso.",
+    "en": "Isolate pressure gauges and transmitters for online calibration and maintenance without depressurizing the main process line."
   },
   "product_valvulas-industriais_table_1_row_6_cell_3": {
     "pt": "General Industrial",
@@ -8686,8 +8686,8 @@
   },
   "product_valvulas-industriais_table_1_row_7_cell_2": {
     "pt": "Válvulas combinadas em bloco (2, 3 ou 5 vias) essenciais para transmissores de pressão diferencial.",
-    "es": "Válvulas combinadas em bloco (2, 3 ou 5 vias) essenciais para transmissores de pressão diferencial.",
-    "en": "Válvulas combinadas em bloco (2, 3 ou 5 vias) essenciais para transmissores de pressão diferencial."
+    "es": "Válvulas integradas en bloque múltiple (2, 3 o 5 vías) indispensables para transmisores de presión diferencial.",
+    "en": "Block manifolds (2-valve, 3-valve, and 5-valve) designed for direct mounting to differential pressure transmitters."
   },
   "product_valvulas-industriais_table_1_row_7_cell_3": {
     "pt": "General Industrial",

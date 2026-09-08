@@ -850,7 +850,24 @@ const productsTranslations = {
   }
 };
 
-// ─── ARTICLE TRANSLATIONS ───────────────────────────────────────────────────
+
+// Populate product translations
+for (const id of productsIds) {
+  const trans = productsTranslations[id];
+  if (trans) {
+    addKey(`product_${id}_name`, trans.name);
+    addKey(`product_${id}_cat`, trans.cat);
+    addKey(`product_${id}_desc`, trans.desc);
+    trans.features.forEach((feat, index) => {
+      addKey(`product_${id}_features_${index}`, feat);
+    });
+    trans.apps.forEach((app, index) => {
+      addKey(`product_${id}_apps_${index}`, app);
+    });
+  }
+}
+
+// ─── ARTICLE TRANSLATIONS (14 BODIES) ───────────────────────────────────────
 const articleTranslations = [
   {
     "id": "seguranca-producao-hidrogenio-anp",
@@ -1105,952 +1122,486 @@ const articleTranslations = [
     }
   }
 ];
-const fs = require('fs');
-const path = require('path');
 
-const localesData = {
-  pt: {},
-  es: {},
-  en: {}
-};
-
-function addKey(key, values) {
-  localesData.pt[key] = values.pt;
-  localesData.es[key] = values.es;
-  localesData.en[key] = values.en;
-}
-
-// ─── LAYOUT & NAV ITEMS ──────────────────────────────────────────────────────
-addKey('layout_topbar_city', { pt: "Belo Horizonte – MG", es: "Belo Horizonte – MG", en: "Belo Horizonte – MG" });
-addKey('layout_topbar_email', { pt: "info@primeproducts.ind.br", es: "info@primeproducts.ind.br", en: "info@primeproducts.ind.br" });
-addKey('layout_topbar_phone', { pt: "(31) 9 8670-8742", es: "(31) 9 8670-8742", en: "(31) 9 8670-8742" });
-addKey('layout_logo_img', { pt: "/logo-prime.png", es: "/logo-prime.png", en: "/logo-prime.png" });
-addKey('layout_nav_cta', { pt: "FALE CONOSCO", es: "CONTÁCTENOS", en: "CONTACT US" });
-addKey('footer_desc', {
-  pt: "Soluções técnicas voltadas à instrumentação, gases e engenharia aplicada com foco em segurança e confiabilidade.",
-  es: "Soluciones técnicas orientadas a la instrumentación, gases e ingeniería aplicada con enfoque en seguridad y confiabilidad.",
-  en: "Technical solutions oriented to instrumentation, gases, and applied engineering focused on safety and reliability."
-});
-addKey('footer_address_1', { pt: "Belo Horizonte – MG", es: "Belo Horizonte – MG", en: "Belo Horizonte – MG" });
-addKey('footer_address_2', { pt: "Atendimento Nacional", es: "Atención Nacional", en: "National Service" });
-addKey('footer_phone_1', { pt: "(31) 9 8670-8742", es: "(31) 9 8670-8742", en: "(31) 9 8670-8742" });
-addKey('footer_email', { pt: "info@primeproducts.ind.br", es: "info@primeproducts.ind.br", en: "info@primeproducts.ind.br" });
-addKey('footer_wide_banner', { pt: "/images/home/footer-banner.png", es: "/images/home/footer-banner.png", en: "/images/home/footer-banner.png" });
-
-// Navigation Labels
-addKey('nav_item_0', { pt: 'Home', es: 'Inicio', en: 'Home' });
-addKey('nav_item_0_mobile', { pt: 'Home', es: 'Inicio', en: 'Home' });
-addKey('nav_item_1', { pt: 'A Prime', es: 'Sobre Prime', en: 'About Prime' });
-addKey('nav_item_1_mobile', { pt: 'A Prime', es: 'Sobre Prime', en: 'About Prime' });
-addKey('nav_item_2', { pt: 'Soluções', es: 'Soluciones', en: 'Solutions' });
-addKey('nav_item_2_mobile', { pt: 'Soluções', es: 'Soluciones', en: 'Solutions' });
-addKey('nav_item_3', { pt: 'Produtos', es: 'Productos', en: 'Products' });
-addKey('nav_item_3_mobile', { pt: 'Produtos', es: 'Productos', en: 'Products' });
-addKey('nav_item_4', { pt: 'Aplicações', es: 'Aplicaciones', en: 'Applications' });
-addKey('nav_item_4_mobile', { pt: 'Aplicações', es: 'Aplicaciones', en: 'Applications' });
-addKey('nav_item_5', { pt: 'Ferramentas', es: 'Herramientas', en: 'Tools' });
-addKey('nav_item_5_mobile', { pt: 'Ferramentas', es: 'Herramientas', en: 'Tools' });
-addKey('nav_item_6', { pt: 'Conteúdo', es: 'Contenido', en: 'Content' });
-addKey('nav_item_6_mobile', { pt: 'Conteúdo', es: 'Contenido', en: 'Content' });
-
-// Navigation subItems
-addKey('nav_sub_item_2_0', { pt: 'Visão Geral e Serviços', es: 'Visión general y servicios', en: 'Overview and Services' });
-addKey('nav_sub_item_2_1', { pt: 'Instrumentação de Processos', es: 'Instrumentación de procesos', en: 'Process Instrumentation' });
-addKey('nav_sub_item_2_2', { pt: 'Instrumentação Analítica', es: 'Instrumentación analítica', en: 'Analytical Instrumentation' });
-addKey('nav_sub_item_2_3', { pt: 'Segurança: detecção e combate a incêndio', es: 'Seguridad: detección y protección contra incendios', en: 'Safety: Gas Detection and Fire Suppression' });
-addKey('nav_sub_item_2_4', { pt: 'Soluções Integradas', es: 'Soluciones integradas', en: 'Integrated Solutions' });
-addKey('nav_sub_item_2_5', { pt: 'Instalação de Rede de Gases', es: 'Instalación de redes de gases', en: 'Gas Distribution Network Installation' });
-addKey('nav_sub_item_2_6', { pt: 'Guia Técnico de Ar Comprimido', es: 'Guía técnica de aire comprimido', en: 'Compressed Air Technical Guide' });
-addKey('nav_sub_item_2_7', { pt: 'Levantamento 3D e As Built', es: 'Levantamiento 3D y As-Built', en: '3D Survey and As-Built' });
-
-addKey('nav_sub_item_3_0', { pt: 'Ver Todos', es: 'Ver todos', en: 'View All' });
-addKey('nav_sub_item_3_1', { pt: 'Cilindros de Alumínio', es: 'Cilindros de aluminio', en: 'Aluminum Cylinders' });
-addKey('nav_sub_item_3_2', { pt: 'Cilindros Tipo 4', es: 'Cilindros Tipo 4', en: 'Type 4 Cylinders' });
-addKey('nav_sub_item_3_3', { pt: 'Conexões para Instrumentação', es: 'Conexiones para instrumentación', en: 'Instrumentation Fittings' });
-addKey('nav_sub_item_3_4', { pt: 'Detectores de Vazamento', es: 'Detectores de fugas', en: 'Leak Detectors' });
-addKey('nav_sub_item_3_5', { pt: 'Dewars e Recipientes Criogênicos', es: 'Dewars y recipientes criogénicos', en: 'Dewars and Cryogenic Containers' });
-addKey('nav_sub_item_3_6', { pt: 'Geração de Oxigênio e Anestesia', es: 'Generación de oxígeno y anestesia', en: 'Oxygen Generation and Anesthesia' });
-addKey('nav_sub_item_3_7', { pt: 'Equipamentos para Corte e Solda', es: 'Equipos para corte y soldadura', en: 'Cutting and Welding Equipment' });
-addKey('nav_sub_item_3_8', { pt: 'Reguladores de Gases Especiais', es: 'Reguladores para gases especiales', en: 'Specialty Gas Regulators' });
-addKey('nav_sub_item_3_9', { pt: 'Reguladores Hidráulicos', es: 'Reguladores hidráulicos', en: 'Hydraulic Regulators' });
-addKey('nav_sub_item_3_10', { pt: 'Reguladores para Calibração de Equipamentos', es: 'Reguladores para calibración de equipos', en: 'Equipment Calibration Regulators' });
-addKey('nav_sub_item_3_11', { pt: 'Sistemas de Combate a Incêndio', es: 'Sistemas de extinción de incendios', en: 'Fire Suppression Systems' });
-addKey('nav_sub_item_3_12', { pt: 'Transmissores: Pressão - Nível - Temperatura', es: 'Transmisores: presión - nivel - temperatura', en: 'Transmitters: Pressure - Level - Temperature' });
-addKey('nav_sub_item_3_13', { pt: 'Válvulas Industriais - Medicinais - Especiais', es: 'Válvulas industriales - medicinales - especiales', en: 'Industrial - Medical - Specialty Valves' });
-
-addKey('nav_sub_item_4_0', { pt: 'Ver Todas', es: 'Ver todas', en: 'View All' });
-addKey('nav_sub_item_4_1', { pt: 'Óleo & Gás', es: 'Petróleo y gas', en: 'Oil & Gas' });
-addKey('nav_sub_item_4_2', { pt: 'Farmacêutico', es: 'Farmacéutica', en: 'Pharmaceutical' });
-addKey('nav_sub_item_4_3', { pt: 'Hospitalar', es: 'Hospitalaria', en: 'Healthcare' });
-addKey('nav_sub_item_4_4', { pt: 'Laboratórios Analíticos', es: 'Laboratorios analíticos', en: 'Analytical Laboratories' });
-addKey('nav_sub_item_4_5', { pt: 'Indústria Química', es: 'Industria química', en: 'Chemical Industry' });
-addKey('nav_sub_item_4_6', { pt: 'Alimentos e Bebidas', es: 'Alimentos y bebidas', en: 'Food and Beverage' });
-addKey('nav_sub_item_4_7', { pt: 'Automotivo', es: 'Automotriz', en: 'Automotive' });
-addKey('nav_sub_item_4_8', { pt: 'Criogenia', es: 'Criogenia', en: 'Cryogenics' });
-addKey('nav_sub_item_4_9', { pt: 'Metal Mecânica', es: 'Metalmecánica', en: 'Metalworking' });
-addKey('nav_sub_item_4_10', { pt: 'Energias Renováveis', es: 'Energías renovables', en: 'Renewable Energy' });
-addKey('nav_sub_item_4_11', { pt: 'Mineração', es: 'Minería', en: 'Mining' });
-
-addKey('nav_sub_item_5_0', { pt: 'Simuladores (Web)', es: 'Simuladores (web)', en: 'Web Simulators' });
-addKey('nav_sub_item_5_1', { pt: 'Calculadoras Prime', es: 'Calculadoras Prime', en: 'Prime Calculators' });
-
-// ─── HOME PAGE ───────────────────────────────────────────────────────────────
-addKey('home_hero_badge', { pt: "ENGENHARIA E INSTRUMENTAÇÃO", es: "INGENIERÍA E INSTRUMENTACIÓN", en: "ENGINEERING AND INSTRUMENTATION" });
-addKey('home_hero_title', {
-  pt: "Excelência técnica em engenharia aplicada, segurança e soluções para processos críticos.",
-  es: "Excelencia técnica en ingeniería aplicada, seguridad y soluciones para procesos críticos.",
-  en: "Technical excellence in applied engineering, safety, and solutions for critical processes."
-});
-addKey('home_hero_desc', {
-  pt: "Equipamentos, integração técnica e engenharia aplicada para processos críticos na indústria, pesquisa e aplicações médicas.",
-  es: "Equipos, integración técnica e ingeniería aplicada para procesos críticos en la industria, la investigación y las aplicaciones médicas.",
-  en: "Equipment, technical integration, and applied engineering for critical processes in industry, research, and medical applications."
-});
-addKey('home_hero_btn1', { pt: "NOSSAS SOLUÇÕES", es: "NUESTRAS SOLUCIONES", en: "OUR SOLUTIONS" });
-addKey('home_hero_btn2', { pt: "QUEM SOMOS", es: "QUIÉNES SOMOS", en: "ABOUT US" });
-addKey('home_about_img', { pt: "/images/home/imagem-para-home-site.webp", es: "/images/home/imagem-para-home-site.webp", en: "/images/home/imagem-para-home-site.webp" });
-addKey('home_about_stat_num', { pt: "100%", es: "100%", en: "100%" });
-addKey('home_about_stat_txt', { pt: "Conformidade Técnica", es: "Conformidad Técnica", en: "Technical Compliance" });
-addKey('home_about_label', { pt: "Quem Somos", es: "Quiénes Somos", en: "About Us" });
-addKey('home_about_heading', {
-  pt: "Onde a precisão técnica encontra a confiabilidade operacional.",
-  es: "Donde la precisión técnica se encuentra con la confiabilidad operacional.",
-  en: "Where technical precision meets operational reliability."
-});
-addKey('home_about_p1', {
-  pt: "Sua operação não pode parar. Por isso, transformamos complexidade técnica em estabilidade operacional.",
-  es: "Su operación no puede detenerse. Por eso, transformamos la complejidad técnica en estabilidad operacional.",
-  en: "Your operation cannot stop. That is why we turn technical complexity into operational stability."
-});
-addKey('home_about_p2', {
-  pt: "Entregamos engenharia aplicada e sistemas de controle precisos. O resultado? Mais segurança, rastreabilidade e continuidade para o seu processo.",
-  es: "Entregamos ingeniería aplicada y sistemas de control precisos. ¿El resultado? Mayor seguridad, trazabilidad y continuidad para su proceso.",
-  en: "We deliver applied engineering and precise control systems. The result? Greater safety, traceability, and continuity for your process."
-});
-addKey('home_feat1_title', { pt: "Engenharia sem margem para erro", es: "Ingeniería sin margen de error", en: "Engineering with no margin for error" });
-addKey('home_feat1_desc', {
-  pt: "Projetamos skids e painéis customizados para aplicações críticas. Soluções dimensionadas para a mais alta exigência.",
-  es: "Diseñamos skids y paneles personalizados para aplicaciones críticas. Soluciones dimensionadas para los requisitos más exigentes.",
-  en: "We design custom skids and panels for critical applications. Solutions engineered for the most demanding requirements."
-});
-addKey('home_feat2_title', { pt: "Rastreabilidade de ponta a ponta", es: "Trazabilidad de extremo a extremo", en: "End-to-End Traceability" });
-addKey('home_feat2_desc', {
-  pt: "Asseguramos conformidade total. Documentação rigorosa e suporte para processos que exigem controle absoluto.",
-  es: "Aseguramos la conformidad total. Documentación rigurosa y soporte para procesos que exigen un control absoluto.",
-  en: "We ensure full compliance. Rigorous documentation and support for processes that require absolute control."
-});
-addKey('home_feat3_title', { pt: "Controle sob medida", es: "Control a medida", en: "Tailored Control" });
-addKey('home_feat3_desc', {
-  pt: "Colocamos a inteligência nas suas mãos. Instrumentação e IHM com leitura exata e resposta imediata.",
-  es: "Ponemos la inteligencia en sus manos. Instrumentación e IHM con lectura precisa y respuesta inmediata.",
-  en: "We put intelligence in your hands, with HMI and instrumentation delivering precise readings and immediate response."
-});
-addKey('home_about_btn', { pt: "Conheça a Prime", es: "Conozca Prime", en: "Discover Prime" });
-
-// Counters
-addKey('home_stat_1_lbl', { pt: "Anos de Experiência", es: "Años de experiencia", en: "Years of Experience" });
-addKey('home_stat_2_lbl', { pt: "Projetos Entregues", es: "Proyectos entregados", en: "Projects Delivered" });
-addKey('home_stat_3_lbl', { pt: "Segurança Operacional", es: "Seguridad operacional", en: "Operational Safety" });
-addKey('home_stat_4_lbl', { pt: "Marcas Parceiras", es: "Marcas asociadas", en: "Partner Brands" });
-
-addKey('home_sol_label', { pt: "Soluções Integradas", es: "Soluciones integradas", en: "Integrated Solutions" });
-addKey('home_sol_title', { pt: "Nossas Soluções e Produtos", es: "Nuestras soluciones y productos", en: "Our Solutions and Products" });
-addKey('home_sol_0_title', { pt: "Instrumentação de Processos", es: "Instrumentación de procesos", en: "Process Instrumentation" });
-addKey('home_sol_0_desc', { pt: "Transmissores, sensores, reguladores e sistemas de medição de precisão.", es: "Transmisores, sensores, reguladores y sistemas de medición de precisión.", en: "Transmitters, sensors, regulators, and precision measurement systems." });
-addKey('home_sol_1_title', { pt: "Instrumentação Analítica", es: "Instrumentación analítica", en: "Analytical Instrumentation" });
-addKey('home_sol_1_desc', { pt: "Analisadores de processo, cromatógrafos e detectores de gases.", es: "Analizadores de proceso, cromatógrafos y detectores de gases.", en: "Process analyzers, chromatographs, and gas detectors." });
-addKey('home_sol_2_title', { pt: "Segurança: detecção e combate a incêndio", es: "Seguridad: detección y protección contra incendios", en: "Safety: Gas Detection and Fire Suppression" });
-addKey('home_sol_2_desc', { pt: "Cilindros, reguladores, dewars e sistemas de combate a incêndio.", es: "Cilindros, reguladores, dewars y sistemas de combate a incendios.", en: "Cylinders, regulators, dewars, and fire suppression systems." });
-addKey('home_sol_3_title', { pt: "Soluções Integradas", es: "Soluciones integradas", en: "Integrated Solutions" });
-addKey('home_sol_3_desc', { pt: "Skids, painéis e sistemas customizados para sua planta.", es: "Skids, paneles y sistemas personalizados para su planta.", en: "Skids, panels, and custom systems for your plant." });
-addKey('home_sol_4_title', { pt: "Engenharia Aplicada", es: "Ingeniería aplicada", en: "Applied Engineering" });
-addKey('home_sol_4_desc', { pt: "Consultoria técnica, especificação e suporte para processos críticos.", es: "Consultoría técnica, especificación y soporte para procesos críticos.", en: "Technical consulting, specification, and support for critical processes." });
-addKey('home_sol_5_title', { pt: "Cilindros de Alumínio", es: "Cilindros de aluminio", en: "Aluminum Cylinders" });
-addKey('home_sol_5_desc', { pt: "Cilindros leves e resistentes para transporte de gases comprimidos.", es: "Cilindros ligeros y resistentes para el transporte de gases comprimidos.", en: "Lightweight and resistant cylinders for compressed gas transport." });
-addKey('home_sol_6_title', { pt: "Cilindros Tipo 4", es: "Cilindros Tipo 4", en: "Type 4 Cylinders" });
-addKey('home_sol_6_desc', { pt: "Cilindros compósitos de alta performance para logística e mobilidade.", es: "Cilindros compuestos de alto rendimiento para logística y movilidad.", en: "High-performance composite cylinders for logistics and mobility." });
-addKey('home_sol_7_title', { pt: "Conexões para Instrumentação", es: "Conexiones para instrumentación", en: "Instrumentation Fittings" });
-addKey('home_sol_7_desc', { pt: "Conexões certificadas para aplicações analíticas e industriais.", es: "Conexiones certificadas para aplicaciones analíticas e industriales.", en: "Certified fittings for analytical and industrial applications." });
-addKey('home_sol_8_title', { pt: "Dewars e Recipientes Criogênicos", es: "Dewars y recipientes criogénicos", en: "Dewars and Cryogenic Containers" });
-addKey('home_sol_8_desc', { pt: "Recipientes criogênicos para armazenamento de gases liquefeitos.", es: "Recipientes criogénicos para el almacenamiento de gases licuados.", en: "Cryogenic vessels for liquefied gas storage." });
-addKey('home_sol_9_title', { pt: "Reguladores de Gases Especiais", es: "Reguladores para gases especiales", en: "Specialty Gas Regulators" });
-addKey('home_sol_9_desc', { pt: "Reguladores de alta performance para gases especiais e calibração.", es: "Reguladores de alto rendimiento para gases especiales y calibración.", en: "High-performance regulators for specialty gases and calibration." });
-
-addKey('home_prod_btn', { pt: "Linha de Produtos", es: "Línea de Productos", en: "Product Range" });
-addKey('home_app_label', { pt: "Aplicações Industriais", es: "Aplicaciones industriales", en: "Industrial Applications" });
-addKey('home_app_title', { pt: "Onde a engenharia da Prime Products faz a diferença.", es: "Donde la ingeniería de Prime Products marca la diferencia.", en: "Where Prime Products engineering makes a difference." });
-addKey('home_app_0_lbl', { pt: "Óleo & Gás", es: "Petróleo y gas", en: "Oil & Gas" });
-addKey('home_app_0_desc', { pt: "Instrumentação certificada ATEX para refinarias e plantas de processo.", es: "Instrumentación certificada ATEX para refinerías y plantas de proceso.", en: "ATEX certified instrumentation for refineries and process plants." });
-addKey('home_app_1_lbl', { pt: "Hospitalar", es: "Hospitalaria", en: "Healthcare" });
-addKey('home_app_1_desc', { pt: "Gases medicinais, geração de oxigênio e sistemas de combate a incêndio.", es: "Gases medicinales, generación de oxígeno y sistemas de extinción de incendios.", en: "Medical gases, oxygen generation, and fire suppression systems." });
-addKey('home_app_2_lbl', { pt: "Laboratórios Analíticos", es: "Laboratorios analíticos", en: "Analytical Laboratories" });
-addKey('home_app_2_desc', { pt: "Gases de alta pureza, reguladores analíticos e criogenia.", es: "Gases de alta pureza, reguladores analíticos y criogenia.", en: "High purity gases, analytical regulators, and cryogenics." });
-
-addKey('home_blog_label', { pt: "Informação Qualificada", es: "Información Especializada", en: "Qualified Technical Information" });
-addKey('home_blog_title', { pt: "Conteúdo Técnico", es: "Contenido Técnico", en: "Technical Content" });
-addKey('home_faq_label', { pt: "Tire suas dúvidas", es: "Resuelva sus dudas", en: "Get Your Questions Answered" });
-addKey('home_faq_title', { pt: "Perguntas Frequentes", es: "Preguntas frecuentes", en: "Frequently Asked Questions" });
-
-// FAQs
-addKey('home_faq_0_q', { pt: "A Prime Products atende em todo o Brasil?", es: "¿Prime Products atiende en todo Brasil?", en: "Does Prime Products serve all of Brazil?" });
-addKey('home_faq_0_a', {
-  pt: "Sim. Possuímos estrutura comercial e de engenharia para atender demandas em todo o território nacional, oferecendo suporte técnico especializado tanto remoto quanto em campo para implantações de grande porte.",
-  es: "Sí. Contamos con una estructura comercial y de ingeniería para atender demandas en todo el territorio nacional, ofreciendo soporte técnico especializado tanto remoto como en campo para implantaciones de gran escala.",
-  en: "Yes. We have a commercial and engineering structure to meet demands throughout the national territory, offering specialized technical support both remotely and in the field for large-scale implementations."
-});
-addKey('home_faq_1_q', { pt: "Os equipamentos possuem certificados de calibração?", es: "¿Los equipos cuentan con certificados de calibración?", en: "Do the instruments come with calibration certificates?" });
-addKey('home_faq_1_a', {
-  pt: "Sim. Fornecemos nossos instrumentos de medição e sistemas analíticos com certificados de calibração rastreáveis RBC (Rede Brasileira de Calibração) e padrões do INMETRO, garantindo conformidade com normas de qualidade.",
-  es: "Sí. Suministramos nuestros instrumentos de medición y sistemas analíticos con certificados de calibración trazables a la RBC (Red Brasileña de Calibración) y patrones de INMETRO, garantizando la conformidad con las normas de calidad.",
-  en: "Yes. We supply our measuring instruments and analytical systems with calibration certificates traceable to the RBC (Brazilian Calibration Network) and INMETRO standards, ensuring compliance with quality regulations."
-});
-addKey('home_faq_2_q', { pt: "Quais certificações técnicas as soluções da Prime atendem?", es: "¿Qué certificaciones técnicas cumplen las soluciones de Prime?", en: "What technical certifications do Prime's solutions meet?" });
-addKey('home_faq_2_a', {
-  pt: "Nossas soluções e skids integrados atendem a normas nacionais e internacionais rigorosas, incluindo NR-13 para vasos de pressão, NR-12 para segurança de máquinas, diretrizes da ANVISA (grau médico/farmacêutico), certificações SIL 2/3 de segurança funcional e certificações ATEX/IECEx para áreas classificadas.",
-  es: "Nuestras soluciones y skids integrados cumplen con estrictas normas nacionales e internacionales, incluyendo NR-13 para recipientes a presión, NR-12 para seguridad de maquinaria, directrices de ANVISA (grado médico/farmacéutico), certificaciones de seguridad funcional SIL 2/3 y certificaciones ATEX/IECEx para áreas clasificadas.",
-  en: "Our solutions and integrated skids meet strict national and international standards, including NR-13 for pressure vessels, NR-12 for machinery safety, ANVISA guidelines (medical/pharmaceutical grade), SIL 2/3 functional safety certifications, and ATEX/IECEx certifications for hazardous areas."
-});
-addKey('home_faq_3_q', { pt: "Qual o prazo médio de entrega para equipamentos e sistemas?", es: "¿Cuál es el plazo promedio de entrega de equipos y sistemas?", en: "What is the average delivery time for equipment and systems?" });
-addKey('home_faq_3_a', {
-  pt: "Mantemos um estoque estratégico de componentes e sobressalentes críticos para atendimento imediato. Para skids, painéis dedicados e soluções customizadas de engenharia aplicada, o prazo é dimensionado de acordo com a complexidade técnica e detalhado na proposta comercial.",
-  es: "Mantenemos un stock estratégico de componentes y repuestos críticos para atención inmediata. Para skids, paneles dedicados y soluciones personalizadas de ingeniería aplicada, el plazo se dimensiona según la complejidad técnica y se detalla en la propuesta comercial.",
-  en: "We maintain a strategic stock of critical components and spare parts for immediate service. For skids, dedicated panels, and custom applied engineering solutions, the lead time is sized according to the technical complexity and detailed in the commercial proposal."
-});
-addKey('home_faq_4_q', { pt: "A Prime executa a montagem física dos sistemas além do projeto?", es: "¿Prime realiza el montaje físico de los sistemas además del diseño?", en: "Does Prime perform the physical assembly of the systems in addition to the design?" });
-addKey('home_faq_4_a', {
-  pt: "Sim. Desenvolvemos soluções completas do tipo turn-key, executando desde a engenharia de projeto (conceitual e detalhada) até a montagem mecânica, montagem de skids de válvulas, conexões de tubulação de alta pressão, teste de estanqueidade, comissionamento em campo (start-up) e treinamento operacional.",
-  es: "Sí. Desarrollamos soluciones completas llave en mano (turn-key), ejecutando desde la ingeniería de diseño (conceptual y detallada) hasta el montaje mecánico, montaje de skids de válvulas, conexiones de tuberías de alta presión, pruebas de estanqueidad, comisionamiento en campo (puesta en marcha) y entrenamiento operativo.",
-  en: "Yes. We develop complete turn-key solutions, executing from design engineering (conceptual and detailed) to mechanical assembly, assembly of valve skids, high-pressure piping connections, leak testing, field commissioning (start-up), and operational training."
-});
-addKey('home_faq_5_q', { pt: "Quais disciplinas de engenharia a Prime Products atende em seus projetos?", es: "¿Qué disciplinas de ingeniería atiende Prime Products en sus proyectos?", en: "What engineering disciplines does Prime Products cover in its projects?" });
-addKey('home_faq_5_a', {
-  pt: "Nossa equipe multidisciplinar atende plenamente as demandas de Instrumentação e Controle de Processos, Engenharia Civil (bases e estruturas de suporte), Engenharia Elétrica (painéis de comando e distribuição de força) e sistemas de HVAC (aquecimento, ventilação e ar condicionado) aplicados a salas de analisadores e abrigos industriais.",
-  es: "Nuestro equipo multidisciplinario atiende plenamente las demandas de instrumentación y control de procesos, ingeniería civil (bases y estructuras de soporte), ingeniería eléctrica (paneles de control y distribución de fuerza) y sistemas de HVAC (calefacción, ventilación y aire acondicionado) aplicados a salas de analizadores y casetas industriales.",
-  en: "Our multidisciplinary team fully meets the demands of process control and instrumentation, civil engineering (foundations and support structures), electrical engineering (control panels and power distribution), and HVAC systems (heating, ventilation, and air conditioning) applied to analyzer rooms and industrial shelters."
-});
-
-addKey('home_cta_title', { pt: "Engenharia de precisão para operações que não podem parar.", es: "Ingeniería de precisión para operaciones que no pueden detenerse.", en: "Precision engineering for operations that cannot stop." });
-addKey('home_cta_desc', {
-  pt: "Sente-se à mesa com nossos especialistas. Desenvolvemos skids e painéis customizados para os processos mais críticos da indústria.",
-  es: "Converse con nuestros especialistas. Desarrollamos skids y paneles personalizados para los procesos más críticos de la industria.",
-  en: "Talk with our specialists. We develop custom skids and panels for the industry's most critical processes."
-});
-addKey('home_cta_btn1', { pt: "Discutir meu projeto", es: "Hablar sobre mi proyecto", en: "Discuss My Project" });
-addKey('home_cta_btn2', { pt: "Ver Soluções Integradas", es: "Ver soluciones integradas", en: "View Integrated Solutions" });
-
-// ─── ABOUT PAGE ──────────────────────────────────────────────────────────────
-addKey('about_hero_title', {
-  pt: "Engenharia aplicada e soluções integradas para gases, instrumentação e processos críticos",
-  es: "Ingeniería aplicada y soluciones integradas para gases, instrumentación y procesos críticos",
-  en: "Applied engineering and integrated solutions for gases, instrumentation, and critical processes"
-});
-addKey('about_main_img', { pt: "/images/quem-somos/quem-somos-campo.webp", es: "/images/quem-somos/quem-somos-campo.webp", en: "/images/quem-somos/quem-somos-campo.webp" });
-addKey('about_stat_num', { pt: "+35", es: "+35", en: "+35" });
-addKey('about_stat_txt', {
-  pt: "Anos transformando rigor técnico em segurança, confiabilidade e suporte para processos críticos.",
-  es: "Años transformando el rigor técnico en seguridad, confiabilidad y soporte para procesos críticos.",
-  en: "Years transforming technical rigor into safety, reliability, and support for critical processes."
-});
-addKey('about_intro_label', { pt: "Visão Geral", es: "Visión General", en: "Overview" });
-addKey('about_intro_title', { pt: "Especialistas em processos críticos", es: "Especialistas en procesos críticos", en: "Critical Process Specialists" });
-addKey('about_sec_p1', {
-  pt: "A Prime Products atua no desenvolvimento e na integração de soluções técnicas para gases especiais, gases industriais, gases medicinais, instrumentação e sistemas aplicados a processos críticos.",
-  es: "Prime Products actúa en el desarrollo y la integración de soluciones técnicas para gases especiales, gases industriales, gases medicinales, instrumentación y sistemas aplicados a procesos críticos.",
-  en: "Prime Products operates in the development and integration of technical solutions for specialty gases, industrial gases, medical gases, instrumentation, and systems applied to critical processes."
-});
-addKey('about_sec_p2', {
-  pt: "Nossa atuação combina fornecimento especializado, engenharia aplicada, instalação em campo, comissionamento, testes e suporte técnico, com foco em segurança, conformidade e confiabilidade operacional.",
-  es: "Nuestra actuación combina suministro especializado, ingeniería aplicada, instalación en campo, comisionamiento, pruebas y soporte técnico, con enfoque en seguridad, conformidad y confiabilidad operacional.",
-  en: "Our operations combine specialized supply, applied engineering, field installation, commissioning, testing, and technical support, with a focus on safety, compliance, and operational reliability."
-});
-addKey('about_sec_p3', {
-  pt: "Atendemos empresas e instituições que exigem precisão técnica, rastreabilidade, documentação consistente e desempenho estável em aplicações industriais, laboratoriais, hospitalares e científicas.",
-  es: "Atendemos empresas e instituciones que exigen precisión técnica, trazabilidad, documentación consistente y desempeño estable en aplicaciones industriales, laboratoriales, hospitalarias y científicas.",
-  en: "We serve companies and institutions that require technical precision, traceability, consistent documentation, and stable performance in industrial, laboratory, healthcare, and scientific applications."
-});
-addKey('about_vp_title', {
-  pt: "Engenharia ponta a ponta, com responsabilidade técnica real",
-  es: "Ingeniería de extremo a extremo, con responsabilidad técnica real",
-  en: "End-to-end engineering with real technical responsibility"
-});
-addKey('about_vp_p1', {
-  pt: "Em operações críticas, a escolha inadequada de componentes, a instalação incorreta ou a falta de integração entre fornecimento e campo podem comprometer segurança, desempenho e continuidade operacional.",
-  es: "En operaciones críticas, la elección inadecuada de componentes, la instalación incorrecta o la falta de integración entre el suministro y el campo pueden comprometer la seguridad, el rendimiento y la continuidad operacional.",
-  en: "In critical operations, inadequate selection of components, incorrect installation, or lack of integration between supply and field can compromise safety, performance, and operational continuity."
-});
-addKey('about_vp_p2', {
-  pt: "A Prime Products reduz esse risco ao atuar de forma integrada, conectando especificação técnica, fornecimento, instalação, comissionamento e suporte, para entregar soluções mais seguras, confiáveis e coerentes com a realidade de cada processo.",
-  es: "Prime Products reduce este riesgo al actuar de forma integrada, conectando especificación técnica, suministro, instalación, comisionamiento y soporte, para entregar soluciones más seguras, confiables y coherentes con la realidad de cada proceso.",
-  en: "Prime Products reduces this risk by acting in an integrated manner, connecting technical specification, supply, installation, commissioning, and support, to deliver solutions that are safer, more reliable, and consistent with the reality of each process."
-});
-addKey('como_trabalhamos', { pt: "Como Trabalhamos", es: "Cómo Trabajamos", en: "How We Work" });
-addKey('about_table_title', { pt: "Soluções técnicas com visão completa do processo", es: "Soluciones técnicas con visión completa del proceso", en: "Technical solutions with a complete view of the process" });
-addKey('about_table_sub', {
-  pt: "Nossa abordagem considera não apenas o equipamento isolado, mas o contexto real de aplicação, os requisitos normativos, a compatibilidade técnica dos materiais e a confiabilidade da operação ao longo do tempo.",
-  es: "Nuestro enfoque considera no solo el equipo aislado, sino el contexto real de aplicación, los requisitos normativos, la compatibilidad técnica de los materiales y la confiabilidad de la operación a lo largo del tiempo.",
-  en: "Our approach considers not only the isolated equipment, but the actual context of the application, regulatory requirements, technical compatibility of materials, and operational reliability over time."
-});
-addKey('tbl_th_1', { pt: "Fase", es: "Fase", en: "Phase" });
-addKey('tbl_th_2', { pt: "O que fazemos", es: "Qué hacemos", en: "What we do" });
-addKey('tbl_th_3', { pt: "Ganho operacional", es: "Ganancia operacional", en: "Operational gain" });
-
-addKey('fase_1', { pt: "1. Análise técnica", es: "1. Análisis técnico", en: "1. Technical analysis" });
-addKey('fase_1_desc', {
-  pt: "Avaliação da aplicação, compatibilidade dos gases, requisitos do processo e necessidades da instalação.",
-  es: "Evaluación de la aplicación, compatibilidad de los gases, requisitos del proceso y necesidades de la instalación.",
-  en: "Evaluation of the application, gas compatibility, process requirements, and installation needs."
-});
-addKey('fase_1_gain', {
-  pt: "Maior precisão na especificação e redução de falhas de concepção.",
-  es: "Mayor precisión en la especificación y reducción de fallas de concepción.",
-  en: "Greater specification accuracy and reduction of design conceptual failures."
-});
-
-addKey('fase_2', { pt: "2. Fornecimento especializado", es: "2. Suministro especializado", en: "2. Specialized supply" });
-addKey('fase_2_desc', {
-  pt: "Portfólio técnico em gases, instrumentação, reguladores, manifolds, conexões, detecção e sistemas integrados.",
-  es: "Portafolio técnico en gases, instrumentación, reguladores, manifolds, conexiones, detección y sistemas integrados.",
-  en: "Technical portfolio in gases, instrumentation, regulators, manifolds, fittings, detection, and integrated systems."
-});
-addKey('fase_2_gain', {
-  pt: "Acesso a soluções compatíveis, rastreáveis e alinhadas ao processo.",
-  es: "Acceso a soluciones compatibles, trazables y alineadas al proceso.",
-  en: "Access to compatible, traceable solutions aligned with the process."
-});
-
-addKey('fase_3', { pt: "3. Instalação e integração", es: "3. Instalación e integración", en: "3. Installation and integration" });
-addKey('fase_3_desc', {
-  pt: "Montagem de redes, painéis, sistemas, interligações e infraestrutura técnica em campo.",
-  es: "Montaje de redes, paneles, sistemas, interconexiones e infraestructura técnica en campo.",
-  en: "Assembly of networks, panels, systems, interconnections, and field technical infrastructure."
-});
-addKey('fase_3_gain', {
-  pt: "Segurança operacional, melhor organização da instalação e redução de retrabalho.",
-  es: "Seguridad operacional, mejor organización de la instalación y reducción de reprocesos.",
-  en: "Operational safety, better installation organization, and reduction of rework."
-});
-
-addKey('fase_4', { pt: "4. Comissionamento e testes", es: "4. Comisionamiento y pruebas", en: "4. Commissioning and testing" });
-addKey('fase_4_desc', {
-  pt: "Verificações, testes, ajustes, entrega técnica e suporte.",
-  es: "Verificaciones, pruebas, ajustes, entrega técnica y soporte.",
-  en: "Verifications, testing, adjustments, technical delivery, and support."
-});
-addKey('fase_4_gain', {
-  pt: "Entrada em operação com mais confiabilidade, conformidade e previsibilidade.",
-  es: "Entrada en operación con más confiabilidad, conformidad y previsibilidad.",
-  en: "Startup with greater reliability, compliance, and predictability."
-});
-
-addKey('about_diff_label', { pt: "Nossos Diferenciais", es: "Nuestros Diferenciales", en: "Our Advantages" });
-addKey('about_diff_title', { pt: "Por que a Prime Products?", es: "¿Por qué Prime Products?", en: "Why Prime Products?" });
-addKey('about_diff_p1', {
-  pt: "Nosso foco está no fornecimento consultivo e na engenharia de alta integridade técnica. Entendemos a responsabilidade envolvida em processos críticos e operamos em total conformidade com normas nacionais e internacionais aplicáveis.",
-  es: "Nuestro enfoque está en el suministro consultivo y la ingeniería de alta integridad técnica. Entendemos la responsabilidad involucrada en procesos críticos y operamos en total conformidad con las normas nacionales e internacionales aplicables.",
-  en: "Our focus is on consultative supply and high-integrity technical engineering. We understand the responsibility involved in critical operations and operate in full compliance with applicable national and international standards."
-});
-
-addKey('dif_0', { pt: "Soluções integradas com visão técnica do processo", es: "Soluciones integradas con visión técnica del proceso", en: "Integrated solutions with a technical view of the process" });
-addKey('dif_1', { pt: "Fornecimento especializado com suporte de aplicação", es: "Suministro especializado con soporte de aplicación", en: "Specialized supply with application support" });
-addKey('dif_2', { pt: "Instalação, testes e comissionamento em campo", es: "Instalación, pruebas y comisionamiento en campo", en: "Field installation, testing, and commissioning" });
-addKey('dif_3', { pt: "Foco em segurança operacional e conformidade técnica", es: "Enfoque en seguridad operacional y conformidad técnica", en: "Focus on operational safety and technical compliance" });
-addKey('dif_4', { pt: "Documentação e rastreabilidade como parte da entrega", es: "Documentación y trazabilidad como parte de la entrega", en: "Documentation and traceability as part of the delivery" });
-addKey('dif_5', { pt: "Atendimento a ambientes de alta exigência técnica", es: "Atención a entornos de alta exigencia técnica", en: "Service for environments with high technical demands" });
-
-addKey('about_mv_0_title', { pt: 'Nossa Missão', es: 'Nuestra Misión', en: 'Our Mission' });
-addKey('about_mv_0_text', {
-  pt: 'Desenvolver e implementar soluções técnicas em gases, instrumentação e engenharia aplicada, com foco em segurança, confiabilidade e desempenho para processos críticos na indústria, laboratórios, hospitais e centros de pesquisa.',
-  es: 'Desarrollar e implementar soluciones técnicas en gases, instrumentación e ingeniería aplicada, con enfoque en seguridad, confiabilidad y rendimiento para procesos críticos en la industria, laboratorios, hospitales y centros de investigación.',
-  en: 'To develop and implement technical solutions in gases, instrumentation, and applied engineering, focusing on safety, reliability, and performance for critical processes in industry, laboratories, hospitals, and research centers.'
-});
-addKey('about_mv_1_title', { pt: 'Nossa Visão', es: 'Nuestra Visión', en: 'Our Vision' });
-addKey('about_mv_1_text', {
-  pt: 'Ser referência nacional em soluções integradas para gases e instrumentação, reconhecida pela excelência técnica, pela confiabilidade operacional e pela capacidade de atender aplicações críticas com padrão profissional elevado.',
-  es: 'Ser referencia nacional en soluciones integradas para gases e instrumentación, reconocida por su excelencia técnica, confiabilidad operacional y capacidad de atender aplicaciones críticas con un alto estándar profesional.',
-  en: 'To be a national reference in integrated solutions for gases and instrumentation, recognized for technical excellence, operational reliability, and the ability to serve critical applications with a high professional standard.'
-});
-
-// Values
-addKey('val_0_t', { pt: 'Excelência técnica', es: 'Excelencia técnica', en: 'Technical excellence' });
-addKey('val_0_d', { pt: 'Engenharia aplicada com foco em desempenho real, coerência técnica e validação de processo.', es: 'Ingeniería aplicada enfocada en rendimiento real, coherencia técnica y validación de procesos.', en: 'Applied engineering focused on real performance, technical coherence, and process validation.' });
-addKey('val_1_t', { pt: 'Segurança e conformidade', es: 'Seguridad y conformidad', en: 'Safety and compliance' });
-addKey('val_1_d', { pt: 'Atuação orientada por normas, boas práticas e prevenção de risco em todas as etapas.', es: 'Actuación orientada por normas, buenas prácticas y prevención de riesgos en todas las etapas.', en: 'Actions guided by standards, best practices, and risk prevention at all stages.' });
-addKey('val_2_t', { pt: 'Rastreabilidade e documentação', es: 'Trazabilidad y documentación', en: 'Traceability and documentation' });
-addKey('val_2_d', { pt: 'Clareza técnica, organização das entregas e suporte à operação com documentação consistente.', es: 'Claridad técnica, organización de entregas y soporte a la operación con documentación consistente.', en: 'Technical clarity, organized deliveries, and operational support with consistent documentation.' });
-addKey('val_3_t', { pt: 'Atendimento consultivo', es: 'Atención consultiva', en: 'Consultative service' });
-addKey('val_3_d', { pt: 'Compromisso com a solução mais adequada, e não apenas com o fornecimento do item.', es: 'Compromiso con la solución más adecuada, y no solo con el suministro del artículo.', en: 'Commitment to the most appropriate solution, and not just the supply of the item.' });
-addKey('val_4_t', { pt: 'Integridade e transparência', es: 'Integridad y transparencia', en: 'Integrity and transparency' });
-addKey('val_4_d', { pt: 'Relação objetiva, responsável e alinhada ao que é tecnicamente viável e comercialmente sustentável.', es: 'Relación objetiva, responsable y alineada con lo técnicamente viable y comercialmente sostenible.', en: 'Objective, responsible relationship aligned with what is technically feasible and commercially sustainable.' });
-addKey('val_5_t', { pt: 'Melhoria contínua', es: 'Mejora continua', en: 'Continuous improvement' });
-addKey('val_5_d', { pt: 'Evolução permanente de processos, equipe, portfólio e capacidade de atendimento.', es: 'Evolución permanente de procesos, equipo, portafolio y capacidad de servicio.', en: 'Permanent evolution of processes, team, portfolio, and service capacity.' });
-
-// ─── CONTACT PAGE ────────────────────────────────────────────────────────────
-addKey('cont_hero_t', { pt: "Fale Conosco", es: "Contáctenos", en: "Contact Us" });
-addKey('cont_hero_s', {
-  pt: "Canais de suporte de engenharia e atendimento técnico especializado para o seu processo.",
-  es: "Canales de soporte de ingeniería y atención técnica especializada para su proceso.",
-  en: "Engineering support and specialized technical service channels for your process."
-});
-addKey('cont_info_t', { pt: "Informações de Contato", es: "Información de Contacto", en: "Contact Information" });
-addKey('cont_info_d', {
-  pt: "Nossa equipe de engenharia está pronta para analisar a viabilidade e propor a solução técnica adequada para a sua demanda.",
-  es: "Nuestro equipo de ingeniería está listo para analizar la viabilidad y proponer la solución técnica adecuada para su demanda.",
-  en: "Our engineering team is ready to analyze viability and propose the appropriate technical solution for your demand."
-});
-addKey('cont_addr_t', { pt: "Matriz", es: "Matriz", en: "Headquarters" });
-addKey('cont_addr_1', { pt: "Belo Horizonte – Minas Gerais", es: "Belo Horizonte – Minas Gerais", en: "Belo Horizonte – Minas Gerais" });
-addKey('cont_addr_2', { pt: "Atendimento Nacional", es: "Atención Nacional", en: "National Service" });
-addKey('cont_ph_t', { pt: "Telefones", es: "Teléfonos", en: "Phones" });
-addKey('cont_ph_1', { pt: "(31) 9 8670-8742", es: "(31) 9 8670-8742", en: "(31) 9 8670-8742" });
-addKey('cont_em_t', { pt: "E-mail Técnico", es: "Correo Electrónico Técnico", en: "Technical E-mail" });
-addKey('cont_em_1', { pt: "info@primeproducts.ind.br", es: "info@primeproducts.ind.br", en: "info@primeproducts.ind.br" });
-addKey('cont_hours_t', { pt: "Horário", es: "Horario", en: "Business Hours" });
-addKey('cont_hours_1', { pt: "Segunda a Sexta: 8h–18h", es: "Lunes a Viernes: 8h–18h", en: "Monday to Friday: 8:00 AM – 6:00 PM" });
-addKey('cont_form_t', { pt: "Envie sua Mensagem", es: "Envíe su Mensaje", en: "Send Us a Message" });
-
-// Form fields labels
-addKey('lbl_name', { pt: "Nome *", es: "Nombre *", en: "Name *" });
-addKey('placeholder_name', { pt: "Seu nome completo", es: "Su nombre completo", en: "Your full name" });
-addKey('lbl_company', { pt: "Empresa", es: "Empresa", en: "Company" });
-addKey('placeholder_company', { pt: "Nome da empresa", es: "Nombre de la empresa", en: "Company name" });
-addKey('lbl_email', { pt: "E-mail *", es: "Correo electrónico *", en: "E-mail *" });
-addKey('placeholder_email', { pt: "seu@email.com", es: "su@correo.com", en: "your@email.com" });
-addKey('lbl_phone', { pt: "Telefone", es: "Teléfono", en: "Phone" });
-addKey('placeholder_phone', { pt: "(11) 9 0000-0000", es: "(11) 9 0000-0000", en: "(11) 9 0000-0000" });
-addKey('lbl_subject', { pt: "Assunto *", es: "Asunto *", en: "Subject *" });
-addKey('placeholder_subject', { pt: "Descreva brevemente sua necessidade", es: "Describa brevemente su necesidad", en: "Briefly describe your need" });
-addKey('lbl_message', { pt: "Mensagem *", es: "Mensaje *", en: "Message *" });
-addKey('placeholder_message', { pt: "Detalhe sua aplicação, projeto ou dúvida técnica...", es: "Detalle su aplicación, proyecto o duda técnica...", en: "Detail your application, project, or technical question..." });
-addKey('btn_send', { pt: "ENVIAR MENSAGEM", es: "ENVIAR MENSAJE", en: "SEND MESSAGE" });
-addKey('btn_sending', { pt: "ENVIANDO...", es: "ENVIANDO...", en: "SENDING..." });
-addKey('msg_success', { pt: "Mensagem Enviada!", es: "¡Mensaje Enviado!", en: "Message Sent!" });
-addKey('msg_success_sub', { pt: "Nossa equipe entrará em contato em breve.", es: "Nuestro equipo se pondrá en contacto a la brevedad.", en: "Our team will contact you shortly." });
-addKey('btn_send_new', { pt: "Enviar nova mensagem", es: "Enviar nuevo mensaje", en: "Send new message" });
-addKey('msg_error', { pt: "Ocorreu um erro ao enviar. Tente novamente.", es: "Ocurrió un error al enviar. Intente nuevamente.", en: "An error occurred while sending. Please try again." });
-
-// ─── PAGES TITLES ────────────────────────────────────────────────────────────
-addKey('prod_hero_title', { pt: "Linha de Produtos", es: "Línea de Productos", en: "Product Range" });
-addKey('prod_hero_sub', { pt: "Equipamentos engineering-grade para processos críticos industriais e laboratoriais.", es: "Equipos engineering-grade para procesos críticos industriales y laboratoriales.", en: "Engineering-grade equipment for critical industrial and laboratory processes." });
-addKey('app_hero_title', { pt: "Segmentos e Aplicações", es: "Segmentos y Aplicaciones", en: "Segments and Applications" });
-addKey('app_hero_sub', { pt: "Onde a Prime Products atua com especialidade técnica, segurança e conformidade.", es: "Donde Prime Products actúa con especialidad técnica, seguridad y conformidad.", en: "Where Prime Products operates with technical expertise, safety, and compliance." });
-addKey('sol_hero_title', { pt: "Soluções e Serviços", es: "Soluciones y Servicios", en: "Solutions and Services" });
-addKey('sol_hero_sub', { pt: "Engenharia de projetos, montagem física de sistemas, testes e suporte contínuo para processos industriais e laboratoriais.", es: "Ingeniería de proyectos, montaje físico de sistemas, pruebas y soporte continuo para procesos industriales y laboratoriales.", en: "Project engineering, physical system assembly, testing, and continuous support for industrial and laboratory processes." });
-addKey('tools_hero_title', { pt: "Simuladores e Ferramentas", es: "Simuladores y Herramientas", en: "Simulators and Tools" });
-addKey('tools_hero_sub', { pt: "Recursos online para auxiliar seus projetos e cálculos técnicos.", es: "Recursos en línea para auxiliar sus proyectos y cálculos técnicos.", en: "Online resources to assist your technical projects and calculations." });
-addKey('articles_hero_title', { pt: "Artigos e Conteúdos Técnicos", es: "Artículos y Contenidos Técnicos", en: "Technical Articles and Content" });
-addKey('articles_hero_sub', { pt: "Relatórios, especificações, manuais e guias para embasar suas decisões de engenharia.", es: "Informes, especificaciones, manuales y guías para respaldar sus decisiones de ingeniería.", en: "Reports, specifications, manuals, and guides to support your engineering decisions." });
-
-// ─── DETAIL PAGES COMMON ──────────────────────────────────────────────────────
-addKey('back_to_products', { pt: "Voltar para Produtos", es: "Volver a Productos", en: "Back to Products" });
-addKey('back_to_applications', { pt: "Voltar para Aplicações", es: "Volver a Aplicaciones", en: "Back to Applications" });
-addKey('back_to_articles', { pt: "Voltar para Conteúdo", es: "Volver a Contenido", en: "Back to Content" });
-addKey('btn_quote', { pt: "Solicitar Orçamento / Suporte", es: "Solicitar Cotización / Soporte", en: "Request Quote / Support" });
-addKey('solicitar_informacoes', { pt: "Solicitar Informações", es: "Solicitar Información", en: "Request Information" });
-addKey('equipe_pronta', { pt: "Nossa equipe técnica está pronta para atender sua demanda.", es: "Nuestro equipo técnico está listo para atender su demanda.", en: "Our technical team is ready to serve your demand." });
-addKey('artigos_relacionados', { pt: "Artigos Relacionados", es: "Artículos Relacionados", en: "Related Articles" });
-addKey('galeria_tecnica', { pt: "Galeria Técnica", es: "Galería Técnica", en: "Technical Gallery" });
-addKey('conteudo_breve', { pt: "Conteúdo completo em breve.", es: "Contenido completo muy pronto.", en: "Full content coming soon." });
-addKey('artigo_nao_encontrado', { pt: "Artigo não encontrado", es: "Artículo no encontrado", en: "Article not found" });
-addKey('voltar_conteudo', { pt: "Voltar para Conteúdo", es: "Volver a Contenido", en: "Back to Content" });
-addKey('category_regulação', { pt: "Regulação", es: "Regulación", en: "Regulation" });
-addKey('category_segurança', { pt: "Segurança", es: "Seguridad", en: "Safety" });
-addKey('category_engenharia', { pt: "Engenharia", es: "Ingeniería", en: "Engineering" });
-addKey('category_analítica', { pt: "Analítica", es: "Analítica", en: "Analytics" });
-addKey('category_qualidade', { pt: "Qualidade", es: "Calidad", en: "Quality" });
-addKey('category_normas', { pt: "Normas", es: "Normas", en: "Standards" });
-addKey('category_inovação', { pt: "Inovação", es: "Innovación", en: "Innovation" });
-addKey('category_manutenção', { pt: "Manutenção", es: "Mantenimiento", en: "Maintenance" });
-addKey('category_engenharia de materiais', { pt: "Engenharia de Materiais", es: "Ingeniería de Materiales", en: "Materials Engineering" });
-addKey('product_desc_title', { pt: "Descrição", es: "Descripción", en: "Description" });
-addKey('other_products', { pt: "Outros Produtos", es: "Otros Productos", en: "Other Products" });
-addKey('models_specs_title', { pt: "Modelos e Especificações Técnicas", es: "Modelos y Especificaciones Técnicas", en: "Models and Technical Specifications" });
-addKey('datasheet_doc_title', { pt: "Datasheet e Documentação", es: "Ficha Técnica y Documentación", en: "Datasheet and Documentation" });
-addKey('datasheet_doc_desc', {
-  pt: "Solicite o datasheet técnico completo, ficha de especificações ou documentação de certificação deste produto diretamente com nossa equipe.",
-  es: "Solicite la ficha técnica completa, la hoja de especificaciones o la documentación de certificación de este producto directamente a nuestro equipo.",
-  en: "Request the complete technical datasheet, specification sheet, or certification documentation for this product directly from our team."
-});
-addKey('btn_request_datasheet', { pt: "Solicitar Datasheet", es: "Solicitar Ficha Técnica", en: "Request Datasheet" });
-addKey('btn_request_certificates', { pt: "Solicitar Certificados", es: "Solicitar Certificados", en: "Request Certificates" });
-addKey('quote_sent_success', { pt: "Solicitação enviada!", es: "¡Solicitud enviada!", en: "Request submitted!" });
-addKey('btn_send_new_request', { pt: "Enviar nova solicitação", es: "Enviar nueva solicitud", en: "Send new request" });
-addKey('product_not_found', { pt: "Produto não encontrado", es: "Producto no encontrado", en: "Product not found" });
-addKey('about_app_title', { pt: "Sobre esta Aplicação", es: "Sobre esta Aplicación", en: "About this Application" });
-addKey('challenges_title', { pt: "Principais Desafios", es: "Principales Desafíos", en: "Key Challenges" });
-addKey('solutions_title', { pt: "Soluções Prime Products", es: "Soluciones Prime Products", en: "Prime Products Solutions" });
-addKey('related_products_title', { pt: "Produtos Relacionados", es: "Productos Relacionados", en: "Related Products" });
-addKey('app_gallery_title', { pt: "Galeria de Aplicações Técnicas", es: "Galería de Aplicaciones Técnicas", en: "Technical Applications Gallery" });
-addKey('app_not_found', { pt: "Aplicação não encontrada", es: "Aplicación no encontrada", en: "Application not found" });
-addKey('related_equipment_title', { pt: "Equipamentos Relacionados", es: "Equipos Relacionados", en: "Related Equipment" });
-addKey('related_equipment_desc', { pt: "Componentes críticos utilizados na montagem das redes de gases.", es: "Componentes críticos utilizados en el montaje de redes de gases.", en: "Critical components used in gas network assembly." });
-addKey('gases_project_title', { pt: "Precisa de um projeto de distribuição de gases?", es: "¿Necesita un proyecto de distribución de gases?", en: "Need a gas distribution project?" });
-addKey('gases_project_desc', { pt: "Entre em contato com nossa equipe técnica para um dimensionamento sob medida.", es: "Póngase en contacto con nuestro equipo técnico para un dimensionamiento a medida.", en: "Contact our technical team for custom sizing." });
-addKey('premium_solution', { pt: "Solução Premium", es: "Solución Premium", en: "Premium Solution" });
-addKey('btn_request_technical_evaluation', { pt: "Solicitar Avaliação Técnica", es: "Solicitar Evaluación Técnica", en: "Request Technical Evaluation" });
-addKey('digitalize_plant_title', { pt: "Pronto para digitalizar sua instalação?", es: "¿Listo para digitalizar su instalación?", en: "Ready to digitalize your facility?" });
-addKey('digitalize_plant_desc', {
-  pt: "Recomendamos iniciar com um Projeto-Piloto de 300 a 1.000 m², permitindo validar o fluxo completo (desde a captura em campo até o uso do modelo 3D pela sua equipe) antes de escalar para a planta inteira.",
-  es: "Recomendamos comenzar con un Proyecto Piloto de 300 a 1.000 m², lo que permite validar el fluxo completo (desde la captura en el campo hasta el uso del modelo 3D por parte de su equipo) antes de escalar a toda la planta.",
-  en: "We recommend starting with a 300 to 1,000 m² Pilot Project, allowing you to validate the complete workflow (from field capture to the use of the 3D model by your team) before scaling to the entire facility."
-});
-addKey('technical_guide', { pt: "Guia Técnico", es: "Guía Técnica", en: "Technical Guide" });
-addKey('btn_request_diagnosis', { pt: "Solicitar Diagnóstico", es: "Solicitar Diagnóstico", en: "Request Diagnosis" });
-addKey('express_tool', { pt: "Ferramenta Expressa", es: "Herramienta Express", en: "Express Tool" });
-addKey('pressure_drop_estimation', { pt: "Estimativa de Queda de Pressão", es: "Estimación de Caída de Presión", en: "Pressure Drop Estimation" });
-addKey('dimension_system_title', { pt: "Precisa dimensionar seu sistema?", es: "¿Necesita dimensionar su sistema?", en: "Need to size your system?" });
-addKey('dimension_system_desc', {
-  pt: "A engenharia da Prime Products realiza o diagnóstico de vazão, auditoria da qualidade ISO 8573 e projeto completo de redes para otimizar sua planta e garantir a eficiência energética.",
-  es: "La ingeniería de Prime Products realiza diagnósticos de flujo, auditorías de calidad ISO 8573 y diseños completos de redes para optimizar su planta y garantizar la eficiencia energética.",
-  en: "Prime Products engineering performs flow diagnostics, ISO 8573 quality audits, and complete network design to optimize your plant and ensure energy efficiency."
-});
-addKey('product_specs_title', { pt: "Especificações Técnicas", es: "Especificaciones Técnicas", en: "Technical Specifications" });
-addKey('product_features_title', { pt: "Características Principales", es: "Características Principales", en: "Key Features" });
-addKey('product_apps_title', { pt: "Aplicações Recomendadas", es: "Aplicaciones Recomendadas", en: "Recommended Applications" });
-addKey('quote_form_title', { pt: "Solicitar Cotação ou Suporte Técnico", es: "Solicitar Cotización o Soporte Técnico", en: "Request Quote or Technical Support" });
-addKey('lbl_qty', { pt: "Quantidade Estimada", es: "Cantidad Estimada", en: "Estimated Quantity" });
-addKey('placeholder_qty', { pt: "Ex: 2 unidades", es: "Ej: 2 unidades", en: "E.g. 2 units" });
-addKey('lbl_details', { pt: "Detalhes da Aplicação / Especificação", es: "Detalles de la Aplicación / Especificación", en: "Application Details / Specification" });
-addKey('placeholder_details', { pt: "Descreva a pressão, vazão, tipo de gás ou requisitos do seu processo...", es: "Describa la presión, caudal, tipo de gas o requisitos de su proceso...", en: "Describe the pressure, flow rate, gas type, or process requirements..." });
-addKey('btn_quote_send', { pt: "Enviar Solicitação", es: "Enviar Solicitud", en: "Submit Request" });
-addKey('form_mode_mock_notice', {
-  pt: "[MOCK] Formulário interceptado com sucesso localmente. Nenhum e-mail foi disparado para a API de produção.",
-  es: "[MOCK] Formulario interceptado con éxito localmente. No se realizó ninguna llamada a la API de producción.",
-  en: "[MOCK] Form successfully intercepted locally. No call was made to the production API."
-});
-
-// Counters keys for layout
-addKey('counter_experiencia', { pt: "Anos de Experiência", es: "Años de experiencia", en: "Years of Experience" });
-addKey('counter_projetos', { pt: "Projetos Entregues", es: "Proyectos entregados", en: "Projects Delivered" });
-addKey('counter_seguranca', { pt: "Segurança Operacional", es: "Seguridad operacional", en: "Operational Safety" });
-addKey('counter_parceiras', { pt: "Marcas Parceiras", es: "Marcas asociadas", en: "Partner Brands" });
-addKey('counter_conformidade', { pt: "Conformidade Técnica", es: "Conformidad técnica", en: "Technical Compliance" });
-
-// ─── SOLUTIONS COMMON ─────────────────────────────────────────────────────────
-addKey('aplicacoes_equipamentos', { pt: "Aplicações e Equipamentos", es: "Aplicaciones y Equipos", en: "Applications and Equipment" });
-addKey('voltar_solucoes', { pt: "Voltar para Soluções", es: "Volver a Soluciones", en: "Back to Solutions" });
-addKey('ver_produto', { pt: "Ver produto", es: "Ver producto", en: "View product" });
-addKey('solucao_personalizada', { pt: "Precisa de uma solução personalizada?", es: "¿Necesita una solución personalizada?", en: "Need a custom solution?" });
-addKey('contato_equipe', {
-  pt: "Entre em contato com nossa equipe técnica para um projeto sob medida.",
-  es: "Póngase en contacto con nuestro equipo técnico para un proyecto a medida.",
-  en: "Contact our technical team for a custom project."
-});
-addKey('solicitar_cotacao', { pt: "Solicitar Cotação", es: "Solicitar Cotización", en: "Request Quote" });
-addKey('como_trabalhamos_label', { pt: "Como Trabalhamos", es: "Cómo Trabajamos", en: "How We Work" });
-
-// ─── PRODUCT_DATA TRANSLATIONS ───────────────────────────────────────────────
-const productsIds = [
-  'cilindros-aluminio', 'cilindros-tipo-4', 'conexoes-instrumentacao', 'detectores-vazamento',
-  'dewars-criogenicos', 'geracao-oxigenio-anestesia', 'geracao-oxigenio', 'corte-solda',
-  'reguladores-especiais', 'reguladores-hidraulicos', 'reguladores-calibracao',
-  'combate-incendio', 'transmissores-pressao', 'valvulas-industriais'
-];
-
-const productsTranslations = {
-  'cilindros-aluminio': {
-    name: { pt: 'Cilindros de Alumínio', es: 'Cilindros de Aluminio', en: 'Aluminum Cylinders' },
-    cat: { pt: 'Gases', es: 'Gases', en: 'Gases' },
-    desc: {
-      pt: 'Cilindros leves e resistentes para transporte seguro de gases comprimidos. Fabricados em ligas de alumínio de alta resistência (ex: 6061-T6), ideais para gases medicinais, industriais e alimentícios, com acabamento interno resistente à corrosão.',
-      es: 'Cilindros livianos y resistentes para el transporte seguro de gases comprimidos. Fabricados en aleaciones de aluminio de alta resistencia (ej: 6061-T6), ideales para gases medicinales, industriales y alimentarios, con acabado interno resistente a la corrosión.',
-      en: 'Lightweight and resistant cylinders for the safe transport of compressed gases. Manufactured in high-strength aluminum alloys (e.g., 6061-T6), ideal for medical, industrial, and food gases, with a corrosion-resistant internal finish.'
-    },
-    features: [
-      { pt: 'Conformidade com normas DOT-3AL e ISO 7866', es: 'Conformidad con normas DOT-3AL e ISO 7866', en: 'Compliance with DOT-3AL and ISO 7866 standards' },
-      { pt: 'Até 40% de redução de peso vs. cilindros de aço', es: 'Hasta un 40% de reducción de peso vs. cilindros de acero', en: 'Up to 40% weight reduction vs. steel cylinders' },
-      { pt: 'Alta resistência à corrosão', es: 'Alta resistencia a la corrosión', en: 'High corrosion resistance' },
-      { pt: 'Integridade e pureza para misturas especiais', es: 'Integridad y pureza para mezclas especiales', en: 'Integrity and purity for specialty mixtures' },
-      { pt: 'Diversas opções de válvulas e roscas integradas', es: 'Diversas opciones de válvulas y roscas integradas', en: 'Various integrated valve and thread options' }
-    ],
-    apps: [
-      { pt: 'Gases medicinais e homecare', es: 'Gases medicinales y atención domiciliaria (homecare)', en: 'Medical gases and homecare' },
-      { pt: 'Gases de laboratório e P&D', es: 'Gases de laboratorio e I+D', en: 'Laboratory and R&D gases' },
-      { pt: 'Bebidas e CO2 alimentício', es: 'Bebidas y CO2 de grado alimentario', en: 'Beverages and food-grade CO2' },
-      { pt: 'Gases industriais e misturas analíticas', es: 'Gases industriales y mezclas analíticas', en: 'Industrial gases and analytical mixtures' }
-    ]
-  },
-  'cilindros-tipo-4': {
-    name: { pt: 'Cilindros Tipo 4', es: 'Cilindros Tipo 4', en: 'Type 4 Cylinders' },
-    cat: { pt: 'Gases', es: 'Gases', en: 'Gases' },
-    desc: {
-      pt: 'Os cilindros Tipo 4 utilizam liner polimérico não metálico envolvido por reforço estrutural em fibra composta, proporcionando elevada relação entre capacidade de armazenamento e peso. São indicados para aplicações que exigem redução de massa, resistência mecânica e armazenamento de gases comprimidos em alta pressão.',
-      es: 'Los cilindros Tipo 4 utilizan un liner polimérico no metálico envuelto por un refuerzo estructural de fibra compuesta, proporcionando una alta relación entre capacidad de almacenamiento y peso. Están indicados para aplicaciones que exigen reducción de masa, resistencia mecánica y almacenamiento de gases comprimidos a alta presión.',
-      en: 'Type 4 cylinders utilize a non-metallic polymeric liner wrapped in composite fiber structural reinforcement, providing a high ratio between storage capacity and weight. They are suitable for applications requiring weight reduction, mechanical strength, and storage of compressed gases at high pressure.'
-    },
-    features: [
-      { pt: 'Liner polimérico não metálico', es: 'Liner polimérico no metálico', en: 'Non-metallic polymeric liner' },
-      { pt: 'Reforço estrutural em fibra composta', es: 'Refuerzo estructural en fibra compuesta', en: 'Composite fiber structural reinforcement' },
-      { pt: 'Construção totalmente composta', es: 'Construcción totalmente compuesta', en: 'Fully composite construction' },
-      { pt: 'Elevada relação resistência/peso', es: 'Elevada relación resistencia/peso', en: 'High strength-to-weight ratio' },
-      { pt: 'Proteção contra impacto, abrasão e esforços de instalação', es: 'Protección contra impacto, abrasión y esfuerzos de instalación', en: 'Protection against impact, abrasion, and installation stress' },
-      { pt: 'Configuração de válvula conforme a aplicação', es: 'Configuración de válvula según la aplicación', en: 'Valve configuration according to application' },
-      { pt: 'Possibilidade de integração com dispositivo de alívio de pressão', es: 'Posibilidad de integración con dispositivo de alivio de presión', en: 'Integration capability with pressure relief devices' },
-      { pt: 'Montagem mediante suportes tecnicamente dimensionados', es: 'Montaje mediante soportes técnicamente dimensionados', en: 'Mounting using technically dimensioned supports' }
-    ],
-    apps: [
-      { pt: 'Mobilidade a gás', es: 'Movilidad a gas', en: 'Gas mobility' },
-      { pt: 'Veículos comerciais', es: 'Vehículos comerciales', en: 'Commercial vehicles' },
-      { pt: 'Ônibus e caminhões', es: 'Autobuses y camiones', en: 'Buses and trucks' },
-      { pt: 'Módulos de armazenamento', es: 'Módulos de almacenamiento', en: 'Storage modules' },
-      { pt: 'Sistemas de energia', es: 'Sistemas de energía', en: 'Energy systems' },
-      { pt: 'Transporte de gases comprimidos', es: 'Transporte de gases comprimidos', en: 'Compressed gas transport' },
-      { pt: 'Aplicações industriais customizadas', es: 'Aplicaciones industriales personalizadas', en: 'Custom industrial applications' }
-    ]
-  },
-  'conexoes-instrumentacao': {
-    name: { pt: 'Conexões para Instrumentação', es: 'Conexiones para Instrumentación', en: 'Instrumentation Fittings' },
-    cat: { pt: 'Instrumentação', es: 'Instrumentación', en: 'Instrumentation' },
-    desc: {
-      pt: 'Conexões certificadas para aplicações de instrumentação analítica e industrial. Compatibilidade com transmissores, analisadores e sistemas de processo.',
-      es: 'Conexiones certificadas para aplicaciones de instrumentación analítica e industrial. Compatibilidad con transmisores, analizadores y sistemas de proceso.',
-      en: 'Certified fittings for analytical and industrial instrumentation applications. Compatibility with transmitters, analyzers, and process systems.'
-    },
-    features: [
-      { pt: 'Conexões TK-Fujikin e equivalentes', es: 'Conexiones TK-Fujikin y equivalentes', en: 'TK-Fujikin fittings and equivalents' },
-      { pt: 'Materiais: SS 316, Hastelloy, PTFE', es: 'Materiales: SS 316, Hastelloy, PTFE', en: 'Materials: SS 316, Hastelloy, PTFE' },
-      { pt: 'Certificação para fluidos agressivos', es: 'Certificación para fluidos agresivos', en: 'Certification for aggressive fluids' },
-      { pt: 'Conexões compressão, NPT e flange', es: 'Conexiones de compresión, NPT y brida', en: 'Compression, NPT, and flange connections' },
-      { pt: 'Estanqueidade garantida a altas pressões', es: 'Estanqueidad garantizada a altas presiones', en: 'Guaranteed tightness at high pressures' }
-    ],
-    apps: [
-      { pt: 'Análise de processo', es: 'Análisis de procesos', en: 'Process analysis' },
-      { pt: 'Instrumentação industrial', es: 'Instrumentación industrial', en: 'Industrial instrumentation' },
-      { pt: 'Laboratórios', es: 'Laboratorios', en: 'Laboratories' },
-      { pt: 'Petroquímica', es: 'Petroquímica', en: 'Petrochemical' }
-    ]
-  },
-  'detectores-vazamento': {
-    name: { pt: 'Detectores de Vazamento', es: 'Detectores de Fugas', en: 'Leak Detectors' },
-    cat: { pt: 'Segurança', es: 'Seguridad', en: 'Safety' },
-    desc: {
-      pt: 'Sistemas de detecção de gases tóxicos e inflamáveis para proteção de ambientes industriais. Tecnologias catalítica, eletroquímica e de infravermelho.',
-      es: 'Sistemas de detección de gases tóxicos e inflamables para protección de entornos industriales. Tecnologías catalítica, electroquímica y de infrarrojos.',
-      en: 'Toxic and flammable gas detection systems for industrial environmental protection. Catalytic, electrochemical, and infrared technologies.'
-    },
-    features: [
-      { pt: 'Detecção de H₂S, CO, NH₃, LEL', es: 'Detección de H₂S, CO, NH₃, LEL', en: 'Detection of H₂S, CO, NH₃, LEL' },
-      { pt: 'Saída 4-20 mA e HART', es: 'Salida 4-20 mA y HART', en: '4-20 mA and HART output' },
-      { pt: 'Certificação ATEX e IECEx', es: 'Certificación ATEX e IECEx', en: 'ATEX and IECEx certification' },
-      { pt: 'Display local e alarmes sonoros/visuais', es: 'Pantalla local y alarmas sonoras/visuales', en: 'Local display and audible/visual alarms' },
-      { pt: 'Calibração simplificada em campo', es: 'Calibración simplificada en campo', en: 'Simplified field calibration' }
-    ],
-    apps: [
-      { pt: 'Refinarias e petroquímicas', es: 'Refinerías y petroquímicas', en: 'Refineries and petrochemicals' },
-      { pt: 'Plantas de gás e GNL', es: 'Plantas de gas y GNL', en: 'Gas and LNG plants' },
-      { pt: 'Laboratórios químicos', es: 'Laboratorios químicos', en: 'Chemical laboratories' },
-      { pt: 'Ambientes confinados', es: 'Espacios confinados', en: 'Confined spaces' }
-    ]
-  },
-  'dewars-criogenicos': {
-    name: { pt: 'Dewars e Recipientes Criogênicos', es: 'Dewars y Recipientes Criogénicos', en: 'Dewars and Cryogenic Containers' },
-    cat: { pt: 'Criogenia', es: 'Criogenia', en: 'Cryogenics' },
-    desc: {
-      pt: 'Recipientes criogênicos para armazenamento e transporte de nitrogênio líquido, oxigênio líquido, argônio líquido e outros gases liquefeitos. Portáteis, de alta capacidade térmica e disponíveis em diversas capacidades para uso em laboratório e aplicações industriais.',
-      es: 'Recipientes criogénicos para el almacenamiento y transporte de nitrógeno líquido, oxígeno líquido, argón líquido y otros gases licuados. Portátiles, de alta capacidad térmica y disponibles en diversas capacidades para uso en laboratorio y aplicaciones industriales.',
-      en: 'Cryogenic vessels for storage and transport of liquid nitrogen, liquid oxygen, liquid argon, and other liquefied gases. Portable, high thermal capacity, and available in various capacities for laboratory and industrial applications.'
-    },
-    features: [
-      { pt: 'Isolamento a vácuo multicamada de alta eficiência', es: 'Aislamiento al vacío multicapa de alta eficiencia', en: 'High-efficiency multi-layer vacuum insulation' },
-      { pt: 'Capacidade de 10 a 450 Litros', es: 'Capacidad de 10 a 450 litros', en: 'Capacity from 10 to 450 Liters' },
-      { pt: 'Construção reforçada em inox', es: 'Construcción reforzada en acero inoxidable', en: 'Reinforced stainless steel construction' },
-      { pt: 'Conformidade com normas DOT-4L e TPED', es: 'Conformidad con normas DOT-4L y TPED', en: 'Compliance with DOT-4L and TPED standards' },
-      { pt: 'Válvulas codificadas por cor', es: 'Válvulas codificadas por color', en: 'Color-coded valves' },
-      { pt: 'Isolamento de vácuo com 5 anos de garantia (Série XL)', es: 'Aislamiento de vacío con 5 años de garantía (Serie XL)', en: 'Vacuum insulation with 5 years warranty (XL Series)' }
-    ],
-    apps: [
-      { pt: 'Criopreservação biológica', es: 'Criopreservación biológica', en: 'Biological cryopreservation' },
-      { pt: 'Laboratórios de pesquisa', es: 'Laboratorios de investigación', en: 'Research laboratories' },
-      { pt: 'Indústria alimentícia', es: 'Industria alimentaria', en: 'Food industry' },
-      { pt: 'Metalurgia criogênica', es: 'Metalurgia criogénica', en: 'Cryogenic metallurgy' },
-      { pt: 'Estações de envase e laser', es: 'Estaciones de envasado y láser', en: 'Filling stations and laser applications' }
-    ]
-  },
-  'geracao-oxigenio-anestesia': {
-    name: { pt: 'Geração de Oxigênio e Anestesia', es: 'Generación de Oxígeno y Anestesia', en: 'Oxygen Generation and Anesthesia' },
-    cat: { pt: 'Gases', es: 'Gases', en: 'Gases' },
-    desc: {
-      pt: 'Sistemas completos on-site com tecnologia PSA/TCA para autonomia na geração de gases. Integração turn-key com redes hospitalares, painéis de alarme e manifolds de backup automático, garantindo conformidade com a RDC 50.',
-      es: 'Sistemas completos in-situ con tecnología PSA/TCA para autonomía en la generación de gases. Integración llave en mano (turn-key) con redes hospitalarias, paneles de alarma y manifolds de respaldo automático, garantizando la conformidad con la RDC 50.',
-      en: 'Complete on-site systems with PSA/TCA technology for gas generation autonomy. Turn-key integration with hospital networks, alarm panels, and automatic backup manifolds, ensuring compliance with RDC 50.'
-    },
-    features: [
-      { pt: 'Geração on-site via tecnologia PSA / VPSA (Pureza de 93-95%).', es: 'Generación in-situ mediante tecnología PSA / VPSA (Pureza de 93-95%).', en: 'On-site generation via PSA / VPSA technology (93-95% purity).' },
-      { pt: 'Painéis de alarme modulares com monitoramento remoto de pressão.', es: 'Paneles de alarma modulares con monitoreo remoto de presión.', en: 'Modular alarm panels with remote pressure monitoring.' },
-      { pt: 'Manifolds automáticos para backup contínuo sem queda de pressão.', es: 'Manifolds automáticos para respaldo continuo sin caída de presión.', en: 'Automatic manifolds for continuous backup without pressure drop.' },
-      { pt: 'Sistemas misturadores para gases anestésicos.', es: 'Sistemas mezcladores para gases anestésicos.', en: 'Mixing systems for anesthetic gases.' }
-    ],
-    apps: [
-      { pt: 'Redes Hospitalares', es: 'Redes hospitalarias', en: 'Hospital networks' },
-      { pt: 'Clínicas Veterinárias', es: 'Clínicas veterinarias', en: 'Veterinary clinics' },
-      { pt: 'Centros Cirúrgicos', es: 'Quirófanos', en: 'Surgical centers' },
-      { pt: 'Indústrias de Ozonização', es: 'Industrias de ozonización', en: 'Ozonation industries' }
-    ]
-  },
-  'geracao-oxigenio': {
-    name: { pt: 'Geração de Oxigênio e Anestesia', es: 'Generación de Oxígeno y Anestesia', en: 'Oxygen Generation and Anesthesia' },
-    cat: { pt: 'Gases', es: 'Gases', en: 'Gases' },
-    desc: {
-      pt: 'Sistemas PSA e concentradores de oxigênio para geração on-site. Independência de fornecedores externos de gases com produção contínua e confiável.',
-      es: 'Sistemas PSA y concentradores de oxígeno para generación in-situ. Independencia de proveedores externos de gases con producción continua y confiable.',
-      en: 'PSA systems and oxygen concentrators for on-site generation. Independence from external gas suppliers with continuous, reliable production.'
-    },
-    features: [
-      { pt: 'Pureza de 93% a 99,5% O₂', es: 'Pureza de 93% a 99,5% O₂', en: '93% to 99.5% O₂ purity' },
-      { pt: 'Capacidade de 1 a 500 Nm³/h', es: 'Capacidad de 1 a 500 Nm³/h', en: 'Capacity of 1 to 500 Nm³/h' },
-      { pt: 'Tecnologia PSA ou VPSA', es: 'Tecnología PSA o VPSA', en: 'PSA or VPSA technology' },
-      { pt: 'Monitoramento e controle automático', es: 'Monitoreo y control automático', en: 'Automatic monitoring and control' },
-      { pt: 'Manutenção simplificada', es: 'Mantenimiento simplificado', en: 'Simplified maintenance' }
-    ],
-    apps: [
-      { pt: 'Hospitais e clínicas', es: 'Hospitales y clínicas', en: 'Hospitals and clinics' },
-      { pt: 'Ozonização de água', es: 'Ozonización de agua', en: 'Water ozonation' },
-      { pt: 'Tratamento de efluentes', es: 'Tratamiento de efluentes', en: 'Wastewater treatment' },
-      { pt: 'Soldagem e corte', es: 'Soldadura y corte', en: 'Welding and cutting' }
-    ]
-  },
-  'corte-solda': {
-    name: { pt: 'Equipamentos para Corte e Solda', es: 'Equipos para Corte y Soldadura', en: 'Cutting and Welding Equipment' },
-    cat: { pt: 'Industrial', es: 'Industrial', en: 'Industrial' },
-    desc: {
-      pt: 'Maçaricos, reguladores e acessórios para corte oxiacetilênico e soldagem MIG/TIG/Eletrodo. Equipamentos para metalurgia, fabricação e manutenção industrial.',
-      es: 'Sopletes, reguladores y accesorios para corte oxiacetilénico y soldadura MIG/TIG/Electrodo. Equipos para metalurgia, fabricación y mantenimiento industrial.',
-      en: 'Torches, regulators, and accessories for oxy-fuel cutting and MIG/TIG/Stick welding. Equipment for metallurgy, fabrication, and industrial maintenance.'
-    },
-    features: [
-      { pt: 'Maçaricos para corte e solda', es: 'Sopletes para corte y soldadura', en: 'Torches for cutting and welding' },
-      { pt: 'Reguladores para CO₂, Ar, O₂, Acetileno', es: 'Reguladores para CO₂, Ar, O₂, Acetileno', en: 'Regulators for CO₂, Ar, O₂, Acetylene' },
-      { pt: 'Mangueiras certificadas', es: 'Mangueras certificadas', en: 'Certified hoses' },
-      { pt: 'Bocais e consumíveis', es: 'Boquillas y consumibles', en: 'Nozzles and consumables' },
-      { pt: 'Kits completos para oficinas', es: 'Kits completos para talleres', en: 'Complete workshop kits' }
-    ],
-    apps: [
-      { pt: 'Metalurgia e siderurgia', es: 'Metalurgia y siderurgia', en: 'Metallurgy and steelmaking' },
-      { pt: 'Construção civil e obras', es: 'Construcción civil y obras', en: 'Civil construction and public works' },
-      { pt: 'Manutenção industrial', es: 'Mantenimiento industrial', en: 'Industrial maintenance' },
-      { pt: 'Oficinas mecânicas', es: 'Talleres mecánicos', en: 'Mechanical workshops' }
-    ]
-  },
-  'reguladores-especiais': {
-    name: { pt: 'Reguladores de Gases Especiais', es: 'Reguladores para Gases Especiales', en: 'Specialty Gas Regulators' },
-    cat: { pt: 'Instrumentação', es: 'Instrumentación', en: 'Instrumentation' },
-    desc: {
-      pt: 'Reguladores de alta performance projetados para controle de gases especiais, aplicações de alta e altíssima pressão, e calibração de instrumentos de medição. Desenvolvidos com foco em máxima estabilidade e vedação absoluta contra vazamentos.',
-      es: 'Reguladores de alto rendimiento diseñados para el control de gases especiales, aplicaciones de alta y altísima presión, y calibración de instrumentos de medición. Desarrollados con enfoque en la máxima estabilidad y sellado absoluto contra fugas.',
-      en: 'High-performance regulators designed for specialty gas control, high and extremely high-pressure applications, and measurement instrument calibration. Developed with a focus on maximum stability and absolute tightness against leakage.'
-    },
-    features: [
-      { pt: 'Modelos específicos para gases especiais de alta pureza', es: 'Modelos específicos para gases especiales de alta pureza', en: 'Specific models for high purity specialty gases' },
-      { pt: 'Estágio simples ou duplo para alta e altíssima pressão (até 300 bar)', es: 'Etapa simple o doble para alta y altísima presión (hasta 300 bar)', en: 'Single or double stage for high and extremely high pressure (up to 300 bar)' },
-      { pt: 'Otimizados para processos críticos de calibração analítica', es: 'Optimizados para procesos críticos de calibración analítica', en: 'Optimized for critical analytical calibration processes' },
-      { pt: 'Construção em materiais inertes (Aço Inox 316, PTFE)', es: 'Construcción en materiales inertes (Acero Inoxidable 316, PTFE)', en: 'Construction in inert materials (316 Stainless Steel, PTFE)' },
-      { pt: 'Estanqueidade certificada com teste de hélio em fábrica', es: 'Estanqueidad certificada con prueba de helio en fábrica', en: 'Certified tightness with factory helium test' }
-    ],
-    apps: [
-      { pt: 'Análise de gases padrão e misturas especiais', es: 'Análisis de gases patrón y mezclas especiales', en: 'Analysis of standard gases and specialty mixtures' },
-      { pt: 'Estações de calibração de instrumentação', es: 'Estaciones de calibración de instrumentación', en: 'Instrumentation calibration stations' },
-      { pt: 'Controle de processos críticos de alta pressão', es: 'Control de procesos críticos de alta presión', en: 'Critical high-pressure process control' },
-      { pt: 'Laboratórios de P&D de alta exigência', es: 'Laboratorios de I+D de alta exigencia', en: 'High-demand R&D laboratories' }
-    ]
-  },
-  'reguladores-hidraulicos': {
-    name: { pt: 'Reguladores Hidráulicos', es: 'Reguladores Hidráulicos', en: 'Hydraulic Regulators' },
-    cat: { pt: 'Alta Pressão', es: 'Alta Presión', en: 'High Pressure' },
-    desc: {
-      pt: 'Reguladores de alta pressão para aplicações hidráulicas especiais.',
-      es: 'Reguladores de alta presión para aplicaciones hidráulicas especiales.',
-      en: 'High pressure regulators for special hydraulic applications.'
-    },
-    features: [
-      { pt: 'Controle preciso de alta pressão', es: 'Control preciso de alta presión', en: 'Precise high-pressure control' },
-      { pt: 'Construção robusta', es: 'Construcción robusta', en: 'Robust construction' },
-      { pt: 'Vedação confiável', es: 'Sellado confiable', en: 'Reliable sealing' }
-    ],
-    apps: [
-      { pt: 'Sistemas hidráulicos', es: 'Sistemas hidráulicos', en: 'Hydraulic systems' },
-      { pt: 'Teste de pressão', es: 'Pruebas de presión', en: 'Pressure testing' }
-    ]
-  },
-  'reguladores-calibracao': {
-    name: { pt: 'Reguladores para Calibração de Equipamentos', es: 'Reguladores para Calibración de Equipos', en: 'Equipment Calibration Regulators' },
-    cat: { pt: 'Calibração', es: 'Calibración', en: 'Calibration' },
-    desc: {
-      pt: 'Mini reguladores e reguladores de demanda compactos de alta precisão para calibração e instrumentação.',
-      es: 'Minireguladores y reguladores de demanda compactos de alta precisión para calibración e instrumentación.',
-      en: 'Mini regulators and compact flow-matching demand regulators for calibration and instrumentation.'
-    },
-    features: [
-      { pt: 'Alta precisão', es: 'Alta precisión', en: 'High precision' },
-      { pt: 'Design compacto', es: 'Diseño compacto', en: 'Compact design' },
-      { pt: 'Conexões C-10, 5/8 UNF e CGA', es: 'Conexiones C-10, 5/8 UNF y CGA', en: 'C-10, 5/8 UNF, and CGA connections' }
-    ],
-    apps: [
-      { pt: 'Calibração de detectores', es: 'Calibración de detectores', en: 'Detector calibration' },
-      { pt: 'Analisadores portáteis', es: 'Analizadores portátiles', en: 'Portable analyzers' },
-      { pt: 'Laboratórios de campo', es: 'Laboratorios de campo', en: 'Field laboratories' }
-    ]
-  },
-  'combate-incendio': {
-    name: { pt: 'Sistemas de Combate a Incêndio', es: 'Sistemas de Extinción de Incendios', en: 'Fire Suppression Systems' },
-    cat: { pt: 'Segurança', es: 'Seguridad', en: 'Safety' },
-    desc: {
-      pt: 'Sistemas de supressão de incêndio com CO₂, FM-200, Novec 1230 e outros agentes limpos. Proteção de salas de dados, painéis elétricos e ambientes críticos.',
-      es: 'Sistemas de supresión de incendios con CO₂, FM-200, Novec 1230 y otros agentes limpios. Protección de salas de servidores (data centers), paneles eléctricos y entornos críticos.',
-      en: 'Fire suppression systems with CO₂, FM-200, Novec 1230, and other clean agents. Protection of data rooms, electrical panels, and critical environments.'
-    },
-    features: [
-      { pt: 'Agentes: CO₂, FM-200, Novec 1230', es: 'Agentes: CO₂, FM-200, Novec 1230', en: 'Agents: CO₂, FM-200, Novec 1230' },
-      { pt: 'Supressão total por inundação', es: 'Supresión total por inundación', en: 'Total flooding suppression' },
-      { pt: 'Detecção integrada', es: 'Detección integrada', en: 'Integrated detection' },
-      { pt: 'Projeto conforme NFPA 12/2001', es: 'Diseño según NFPA 12/2001', en: 'Design according to NFPA 12/2001' },
-      { pt: 'Manutenção e recarga de cilindros', es: 'Mantenimiento y recarga de cilindros', en: 'Cylinder maintenance and refilling' }
-    ],
-    apps: [
-      { pt: 'Data centers e CPD', es: 'Centros de datos (data centers) y CPD', en: 'Data centers and IT rooms' },
-      { pt: 'Painéis e subestações elétricas', es: 'Paneles y subestaciones eléctricas', en: 'Electrical panels and substations' },
-      { pt: 'Salas de controle', es: 'Salas de control', en: 'Control rooms' },
-      { pt: 'Museus e arquivos', es: 'Museos y archivos', en: 'Museums and archives' }
-    ]
-  },
-  'transmissores-pressao': {
-    name: { pt: 'Transmissores: Pressão - Nível - Temperatura', es: 'Transmisores: Presión - Nivel - Temperatura', en: 'Transmitters: Pressure - Level - Temperature' },
-    cat: { pt: 'Instrumentação', es: 'Instrumentación', en: 'Instrumentation' },
-    desc: {
-      pt: 'Transmissores inteligentes de alta performance para medição de pressão diferencial, manométrica, absoluta e nível. Compatíveis com HART, Profibus e Foundation Fieldbus.',
-      es: 'Transmisores inteligentes de alto rendimiento para medición de presión diferencial, manométrica, absoluta y nivel. Compatibles con HART, Profibus y Foundation Fieldbus.',
-      en: 'High-performance intelligent transmitters for differential, gauge, absolute pressure, and level measurement. Compatible with HART, Profibus, and Foundation Fieldbus.'
-    },
-    features: [
-      { pt: 'Precisão de ±0,04% da URL', es: 'Precisión de ±0,04% de la URL', en: 'Accuracy of ±0,04% of URL' },
-      { pt: 'Protocolo HART, Profibus PA, FF', es: 'Protocolo HART, Profibus PA, FF', en: 'HART, Profibus PA, FF protocol' },
-      { pt: 'Rangeabilidade de 100:1', es: 'Rangeabilidad de 100:1', en: '100:1 rangeability' },
-      { pt: 'Display LCD local configurável', es: 'Pantalla LCD local configurable', en: 'Configurable local LCD display' },
-      { pt: 'Certificação ATEX e SIL 2/3', es: 'Certificación ATEX y SIL 2/3', en: 'ATEX and SIL 2/3 certification' }
-    ],
-    apps: [
-      { pt: 'Óleo & gás', es: 'Petróleo y gas', en: 'Oil & gas' },
-      { pt: 'Petroquímica e química', es: 'Petroquímica y química', en: 'Petrochemical and chemical' },
-      { pt: 'Geração de energia', es: 'Generación de energía', en: 'Power generation' },
-      { pt: 'Processos críticos de segurança', es: 'Procesos críticos de seguridad', en: 'Critical safety processes' }
-    ]
-  },
-  'valvulas-industriais': {
-    name: { pt: 'Válvulas Industriais - Medicinais - Especiais', es: 'Válvulas Industriales - Medicinales - Especiales', en: 'Industrial - Medical - Specialty Valves' },
-    cat: { pt: 'Válvulas para Cilindros', es: 'Válvulas para Cilindros', en: 'Cylinder Valves' },
-    desc: {
-      pt: 'Válvulas de agulha, esfera e membrana para gases industriais e medicinais. Com tecnologia de vedação de precisão, suportam altas pressões e oferecem controle fino de fluxo.',
-      es: 'Válvulas de aguja, esfera y diafragma para gases industriales y medicinales. Con tecnología de sellado de precisión, soportan altas presiones y ofrecen un control fino del flujo.',
-      en: 'Needle, ball, and diaphragm valves for industrial and medical gases. With precision sealing technology, they withstand high pressures and offer fine flow control.'
-    },
-    features: [
-      { pt: 'Materiais: aço inox, latão, PTFE', es: 'Materiales: acero inoxidable, latón, PTFE', en: 'Materials: stainless steel, brass, PTFE' },
-      { pt: 'Pressões de até 400 bar', es: 'Presiones de hasta 400 bar', en: 'Pressures up to 400 bar' },
-      { pt: 'Tamanhos de 1/8" a 2"', es: 'Tamaños de 1/8" a 2"', en: 'Sizes from 1/8" to 2"' },
-      { pt: 'Certificação para gases medicinais', es: 'Certificación para gases medicinales', en: 'Certification for medical gases' },
-      { pt: 'Conexões rosca, solda e flange', es: 'Conexiones roscadas, soldadas y bridadas', en: 'Threaded, welded, and flanged connections' }
-    ],
-    apps: [
-      { pt: 'Distribuição de gases medicinais', es: 'Distribución de gases medicinales', en: 'Medical gas distribution' },
-      { pt: 'Laboratórios e P&D', es: 'Laboratorios e I+D', en: 'Laboratories and R&D' },
-      { pt: 'Indústria química', es: 'Industria química', en: 'Chemical industry' },
-      { pt: 'Automação de processos', es: 'Automatización de procesos', en: 'Process automation' }
-    ]
-  }
-};
-
-// ─── ARTICLE TRANSLATIONS ───────────────────────────────────────────────────
-const articleTranslations = [
-  {
-    id: "seguranca-producao-hidrogenio-anp",
-    title: { pt: "Segurança Operacional na Produção de Hidrogênio de Baixa Emissão", es: "Seguridad Operacional en la Producción de Hidrógeno de Bajas Emisiones", en: "Operational Safety in Low Emission Hydrogen Production" },
-    summary: { pt: "Relatório oficial da ANP sobre o arcabouço regulatório, gestão de riscos e a segurança operacional para a produção de hidrogênio no Brasil.", es: "Informe oficial de la ANP sobre el marco regulatorio, gestión de riesgos y seguridad operacional para la producción de hidrógeno en Brasil.", en: "Official ANP report on the regulatory framework, risk management, and operational safety for hydrogen production in Brazil." }
-  },
-  {
-    id: "principios-seguranca-hidrogenio",
-    title: { pt: "Princípios Básicos de Segurança do Hidrogênio", es: "Principios Básicos de Seguridad del Hidrógeno", en: "Basic Principles of Hydrogen Safety" },
-    summary: { pt: "Síntese técnica de referência sobre as propriedades, perigos dominantes e a filosofia de proteção em camadas para sistemas de hidrogênio.", es: "Síntesis técnica de referencia sobre las propiedades, peligros dominantes y filosofía de protección en capas para sistemas de hidrógeno.", en: "Technical reference synthesis on properties, dominant hazards, and layered protection philosophy for hydrogen systems." }
-  },
-  {
-    id: "manual-projeto-abrigos-cilindros",
-    title: { pt: "Manual Prático de Projeto: Definição do Local e Distanciamentos de Abrigos de Cilindros", es: "Manual Práctico de Diseño: Definición del Sitio y Distancias de Casetas de Cilindros", en: "Practical Design Manual: Site Selection and Distances for Cylinder Shelters" },
-    summary: { pt: "Guia consolidado com requisitos legais, critérios prescritivos e boas práticas para projetos de centrais externas e abrigos de cilindros de gases comprimidos.", es: "Guía consolidada con requisitos legales, criterios prescriptivos y buenas prácticas para proyectos de centrales externas y casetas de cilindros de gases comprimidos.", en: "Consolidated guide with legal requirements, prescriptive criteria, and best practices for external stations and compressed gas cylinder shelters." }
-  },
-  {
-    id: "conversao-diesel-hidrogenio",
-    title: { pt: "Conversão de Motores Diesel para Gás Natural", es: "Conversión de Motores Diesel a Gas Natural", en: "Conversion of Diesel Engines to Natural Gas" },
-    summary: { pt: "Soluções dedicadas a gás natural ou diesel-gás em modo dual fuel para grupos geradores, bombas, compressores e equipamentos industriais.", es: "Soluciones dedicadas a gas natural o diesel-gas en modo dual fuel para grupos electrógenos, bombas, compresores y equipos industriales.", en: "Dedicated solutions for natural gas or dual fuel diesel-gas for generator sets, pumps, compressors, and industrial equipment." }
-  },
-  {
-    id: "instrumentacao-analitica-utilidades",
-    title: { pt: "Instrumentação Analítica: A Ciência por Trás da Infraestrutura", es: "Instrumentación Analítica: La Ciencia detrás de la Infraestructura", en: "Analytical Instrumentation: The Science Behind the Infrastructure" },
-    summary: { pt: "A diferença crítica entre montar tubulações industriais comuns e projetar redes de utilidades baseadas no limite de detecção do instrumento.", es: "La diferencia crítica entre montar tuberías industriales comunes y diseñar redes de servicios públicos basadas en el límite de detección del instrumento.", en: "The critical difference between installing common industrial piping and designing utility networks based on the instrument detection limit." }
-  },
-  {
-    id: "compatibilidade-elgiloy-h2s",
-    title: { pt: "Compatibilidade do H₂S com Liga Elgiloy®", es: "Compatibilidad del H₂S con la Aleación Elgiloy®", en: "Compatibility of H₂S with Elgiloy® Alloy" },
-    summary: { pt: "Folha de dados técnica orientativa sobre componentes de reguladores e válvulas para gases especiais contendo Sulfeto de Hidrogênio (H₂S).", es: "Hoja de datos técnica orientativa sobre componentes de reguladores y válvulas para gases especiales que contienen sulfuro de hidrógeno (H₂S).", en: "Technical guidance datasheet on regulator and valve components for specialty gases containing Hydrogen Sulfide (H₂S)." }
-  },
-  {
-    id: "instrumentacao-industria-4-0",
-    title: { pt: "Importância da instrumentação correta na indústria 4.0", es: "Importancia de la instrumentación correcta en la industria 4.0", en: "Importance of correct instrumentation in Industry 4.0" },
-    summary: { pt: "Como a escolha dos instrumentos afeta a qualidade e a eficiência dos processos modernos.", es: "Cómo la elección de los instrumentos afecta la calidad y la eficiencia de los procesos modernos.", en: "How the choice of instruments affects the quality and efficiency of modern processes." }
-  },
-  {
-    id: "seguranca-sistemas-gases",
-    title: { pt: "Segurança em sistemas de gases: Normas NR-13 e além", es: "Seguridad en sistemas de gases: Normas NR-13 y más allá", en: "Safety in gas systems: NR-13 standards and beyond" },
-    summary: { pt: "Normas e procedimentos essenciais para garantir a integridade e a segurança de sistemas de gases industriais.", es: "Normas y procedimientos esenciales para garantizar la integridad y seguridad de sistemas de gases industriales.", en: "Essential standards and procedures to ensure the integrity and safety of industrial gas systems." }
-  },
-  {
-    id: "engenharia-aplicada-processos",
-    title: { pt: "Engenharia aplicada: Otimizando processos industriais", es: "Ingeniería aplicada: Optimizando procesos industriales", en: "Applied Engineering: Optimizing Industrial Processes" },
-    summary: { pt: "A diferença entre a teoria e a prática na otimização de malhas de controle e processos críticos.", es: "La diferencia entre la teoría y la práctica en la optimización de lazos de control y procesos críticos.", en: "The difference between theory and practice in optimizing control loops and critical processes." }
-  },
-  {
-    id: "confiabilidade-operacional",
-    title: { pt: "Garantindo confiabilidade operacional em 5 passos", es: "Garantizando la confiabilidad operacional en 5 pasos", en: "Ensuring Operational Reliability in 5 Steps" },
-    summary: { pt: "Estratégias para reduzir paradas não programadas e aumentar a vida útil dos seus ativos.", es: "Estrategias para reducir paradas no programadas y aumentar la vida útil de sus activos.", en: "Strategies to reduce unscheduled shutdowns and increase the useful life of your assets." }
-  },
-  {
-    id: "boas-praticas-calibracao",
-    title: { pt: "Boas práticas em calibração de instrumentos analíticos", es: "Buenas prácticas en la calibración de instrumentos analíticos", en: "Best Practices in Analytical Instrument Calibration" },
-    summary: { pt: "Como garantir a rastreabilidade e a precisão das suas análises.", es: "Cómo garantizar la trazabilidad y la precisión de sus análisis.", en: "How to ensure traceability and accuracy of your analyses." }
-  },
-  {
-    id: "analise-processo-vs-laboratorio",
-    title: { pt: "Diferença entre análise de processo e análise laboratorial", es: "Diferencia entre el análisis de procesos y el análisis de laboratorio", en: "Difference Between Process Analysis and Laboratory Analysis" },
-    summary: { pt: "Vantagens e desvantagens de cada abordagem para o controle de qualidade.", es: "Ventajas y desventajas de cada enfoque para el control de calidad.", en: "Advantages and disadvantages of each approach for quality control." }
-  },
-  {
-    id: "conformidade-rastreabilidade",
-    title: { pt: "Conformidade e rastreabilidade: Por que documentar?", es: "Conformidad y trazabilidad: ¿Por qué documentar?", en: "Compliance and Traceability: Why Document?" },
-    summary: { pt: "A importância da documentação técnica na indústria regulada.", es: "La importancia de la documentación técnica en la industria regulada.", en: "The importance of technical documentation in the regulated industry." }
-  },
-  {
-    id: "tendencias-instrumentacao",
-    title: { pt: "Tendências em instrumentação para o próximo ano", es: "Tendencias en instrumentación para el próximo año", en: "Trends in Instrumentation for Next Year" },
-    summary: { pt: "O que esperar do futuro da automação e instrumentação industrial.", es: "Qué esperar del futuro de la automatización e instrumentación industrial.", en: "What to expect from the future of industrial automation and instrumentation." }
-  }
-];
-
-// Populate article translations
 for (const art of articleTranslations) {
   addKey(`article_${art.id}_title`, art.title);
   addKey(`article_${art.id}_summary`, art.summary);
+  if (art.content) {
+    addKey(`article_${art.id}_content`, art.content);
+  }
 }
 
-// Populate product translations
-for (const id of productsIds) {
-  const trans = productsTranslations[id];
-  if (trans) {
-    addKey(`product_${id}_name`, trans.name);
-    addKey(`product_${id}_cat`, trans.cat);
-    addKey(`product_${id}_desc`, trans.desc);
-    trans.features.forEach((feat, index) => {
-      addKey(`product_${id}_features_${index}`, feat);
-    });
-    trans.apps.forEach((app, index) => {
-      addKey(`product_${id}_apps_${index}`, app);
-    });
+// ─── SPECIAL APPLICATIONS & TOOLS & SEO TRANSLATIONS ──────────────────────
+const seoAndPagesKeys = {
+  "meta_home_title": {
+    "pt": "Prime Products | Soluções em Instrumentação, Gases e Engenharia",
+    "es": "Prime Products | Soluciones en Instrumentación, Gases e Ingeniería",
+    "en": "Prime Products | Process Instrumentation, Gas Systems & Engineering Solutions"
+  },
+  "meta_home_desc": {
+    "pt": "Soluções integradas em instrumentação analítica, centrais de gases especiais, reguladores e engenharia aplicada para indústrias de alta exigência.",
+    "es": "Soluciones integradas en instrumentación analítica, centrales de gases especiales, reguladores e ingeniería aplicada para industrias de alta exigencia.",
+    "en": "Integrated solutions in analytical instrumentation, high-purity gas manifolds, regulators, and applied process engineering for demanding industries."
+  },
+  "meta_about_title": {
+    "pt": "Sobre a Prime Products | Engenharia, Inovação e Confiabilidade",
+    "es": "Sobre Prime Products | Ingeniería, Innovación y Confiabilidad",
+    "en": "About Prime Products | Engineering, Innovation & Reliability"
+  },
+  "meta_about_desc": {
+    "pt": "Conheça a Prime Products: excelência técnica em engenharia de fluidos, gases industriais, instrumentação de processos e segurança operacional.",
+    "es": "Conozca Prime Products: excelencia técnica en ingeniería de fluidos, gases industriales, instrumentación de procesos y seguridad operacional.",
+    "en": "Discover Prime Products: technical excellence in fluid engineering, specialty gases, process instrumentation, and plant safety."
+  },
+  "meta_solutions_title": {
+    "pt": "Soluções de Engenharia e Serviços Técnicos | Prime Products",
+    "es": "Soluciones de Ingeniería y Servicios Técnicos | Prime Products",
+    "en": "Engineering Solutions & Technical Services | Prime Products"
+  },
+  "meta_solutions_desc": {
+    "pt": "Projetos turn-key, montagem de skids de processo, redes de utilidades de alta pureza e integração de instrumentação analítica.",
+    "es": "Proyectos llave en mano (turn-key), fabricación de skids de proceso, redes de gases de alta pureza e integración de instrumentación analítica.",
+    "en": "Turnkey engineering, modular process skids, high-purity utility piping, and analytical instrumentation integration."
+  },
+  "meta_tools_title": {
+    "pt": "Ferramentas e Simuladores Técnicos | Prime Products",
+    "es": "Herramientas y Simuladores Técnicos | Prime Products",
+    "en": "Engineering Tools & Calculators | Prime Products"
+  },
+  "meta_tools_desc": {
+    "pt": "Conversores de grandezas físicas, tabelas termodinâmicas de gases industriais e diagramas de fase para engenheiros e projetistas.",
+    "es": "Conversores de unidades físicas, tablas termodinámicas de gases industriales y diagramas de fase para ingenieros de procesos.",
+    "en": "Physical unit converters, industrial gas thermodynamic tables, and phase diagrams for process and mechanical engineers."
+  },
+  "meta_tools_pro_title": {
+    "pt": "Calculadoras Técnicas Avançadas Pro | Prime Products",
+    "es": "Calculadoras Técnicas Avanzadas Pro | Prime Products",
+    "en": "Advanced Pro Engineering Calculators | Prime Products"
+  },
+  "meta_tools_pro_desc": {
+    "pt": "Dimensionamento de válvulas de controle Cv/Kv conforme ISA-75.01, simulação de perda de carga e cálculos de fluxo em regime dinâmico.",
+    "es": "Dimensionamiento de válvulas de control Cv/Kv conforme a ISA-75.01, simulación de caída de presión y cálculo de flujo dinámico.",
+    "en": "ISA-75.01 control valve Cv/Kv sizing, line pressure drop simulations, and multi-variable dynamic flow calculations."
+  },
+  "meta_content_title": {
+    "pt": "Conteúdo Técnico e Artigos de Engenharia | Prime Products",
+    "es": "Contenido Técnico y Artículos de Ingeniería | Prime Products",
+    "en": "Technical Articles & Engineering Insights | Prime Products"
+  },
+  "meta_content_desc": {
+    "pt": "Artigos especializados sobre hidrogênio verde, segurança NR-13, boas práticas de calibração metrológica e tecnologia analítica.",
+    "es": "Artículos especializados sobre hidrógeno verde, seguridad en recipientes a presión, calibración metrológica y tecnología analítica.",
+    "en": "In-depth engineering articles on green hydrogen, pressure vessel safety, metrological calibration best practices, and process analytics."
+  },
+  "meta_contact_title": {
+    "pt": "Fale com Nossos Especialistas de Engenharia | Prime Products",
+    "es": "Hable con Nuestros Especialistas de Ingeniería | Prime Products",
+    "en": "Contact Our Engineering Specialists | Prime Products"
+  },
+  "meta_contact_desc": {
+    "pt": "Entre em contato com a equipe técnica da Prime Products para dimensionamento, orçamentos e consultoria técnica personalizada.",
+    "es": "Contacte al equipo técnico de Prime Products para dimensionamiento de equipos, presupuestos y asesoría de ingeniería personalizada.",
+    "en": "Get in touch with the Prime Products engineering team for technical sizing, RFQs, and customized process consulting."
+  },
+  "meta_automotiva_title": {
+    "pt": "Controle de Emissões Veiculares | Prime Products",
+    "es": "Control de Emisiones Vehiculares | Prime Products",
+    "en": "Vehicle Emission Testing Laboratories | Prime Products"
+  },
+  "meta_automotiva_desc": {
+    "pt": "Laboratórios de emissões veiculares com amostragem, calibração e análise de precisão.",
+    "es": "Laboratorios de control de emisiones vehiculares con muestreo, calibración y análisis de alta precisión.",
+    "en": "Vehicle emissions testing laboratories with sampling systems, automated calibration, and precision multi-bench analysis."
+  },
+  "meta_farmaceutica_title": {
+    "pt": "Processos Farmacêuticos e Utilidades Limpas | Prime Products",
+    "es": "Procesos Farmacéuticos y Servicios Limpios | Prime Products",
+    "en": "Pharmaceutical Clean Utilities & Process Systems | Prime Products"
+  },
+  "meta_farmaceutica_desc": {
+    "pt": "Sistemas de gases de processo, utilidades críticas e skids para indústrias farmacêuticas.",
+    "es": "Sistemas de gases de proceso, servicios críticos y skids para la industria farmacéutica y biotecnología.",
+    "en": "High-purity process gas systems, critical clean utilities, and modular skids for pharmaceutical and biotech facilities."
+  },
+  "meta_hydrogen_title": {
+    "pt": "Energias Renováveis & Hidrogênio | Prime Products",
+    "es": "Energías Renovables e Hidrógeno | Prime Products",
+    "en": "Renewable Energy & Hydrogen Infrastructure | Prime Products"
+  },
+  "meta_hydrogen_desc": {
+    "pt": "Soluções Jumbo Tubes Tipo 4, Tube Trailers e infraestrutura de alta pressão para H2 verde.",
+    "es": "Soluciones de Jumbo Tubes Tipo 4, Tube Trailers e infraestructura de alta presión para H₂ verde.",
+    "en": "Type 4 Jumbo Tube packages, high-pressure tube trailers, and refueling infrastructure for green hydrogen."
+  },
+  "meta_solutions_medicao_title": {
+    "pt": "Medição e Controle de Processos | Prime Products",
+    "es": "Medición y Control de Procesos | Prime Products",
+    "en": "Process Measurement & Control | Prime Products"
+  },
+  "meta_solutions_medicao_desc": {
+    "pt": "Instrumentos de precisão para pressão, temperatura, nível e vazão em ambientes industriais severos.",
+    "es": "Instrumentos de precisión para presión, temperatura, nivel y caudal en entornos industriales severos.",
+    "en": "Precision instrumentation for pressure, temperature, level, and flow in harsh industrial environments."
+  },
+  "meta_solutions_analitica_title": {
+    "pt": "Instrumentação Analítica | Prime Products",
+    "es": "Instrumentación Analítica | Prime Products",
+    "en": "Analytical Instrumentation | Prime Products"
+  },
+  "meta_solutions_analitica_desc": {
+    "pt": "Sistemas de análise contínua de gases, amostragem e monitoramento em linha.",
+    "es": "Sistemas de análisis continuo de gases, acondicionamiento de muestras y monitoreo en línea.",
+    "en": "Continuous gas analysis systems, sample conditioning, and inline process monitoring."
+  },
+  "meta_solutions_seguranca_title": {
+    "pt": "Segurança Operacional e Combate a Incêndio | Prime Products",
+    "es": "Seguridad Operacional y Protección Contra Incendios | Prime Products",
+    "en": "Operational Safety & Fire Suppression | Prime Products"
+  },
+  "meta_solutions_seguranca_desc": {
+    "pt": "Detecção de gases tóxicos e inflamáveis, sistemas automáticos de extinção e barreiras de proteção.",
+    "es": "Detección de gases tóxicos e inflamables, sistemas automáticos de extinción y barreras de protección.",
+    "en": "Toxic and combustible gas detection arrays, automated clean agent fire suppression, and process interlocks."
+  },
+  "meta_solutions_integradas_title": {
+    "pt": "Soluções Integradas Turn-key | Prime Products",
+    "es": "Soluciones Integradas Llave en Mano | Prime Products",
+    "en": "Integrated Turnkey Solutions | Prime Products"
+  },
+  "meta_solutions_integradas_desc": {
+    "pt": "Engenharia completa desde a concepção, montagem de painéis, skids até o comissionamento em campo.",
+    "es": "Ingeniería integral desde el diseño básico, montaje de paneles, skids hasta la puesta en marcha.",
+    "en": "End-to-end engineering from conceptual design, custom panel assembly, skid manufacturing to field commissioning."
+  },
+  "meta_solutions_rede_title": {
+    "pt": "Redes de Distribuição de Gases | Prime Products",
+    "es": "Redes de Distribución de Gases | Prime Products",
+    "en": "Gas Distribution Piping Networks | Prime Products"
+  },
+  "meta_solutions_rede_desc": {
+    "pt": "Tubulações em aço inox 316L, soldagem orbital e centrais de distribuição de gases de alta pureza.",
+    "es": "Tuberías en acero inoxidable 316L, soldadura orbital y centrales de distribución de gases de alta pureza.",
+    "en": "High-purity 316L stainless steel piping networks, certified orbital welding, and manifold distribution headers."
+  },
+  "meta_solutions_ar_title": {
+    "pt": "Sistemas de Ar Comprimido e Gases | Prime Products",
+    "es": "Sistemas de Aire Comprimido y Gases | Prime Products",
+    "en": "Compressed Air & Industrial Gas Systems | Prime Products"
+  },
+  "meta_solutions_ar_desc": {
+    "pt": "Tratamento de ar comprimido, geração in-situ de N2/O2 e controle de pureza e particulados.",
+    "es": "Tratamiento de aire comprimido, generación in-situ de N₂/O₂ y control de pureza y partículas.",
+    "en": "Compressed air treatment, on-site N₂/O₂ PSA generation, and continuous particulate monitoring."
+  },
+  "meta_solutions_3d_title": {
+    "pt": "Engenharia 3D e Modelagem de Processos | Prime Products",
+    "es": "Ingeniería 3D y Modelado de Procesos | Prime Products",
+    "en": "3D Engineering & Process Modeling | Prime Products"
+  },
+  "meta_solutions_3d_desc": {
+    "pt": "Projetos conceituais e executivos em 3D, isométricos e P&ID para instalações industriais complexas.",
+    "es": "Diseños conceptuales y ejecutivos en 3D, isométricos y P&ID para plantas industriales complejas.",
+    "en": "Conceptual and detailed 3D CAD engineering, piping isometrics, and P&IDs for complex process plants."
+  },
+  "auto_hero_tag": {
+    "pt": "INDÚSTRIA E CONTROLE",
+    "es": "INDUSTRIA Y CONTROL",
+    "en": "INDUSTRY & CONTROL"
+  },
+  "auto_hero_title": {
+    "pt": "Laboratórios de Controle de Emissões Veiculares",
+    "es": "Laboratorios de Control de Emisiones Vehiculares",
+    "en": "Vehicle Emission Testing Laboratories"
+  },
+  "auto_back_btn": {
+    "pt": "Voltar para Aplicações",
+    "es": "Volver a Aplicaciones",
+    "en": "Back to Applications"
+  },
+  "auto_exec_title": {
+    "pt": "Visão Executiva",
+    "es": "Visión Ejecutiva",
+    "en": "Executive Overview"
+  },
+  "auto_exec_p1": {
+    "pt": "Engenharia de gases, instrumentação analítica, dinamômetros e sistemas de calibração automotiva.",
+    "es": "Ingeniería de gases, instrumentación analítica, dinamómetros y sistemas de calibración automotriz.",
+    "en": "Gas engineering, analytical instrumentation, dynamometers, and automotive calibration systems."
+  },
+  "auto_exec_p2": {
+    "pt": "A Prime Products desenvolve soluções integrando centrais de gases, painéis de calibração, redes em aço inoxidável e infraestrutura para analisadores de gases e dinamômetros para laboratórios de P&D e homologação.",
+    "es": "Prime Products desarrolla soluciones integrando centrales de gases, paneles de calibración, redes en acero inoxidable e infraestructura para analizadores de gases y dinamómetros para laboratorios de I+D y homologación.",
+    "en": "Prime Products engineers integrated solutions including gas manifolds, calibration panels, stainless steel piping, and infrastructure for gas analyzers and chassis dynamometers in R&D and certification labs."
+  },
+  "auto_core_principle_tag": {
+    "pt": "PRINCÍPIO CENTRAL",
+    "es": "PRINCIPIO FUNDAMENTAL",
+    "en": "CORE PRINCIPLE"
+  },
+  "auto_core_principle_text": {
+    "pt": "A confiabilidade do resultado não depende apenas do analisador. Ela resulta da integração entre gases certificados, estabilidade de pressão, estanqueidade e rastreabilidade metrológica.",
+    "es": "La confiabilidad del resultado no depende únicamente del analizador. Proviene de la integración entre gases certificados, estabilidad de presión, hermeticidad absoluta y trazabilidad metrológica.",
+    "en": "Measurement accuracy depends not solely on the analyzer itself, but on the seamless integration of certified calibration gases, pressure stability, zero-leak integrity, and metrological traceability."
+  },
+  "auto_arch_title": {
+    "pt": "Arquitetura Funcional do Laboratório",
+    "es": "Arquitectura Funcional del Laboratorio",
+    "en": "Functional Laboratory Architecture"
+  },
+  "auto_arch_step_1": {
+    "pt": "O dinamômetro aplica carga e reproduz o ciclo de condução ou o regime de operação do motor.",
+    "es": "El dinamómetro aplica carga y reproduce el ciclo de conducción o el régimen de operación del motor.",
+    "en": "The chassis dynamometer simulates road load and reproduces standard driving cycles or steady-state engine regimes."
+  },
+  "auto_arch_step_2": {
+    "pt": "O sistema de amostragem coleta o escapamento bruto ou diluído e controla vazões, temperaturas e pressões.",
+    "es": "El sistema de muestreo recolecta el escape crudo o diluido y controla caudales, temperaturas y presiones.",
+    "en": "The sampling system collects raw or dilute exhaust while precisely managing flow rates, sample temperatures, and line pressures."
+  },
+  "auto_arch_step_3": {
+    "pt": "Os analisadores determinam as concentrações dos poluentes e dos componentes de interesse.",
+    "es": "Los analizadores determinan las concentraciones de contaminantes y componentes de interés.",
+    "en": "Analytical instruments quantify concentrations of regulated gaseous emissions and target combustion compounds."
+  },
+  "auto_arch_step_4": {
+    "pt": "Os painéis de gases executam redução de pressão, seleção, purga e distribuição de gases de zero, span e auditoria.",
+    "es": "Los paneles de gases ejecutan reducción de presión, selección, purga y distribución de gases de cero, span y auditoría.",
+    "en": "Specialty gas panels perform precision pressure regulation, stream selection, high-purity purging, and routing of zero, span, and audit gases."
+  },
+  "auto_arch_step_5": {
+    "pt": "A automação sincroniza dinamômetro, CVS, analisadores e aquisição de dados.",
+    "es": "La automatización sincroniza dinamómetro, CVS, analisadores e aquisição de dados.",
+    "en": "Automated test controllers synchronize the dynamometer, CVS dilution tunnel, gas benches, and data acquisition."
+  },
+  "auto_inst_title": {
+    "pt": "Instrumentação Analítica de Emissões",
+    "es": "Instrumentación Analítica de Emisiones",
+    "en": "Analytical Emissions Instrumentation"
+  },
+  "auto_inst_desc": {
+    "pt": "Plataformas modulares configuradas com diferentes princípios de medição para cada componente.",
+    "es": "Plataformas modulares configuradas con diferentes principios de medición para cada componente.",
+    "en": "Modular multi-bench platforms configured with optimal measurement technologies for each gaseous species."
+  },
+  "auto_panels_title": {
+    "pt": "Painéis e Circuitos Dedicados",
+    "es": "Paneles y Circuitos Dedicados",
+    "en": "Dedicated Gas Panels & Circuits"
+  },
+  "auto_safety_title": {
+    "pt": "Segurança Integrada",
+    "es": "Seguridad Integrada",
+    "en": "Integrated Safety"
+  },
+  "auto_results_title": {
+    "pt": "Resultados Esperados",
+    "es": "Resultados Esperados",
+    "en": "Target Deliverables & Benefits"
+  },
+  "auto_gallery_title": {
+    "pt": "Galeria de Aplicações Técnicas",
+    "es": "Galería de Aplicaciones Técnicas",
+    "en": "Technical Applications Gallery"
+  },
+  "pharma_hero_tag": {
+    "pt": "LABORATORIAL E PESQUISA",
+    "es": "LABORATORIO E INVESTIGACIÓN",
+    "en": "LABORATORY & RESEARCH"
+  },
+  "pharma_hero_title": {
+    "pt": "Soluções de Engenharia para a Indústria Farmacêutica",
+    "es": "Soluciones de Ingeniería para la Industria Farmacéutica",
+    "en": "Engineering Solutions for the Pharmaceutical Industry"
+  },
+  "pharma_section_process_title": {
+    "pt": "Utilidades e Sistemas de Processo para Ambientes Regulados",
+    "es": "Servicios Críticos y Sistemas de Proceso para Ambientes Regulados",
+    "en": "Critical Utilities and Process Systems for Regulated Environments"
+  },
+  "pharma_back_btn": {
+    "pt": "Voltar para Aplicações",
+    "es": "Volver a Aplicaciones",
+    "en": "Back to Applications"
+  },
+  "pharma_exec_p1": {
+    "pt": "Projetos, fornecimento e montagens integradas, com foco em qualidade, segurança operacional, rastreabilidade e preparação para qualificação.",
+    "es": "Diseño, suministro y montaje integral enfocado en calidad, seguridad operacional, trazabilidad y calificación.",
+    "en": "Turnkey engineering, equipment supply, and validated installation focused on cGMP compliance, operational safety, and full DQ/IQ/OQ readiness."
+  },
+  "pharma_sec1_title": {
+    "pt": "Gases de Processo e Utilidades Críticas",
+    "es": "Gases de Proceso y Servicios Críticos",
+    "en": "High-Purity Process Gases & Clean Utilities"
+  },
+  "pharma_sec2_title": {
+    "pt": "Sistemas de Água e Vapor Limpo",
+    "es": "Sistemas de Agua Purificada y Vapor Puro",
+    "en": "High-Purity Water & Clean Steam Systems"
+  },
+  "pharma_sec3_title": {
+    "pt": "Sistemas Clean-in-Place — CIP",
+    "es": "Sistemas de Limpieza In-Situ — CIP",
+    "en": "Clean-in-Place (CIP) Skids & Automation"
+  },
+  "pharma_qa_title": {
+    "pt": "Engenharia e Qualidade",
+    "es": "Ingeniería y Calidad",
+    "en": "Engineering & Quality Assurance"
+  },
+  "pharma_standards_title": {
+    "pt": "Referências Normativas",
+    "es": "Normativas y Estándares de Referencia",
+    "en": "Regulatory & Standards Framework"
+  },
+  "hydro_hero_tag": {
+    "pt": "ENERGIA",
+    "es": "ENERGÍA",
+    "en": "ENERGY"
+  },
+  "hydro_hero_title": {
+    "pt": "Energias Renováveis e Hidrogênio",
+    "es": "Energías Renovables e Hidrógeno",
+    "en": "Renewable Energy & Hydrogen Systems"
+  },
+  "hydro_back_btn": {
+    "pt": "Voltar para Aplicações",
+    "es": "Volver a Aplicaciones",
+    "en": "Back to Applications"
+  },
+  "hydro_about_title": {
+    "pt": "Sobre esta Aplicação",
+    "es": "Sobre esta Aplicación",
+    "en": "About this Application"
+  },
+  "hydro_challenges_title": {
+    "pt": "Principais Desafios",
+    "es": "Principales Desafíos",
+    "en": "Key Technical Challenges"
+  },
+  "hydro_solutions_title": {
+    "pt": "Soluções Prime Products",
+    "es": "Soluciones Prime Products",
+    "en": "Prime Products Solutions"
+  },
+  "hydro_block1_title": {
+    "pt": "Sistemas de Transporte (Tube Trailers)",
+    "es": "Sistemas de Transporte de Alta Presión (Tube Trailers)",
+    "en": "High-Pressure Transportation Systems (Tube Trailers)"
+  },
+  "hydro_block2_title": {
+    "pt": "Armazenamento Estacionário de Grande Capacidade",
+    "es": "Almacenamiento Estacionario de Gran Capacidad",
+    "en": "Super Large Capacity Stationary Storage"
+  },
+  "hydro_block3_title": {
+    "pt": "Postos de Abastecimento de H₂ e Aplicações Aeroespaciais",
+    "es": "Estaciones de Servicio H2 y Aplicaciones Aeroespaciales",
+    "en": "H2 Refueling Stations & Aerospace Applications"
+  },
+  "tool_pressure_name": {
+    "pt": "Conversor de Pressão",
+    "es": "Conversor de Presión",
+    "en": "Pressure Unit Converter"
+  },
+  "tool_pressure_desc": {
+    "pt": "Converta entre bar, psi, kPa, MPa, atm, mmHg e outras unidades de pressão.",
+    "es": "Convierta entre bar, psi, kPa, MPa, atm, mmHg y otras unidades de presión.",
+    "en": "Convert between bar, psi, kPa, MPa, atm, mmHg, and other pressure units."
+  },
+  "tool_temp_name": {
+    "pt": "Conversor de Temperatura",
+    "es": "Conversor de Unidades de Temperatura",
+    "en": "Temperature Unit Converter"
+  },
+  "tool_temp_desc": {
+    "pt": "Conversão entre Celsius, Fahrenheit, Kelvin e Rankine.",
+    "es": "Conversión entre Celsius, Fahrenheit, Kelvin y Rankine.",
+    "en": "Conversion between Celsius, Fahrenheit, Kelvin, and Rankine."
+  },
+  "tool_flow_name": {
+    "pt": "Conversor de Vazão",
+    "es": "Conversor de Caudal",
+    "en": "Flow Rate Converter"
+  },
+  "tool_flow_desc": {
+    "pt": "Converta unidades de vazão: m³/h, L/min, SCFM, Nm³/h e mais.",
+    "es": "Convierta unidades de caudal: m³/h, L/min, SCFM, Nm³/h y más.",
+    "en": "Convert flow units: m³/h, L/min, SCFM, Nm³/h, and more."
+  },
+  "tool_gas_table_name": {
+    "pt": "Tabelas de Gases",
+    "es": "Tablas de Gases",
+    "en": "Industrial Gas Tables"
+  },
+  "tool_gas_table_desc": {
+    "pt": "Propriedades físicas e termodinâmicas dos principais gases industriais.",
+    "es": "Propiedades físicas y termodinámicas de los principales gases industriales.",
+    "en": "Physical and thermodynamic properties of key industrial gases."
+  },
+  "tool_phase_diagram_name": {
+    "pt": "Diagrama de Fases",
+    "es": "Diagramas de Fases",
+    "en": "Phase Diagrams"
+  },
+  "tool_phase_diagram_desc": {
+    "pt": "Diagramas de fases para gases criogênicos e industriais.",
+    "es": "Diagramas de fases para gases criogénicos e industriales.",
+    "en": "Phase equilibrium diagrams for cryogenic and industrial gases."
+  },
+  "tool_energy_name": {
+    "pt": "Conversor de Energia",
+    "es": "Conversor de Energía",
+    "en": "Energy Unit Converter"
+  },
+  "tool_energy_desc": {
+    "pt": "Converta unidades de energia: kJ, kcal, BTU, kWh e outras.",
+    "es": "Convierta unidades de energía: kJ, kcal, BTU, kWh y más.",
+    "en": "Convert energy units: kJ, kcal, BTU, kWh, and more."
+  },
+  "toolspro_hero_tag": {
+    "pt": "ENGENHARIA APLICADA",
+    "es": "INGENIERÍA APLICADA",
+    "en": "APPLIED ENGINEERING"
+  },
+  "toolspro_hero_title": {
+    "pt": "Calculadoras Técnicas Avançadas",
+    "es": "Calculadoras Técnicas Avanzadas",
+    "en": "Advanced Engineering Calculators"
+  },
+  "toolspro_hero_sub": {
+    "pt": "Simulações de vazão, dimensionamento de válvulas Cv/Kv e conversões de precisão.",
+    "es": "Simulaciones de caudal, dimensionamiento de válvulas Cv/Kv y conversiones de precisión.",
+    "en": "Flow modeling, ISA-75 valve Cv/Kv sizing, and precision physical unit conversions."
+  },
+  "toolspro_cv_title": {
+    "pt": "Dimensionamento Cv/Kv",
+    "es": "Dimensionamiento Cv/Kv",
+    "en": "Valve Cv/Kv Sizing"
+  },
+  "toolspro_cv_standard": {
+    "pt": "Norma ISA-75.01",
+    "es": "Norma ISA-75.01",
+    "en": "ISA-75.01 Standard"
+  },
+  "toolspro_liquid_tab": {
+    "pt": "⚗ Líquidos",
+    "es": "⚗ Líquidos",
+    "en": "⚗ Liquids"
+  },
+  "toolspro_gas_tab": {
+    "pt": "💨 Gases / Vapor",
+    "es": "💨 Gases / Vapor",
+    "en": "💨 Gases / Steam"
+  },
+  "toolspro_calc_fill_prompt": {
+    "pt": "Preencha os campos para calcular",
+    "es": "Complete los campos para calcular",
+    "en": "Enter process parameters to calculate"
   }
+};
+
+for (const [key, val] of Object.entries(seoAndPagesKeys)) {
+  addKey(key, val);
 }
 
 // ─── APPLICATIONS TRANSLATIONS ────────────────────────────────────────────────
@@ -2339,10 +1890,26 @@ addKey('newsletter_btn_sending', { pt: "Enviando...", es: "Enviando...", en: "Se
 addKey('newsletter_success', { pt: "Obrigado por se inscrever!", es: "¡Gracias por suscribirse!", en: "Thank you for subscribing!" });
 addKey('newsletter_error', { pt: "Ocorreu um erro. Tente novamente.", es: "Ocurrió un error. Intente novamente.", en: "An error occurred. Please try again." });
 
-// Write the files
+
+// ─── OFFICIAL CATALOG MATRIX TRANSLATIONS (1,992 KEYS) ──────────────────────
+const catalogTranslationsMap = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../catalog_translations_map.json'), 'utf8'));
+
+for (const [key, val] of Object.entries(catalogTranslationsMap)) {
+  addKey(key, {
+    pt: val.pt,
+    es: val.es,
+    en: val.en
+  });
+}
+
+// ─── WRITE LOCALE JSON FILES ────────────────────────────────────────────────
 const localesDir = path.resolve(__dirname, '../src/locales');
+if (!fs.existsSync(localesDir)) {
+  fs.mkdirSync(localesDir, { recursive: true });
+}
+
 fs.writeFileSync(path.join(localesDir, 'pt.json'), JSON.stringify(localesData.pt, null, 2), 'utf8');
 fs.writeFileSync(path.join(localesDir, 'es.json'), JSON.stringify(localesData.es, null, 2), 'utf8');
 fs.writeFileSync(path.join(localesDir, 'en.json'), JSON.stringify(localesData.en, null, 2), 'utf8');
 
-console.log('Locales JSON files built successfully in src/locales/');
+console.log(`Locales successfully generated: ${Object.keys(localesData.pt).length} keys in pt.json, es.json, en.json`);

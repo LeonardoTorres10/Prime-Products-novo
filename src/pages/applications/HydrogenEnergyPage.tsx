@@ -159,7 +159,7 @@ const HydrogenEnergyPage = () => {
               <div className="w-full md:w-1/2">
                 <h3 className="text-2xl font-bold text-white mb-4 flex items-center">
                   <Factory className="mr-3 text-[#e25a3a]" size={28} />
-                  Super Large Capacity Storage
+                  {t('hydro_block2_title', 'Armazenamento Estacionário de Grande Capacidade')}
                 </h3>
                 <p className="text-gray-200 leading-relaxed mb-6">
                   A estocagem estacionária exige segurança contra a fragilização por hidrogênio. Oferecemos pacotes de armazenamento <strong className="text-white">Jumbo Tube Tipo 4</strong> e vasos de pressão projetados para capacidades extremas.
@@ -190,7 +190,7 @@ const HydrogenEnergyPage = () => {
             </div>
             <div className="w-full md:w-1/2">
               <h3 className="text-2xl font-bold text-secondary mb-4">
-                H2 Filling Stations & Aerospace
+                {t('hydro_block3_title', 'Postos de Abastecimento de H₂ e Aplicações Aeroespaciais')}
               </h3>
               <p className="text-gray-600 leading-relaxed mb-6">
                 Desde postos de abastecimento de H₂ para veículos movidos a célula a combustível até complexos centros aeroespaciais (Aerospace Centers).

@@ -54,6 +54,8 @@ export const applicationSlugMappings: Record<string, Record<string, string>> = {
 };
 
 export const articleSlugMappings: Record<string, Record<string, string>> = {
+  'checklist-tecnico-centrais-gases-manifolds': { pt: 'checklist-tecnico-centrais-gases-manifolds', es: 'checklist-tecnico-centrales-gases-manifolds', en: 'technical-checklist-gas-systems-manifolds' },
+
   'seguranca-producao-hidrogenio-anp': { pt: 'seguranca-producao-hidrogenio-anp', es: 'seguridad-produccion-hidrogeno-anp', en: 'safety-low-emission-hydrogen-anp' },
   'principios-seguranca-hidrogenio': { pt: 'principios-seguranca-hidrogenio', es: 'principios-seguridad-hidrogeno', en: 'basic-safety-principles-hydrogen' },
   'manual-projeto-abrigos-cilindros': { pt: 'manual-projeto-abrigos-cilindros', es: 'manual-diseno-casetas-cilindros', en: 'practical-guide-cylinder-shelters' },

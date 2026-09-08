@@ -37,7 +37,7 @@ const FarmaceuticaPage = () => {
               LABORATORIAL E PESQUISA
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              Soluções de Engenharia para a Indústria Farmacêutica
+              {t('pharma_hero_title', 'Soluções de Engenharia para a Indústria Farmacêutica')}
             </h1>
           </div>
         </div>
@@ -54,7 +54,7 @@ const FarmaceuticaPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
             <div className="lg:col-span-2 space-y-12">
               <div className="bg-white p-8 shadow-sm border-t-4 border-primary">
-                <h2 className="text-2xl font-bold text-secondary mb-4">{t('pharma_hero_title', 'Utilidades e Sistemas de Processo para Ambientes Regulados')}</h2>
+                <h2 className="text-2xl font-bold text-secondary mb-4">{t('pharma_section_process_title', 'Utilidades e Sistemas de Processo para Ambientes Regulados')}</h2>
                 <p className="text-gray-600 leading-relaxed font-medium mb-4">
                   Projetos, fornecimento e montagens integradas, com foco em qualidade, segurança operacional, rastreabilidade e preparação para qualificação.
                 </p>

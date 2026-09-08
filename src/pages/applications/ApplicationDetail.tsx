@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { SEOHead } from '../../components/SEOHead';import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, CheckCircle, Phone, Mail } from 'lucide-react';
 import { AnimateOnScroll } from '../../components/AnimateOnScroll';
 import { EditableElement } from '../../components/EditableElement';
@@ -13,7 +13,7 @@ const APP_GALLERY: Record<string, string[]> = {
   'laboratorios-analiticos': ['/images/aplicacoes/laboratorio-analitico/about-lab.jpg', '/images/aplicacoes/laboratorio-analitico/sol-analitica-00.png', '/images/aplicacoes/laboratorio-analitico/sol-analitica-02.png', '/images/aplicacoes/laboratorio-analitico/whatsapp-image-2026-03-24-at-17.03.49.jpeg'],
   'farmaceutica': ['/images/aplicacoes/farmaceutica/farmaceutica-corredor.jpg', '/images/aplicacoes/farmaceutica/farmaceutica-filtro.jpg', '/images/aplicacoes/farmaceutica/farmaceutica-linha-1.jpg', '/images/aplicacoes/farmaceutica/farmaceutica-linha-2.jpg'],
   'centros-pesquisa': ['/images/aplicacoes/centro-pesquisa/app-centros-pesquisa.webp', '/images/aplicacoes/centro-pesquisa/pesquisa.jpg'],
-  'hospitalar': ['/images/aplicacoes/hospitalar/Hospitalar.png', '/images/aplicacoes/hospitalar/medical-gas-outlets.png'],
+  'hospitalar': ['/images/aplicacoes/hospitalar/hospitalar.png', '/images/aplicacoes/hospitalar/medical-gas-outlets.png'],
   'oleo-gas': ['/images/aplicacoes/oleo-gas/app-oleo-gas-offshore.jpg', '/images/aplicacoes/oleo-gas/app-oleo-gas-refinaria.jpg'],
   'industria-quimica': ['/images/aplicacoes/quimica-petroquimica/app-quimica-1.jpg', '/images/aplicacoes/quimica-petroquimica/app-quimica-2.jpg', '/images/aplicacoes/quimica-petroquimica/industria-quimica.png'],
   'alimentos-bebidas': ['/images/aplicacoes/alimenticia/app-alimentos-bebidas-1.jpg', '/images/aplicacoes/alimenticia/app-alimentos-bebidas-2.jpg', '/images/aplicacoes/alimenticia/segmento-de-alimentos-e-bebidas.png'],
@@ -260,6 +260,7 @@ export function ApplicationDetail() {
 
   return (
     <>
+      <SEOHead title={`${name} | Prime Products`} description={localizedApp.desc} type="article" />
       <EditableElement
         id={`app_${canonicalId}_hero`}
         type="container"
@@ -387,3 +388,5 @@ export function ApplicationDetail() {
     </>
   );
 }
+
+

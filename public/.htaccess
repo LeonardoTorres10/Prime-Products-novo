@@ -1,6 +1,30 @@
-DirectoryIndex index.html
+﻿DirectoryIndex index.html
 Options -MultiViews
 RewriteEngine On
+
+ErrorDocument 404 /404.html
+
+# Forçar www (Canonical Domain)
+RewriteCond %{HTTP_HOST} ^primeproducts\.ind\.br$ [NC]
+RewriteRule ^(.*)$ https://www.primeproducts.ind.br/ [R=301,L]
+
+# Forçar HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/ [R=301,L]
+
+# Exceções estritas
+RewriteRule ^(robots\.txt|sitemap\.xml|404\.html)$ - [L]
+
+# Se for arquivo ou diretório físico (ex: os HTMLs estáticos gerados pelo prerender)
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+RewriteRule ^ - [L]
+
+# Se existe um index.html dentro da pasta da rota prerenderizada
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
+RewriteRule ^(.*)$ /index.html [L]
+
+# Fallback final para rotas inválidas = ERRO 404
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.html [QSA,L]
+RewriteRule ^ - [R=404,L]

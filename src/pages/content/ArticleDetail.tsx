@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { SEOHead } from '../../components/SEOHead';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, Tag, Phone, Mail } from 'lucide-react';
 import { AnimateOnScroll } from '../../components/AnimateOnScroll';
@@ -58,21 +58,11 @@ export function ArticleDetail() {
     category: t(`category_${r.category.toLowerCase()}`, r.category)
   }));
 
-  useEffect(() => {
-    if (localizedArticle) {
-      document.title = `${localizedArticle.title} | Prime Products`;
-      let descMeta = document.querySelector('meta[name="description"]');
-      if (!descMeta) {
-        descMeta = document.createElement('meta');
-        descMeta.setAttribute('name', 'description');
-        document.head.appendChild(descMeta);
-      }
-      descMeta.setAttribute('content', localizedArticle.summary || '');
-    }
-  }, [localizedArticle.title, localizedArticle.summary]);
+  
 
   return (
     <>
+      <SEOHead title={`${localizedArticle.title} | Prime Products`} description={localizedArticle.summary} type="article" image={localizedArticle.image} />
       <section
         className="prime-bg-standard relative min-h-[65vh] flex items-end bg-secondary overflow-hidden pb-16 pt-40"
         style={{ backgroundImage: `url('${localizedArticle.image}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}
@@ -198,3 +188,4 @@ export function ArticleDetail() {
     </>
   );
 }
+

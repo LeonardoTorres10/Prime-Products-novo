@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { SEOHead } from '../../components/SEOHead';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, CheckCircle, Phone, Mail, FileText, Send } from 'lucide-react';
 import { AnimateOnScroll } from '../../components/AnimateOnScroll';
@@ -225,21 +226,11 @@ export function ProductDetail() {
   const apps = localizedProduct?.apps ?? [];
   const video = product?.video ?? null;
 
-  useEffect(() => {
-    if (name) {
-      document.title = `${name} | Prime Products`;
-      let descMeta = document.querySelector('meta[name="description"]');
-      if (!descMeta) {
-        descMeta = document.createElement('meta');
-        descMeta.setAttribute('name', 'description');
-        document.head.appendChild(descMeta);
-      }
-      descMeta.setAttribute('content', desc || '');
-    }
-  }, [name, desc]);
+
 
   return (
     <>
+      <SEOHead title={`${name} | Prime Products`} description={desc} type="product" />
       <EditableElement
         id={`prod_${canonicalId}_hero_bg`}
         type="container"
@@ -566,3 +557,4 @@ export function ProductDetail() {
     </>
   );
 }
+

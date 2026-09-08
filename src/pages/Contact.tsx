@@ -6,7 +6,7 @@ import { SectionContainer } from '../components/SectionContainer';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export function Contact() {
-  const { language, t } = useLanguage();
+  const { t } = useLanguage();
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', subject: '', message: '', _hp: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
